@@ -33,17 +33,16 @@ fastify.get("/", function (request, reply) {
   return reply.view("/src/pages/index.hbs");
 });
 
-fastify.
+const url = 'https://script.google.com/macros/s/AKfycbzJbbe-S3idijgn-MDurYngjZ7cw_8pSvxPmnc-_d_QSGcMjITDX8gQtjNhCSwYbqnM/exec';
 
 fastify.post("/", function (request, reply) {
   let username = request.body.username_admin
   let params = {pesan : ""}
       if(username == ""){
         params['pesan'] = "tidak boleh kosong"
-        return reply.view("/src/pages/index.hbs", params);
-      }else if(username == 'syuaib'){
-        return reply.view("/src/pages/dasboard.hbs");
+        return reply.send(params);
       }else{
+        fetch()
         params['pesan'] = "username/password salah"
         return reply.view("/src/pages/index.hbs", params);
       }
