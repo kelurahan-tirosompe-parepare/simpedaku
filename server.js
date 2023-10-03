@@ -41,14 +41,7 @@ fastify.post("/", async function (request, reply) {
     params["pesan"] = "tidak boleh kosong";
     return reply.view("/src/pages/index.hbs", params);
   } else {
-    const { data, res } = await request("http://cnodejs.org/");
-    // result: { data: Buffer, res: Response }
-    console.log(
-      "status: %s, body size: %d, headers: %j",
-      res.status,
-      data.length,
-      res.headers
-    );
+    
     params["pesan"] = "username/password salah";
     //return reply.view("/src/pages/dasboard.hbs", params);
   }
