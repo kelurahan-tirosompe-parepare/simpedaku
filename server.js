@@ -52,15 +52,19 @@ fastify.get("/", function (request, reply) {
  * Accepts body data indicating the user choice
  */
 fastify.post("/", function (request, reply) {
+  let username = request.body.username_admin
   let params = {pesan : ""}
-      if(request.body.username_admin == ""){
+      if(username == ""){
         params['pesan'] = "tidak boleh kosong"
+        return reply.view("/src/pages/index.hbs", params);
+      }else if(username == 'syuaib'){
+        return reply.view("/src/pages/dasboard.hbs");
       }else{
-        params['pesan'] = request.body.username_admin
+        params['pesan'] = "username/password salah"
+        return reply.view("/src/pages/index.hbs", params);
       }
 
   // The Handlebars template will use the parameter values to update the page with the chosen color
-  return reply.view("/src/pages/index.hbs", params);
 });
 
 // Run the server and report out to the logs
