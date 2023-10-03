@@ -1,17 +1,9 @@
-/**
- * This is the main Node.js server script for your project
- * Check out the two endpoints this back-end API provides in fastify.get and fastify.post below
- */
-
 const path = require("path");
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
-  // Set this to true for detailed logging:
   logger: false,
 });
-
-// ADD FAVORITES ARRAY VARIABLE FROM TODO HERE
 
 // Setup our static files
 fastify.register(require("@fastify/static"), {
@@ -35,22 +27,14 @@ if (seo.url === "glitch-default") {
   seo.url = `https://${process.env.PROJECT_DOMAIN}.glitch.me`;
 }
 
-/**
- * Our home page route
- *
- * Returns src/pages/index.hbs with data built into it
- */
 fastify.get("/", function (request, reply) {
 
   // The Handlebars code will be able to access the parameter values and build them into the page
   return reply.view("/src/pages/index.hbs");
 });
 
-/**
- * Our POST route to handle and react to form submissions
- *
- * Accepts body data indicating the user choice
- */
+fastify.
+
 fastify.post("/", function (request, reply) {
   let username = request.body.username_admin
   let params = {pesan : ""}
@@ -63,8 +47,6 @@ fastify.post("/", function (request, reply) {
         params['pesan'] = "username/password salah"
         return reply.view("/src/pages/index.hbs", params);
       }
-
-  // The Handlebars template will use the parameter values to update the page with the chosen color
 });
 
 // Run the server and report out to the logs
