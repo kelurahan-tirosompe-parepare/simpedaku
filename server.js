@@ -1,9 +1,9 @@
 const path = require("path");
-const appscript = require("/appscript.js")
+const appscript = require("./appscript.js")
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
-  logger: false,
+  logger: true,
 });
 
 // Setup our static files
@@ -41,11 +41,11 @@ fastify.post("/", function (request, reply) {
   let params = {pesan : ""}
       if(username == ""){
         params['pesan'] = "tidak boleh kosong"
-        return reply.send(params);
-      }else{
-        appscript()
-        params['pesan'] = "username/password salah"
         return reply.view("/src/pages/index.hbs", params);
+      }else{
+        console.log(appscript(fastify, url))
+        params['pesan'] = "username/password salah"
+        //return reply.view("/src/pages/dasboard.hbs", params);
       }
 });
 
