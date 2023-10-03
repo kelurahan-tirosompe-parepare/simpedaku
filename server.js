@@ -56,7 +56,7 @@ fastify.post("/", function (request, reply) {
       if(request.body.username_admin == ""){
         params['pesan'] = "tidak boleh kosong"
       }else{
-        params['pesan'] = request.body
+        params['pesan'] = request.body.username_admin
       }
 
   // The Handlebars template will use the parameter values to update the page with the chosen color
