@@ -60,7 +60,7 @@ fastify.post("/", function (request, reply) {
       }
 
   // The Handlebars template will use the parameter values to update the page with the chosen color
-  return params;
+  return reply.view("/src/pages/index.hbs", params);
 });
 
 // Run the server and report out to the logs
