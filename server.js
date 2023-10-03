@@ -1,9 +1,8 @@
 const path = require("path");
-const appscript = require("./appscript.js")
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
-  logger: true,
+  logger: false,
 });
 
 // Setup our static files
@@ -29,24 +28,30 @@ if (seo.url === "glitch-default") {
 }
 
 fastify.get("/", function (request, reply) {
-
   // The Handlebars code will be able to access the parameter values and build them into the page
   return reply.view("/src/pages/index.hbs");
 });
 
-const url = 'https://script.google.com/macros/s/AKfycbzJbbe-S3idijgn-MDurYngjZ7cw_8pSvxPmnc-_d_QSGcMjITDX8gQtjNhCSwYbqnM/exec';
 
-fastify.post("/", function (request, reply) {
-  let username = request.body.username_admin
-  let params = {pesan : ""}
-      if(username == ""){
-        params['pesan'] = "tidak boleh kosong"
-        return reply.view("/src/pages/index.hbs", params);
-      }else{
-        console.log(appscript(fastify, url))
-        params['pesan'] = "username/password salah"
-        //return reply.view("/src/pages/dasboard.hbs", params);
-      }
+
+fastify.post("/", async function (request, reply) {
+  let username = request.body.username_admin;
+  let params = { pesan: "" };
+  if (username == "") {
+    params["pesan"] = "tidak boleh kosong";
+    return reply.view("/src/pages/index.hbs", params);
+  } else {
+    const { data, res } = await request("http://cnodejs.org/");
+    // result: { data: Buffer, res: Response }
+    console.log(
+      "status: %s, body size: %d, headers: %j",
+      res.status,
+      data.length,
+      res.headers
+    );
+    params["pesan"] = "username/password salah";
+    //return reply.view("/src/pages/dasboard.hbs", params);
+  }
 });
 
 // Run the server and report out to the logs
@@ -54,7 +59,7 @@ fastify.listen(
   { port: process.env.PORT, host: "0.0.0.0" },
   function (err, address) {
     if (err) {
-      console.error(err);
+      // console.error(err);
       process.exit(1);
     }
     console.log(`Your app is listening on ${address}`);

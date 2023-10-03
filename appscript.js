@@ -1,10 +1,7 @@
-module.exports = function (fastify, url, next) {
-  fastify.register(require('fastify-http-client'))
+const { request } = require("urllib");
+const url =
+  "https://script.google.com/macros/s/AKfycbzJbbe-S3idijgn-MDurYngjZ7cw_8pSvxPmnc-_d_QSGcMjITDX8gQtjNhCSwYbqnM/exec";
 
-  // request via httpclient
-  fastify.httpclient.request(url, (err, body) => {
-    return  body.length;
-  })
-
-  next()
+module.exports = function(){
+  
 }
