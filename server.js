@@ -37,6 +37,7 @@ fastify.get("/", function (request, reply) {
 fastify.post("/", async function (request, reply) {
   let username = request.body.username_admin;
   let password = request.body.password_admin;
+  let rw = request.body.rw_admin;
   let params = { pesan: "" };
   if (username == "") {
     params["pesan"] = "tidak boleh kosong";
@@ -49,11 +50,12 @@ fastify.post("/", async function (request, reply) {
       method: "post",
       url: url,
       data: {
+        rw: rw,
         username: username,
         password: password,
       }
     }).then((res) => {
-      params["pesan"] = res.data;
+      params["pesan"] = JSON.parse(res.data);
       return reply.send(params);
     }).catch(err => {
       console.log(err)
