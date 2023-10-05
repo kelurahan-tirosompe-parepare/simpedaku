@@ -54,7 +54,9 @@ fastify.post("/", async function (request, reply) {
     }).then((res) => {
       params["pesan"] = res;
       return reply.send(params);
-    });
+    }).catch(err => {
+      console.log(err)
+    })
     //return reply.view("/src/pages/dasboard.hbs", params);
   }
 });
