@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const {data} = axios({
+module.exports = axios({
   method: 'post',
   url: '/user/12345',
   data: {

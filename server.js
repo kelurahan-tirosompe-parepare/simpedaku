@@ -1,4 +1,5 @@
 const path = require("path");
+const {data} = require("./appscript.js")
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
@@ -34,7 +35,7 @@ fastify.get("/", function (request, reply) {
 
 
 
-fastify.post("/", async function (request, reply) {
+fastify.post("/", function (request, reply) {
   
   let username = request.body.username_admin;
   let params = { pesan: "" };
@@ -42,8 +43,10 @@ fastify.post("/", async function (request, reply) {
     params["pesan"] = "tidak boleh kosong";
     return reply.view("/src/pages/index.hbs", params);
   } else {
-    
-    params["pesan"] = "username/password salah";
+    data.then(res => {
+      return params["pesan"] = res
+    })
+    //params["pesan"] = "username/password salah";
     //return reply.view("/src/pages/dasboard.hbs", params);
   }
 });
