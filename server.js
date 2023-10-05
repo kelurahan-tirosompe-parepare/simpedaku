@@ -55,7 +55,7 @@ fastify.post("/", async function (request, reply) {
         password: password,
       }
     }).then((res) => {
-      params["pesan"] = JSON.parse(res.data);
+      params["pesan"] = res.data;
       return reply.send(params);
     }).catch(err => {
       console.log(err)
