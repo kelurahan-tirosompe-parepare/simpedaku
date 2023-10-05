@@ -34,8 +34,9 @@ fastify.get("/", function (request, reply) {
   return reply.view("/src/pages/index.hbs");
 });
 
-fastify.post("/", function (request, reply) {
+fastify.post("/", async function (request, reply) {
   let username = request.body.username_admin;
+  let password = request.body.password_admin;
   let params = { pesan: "" };
   if (username == "") {
     params["pesan"] = "tidak boleh kosong";
@@ -43,8 +44,16 @@ fastify.post("/", function (request, reply) {
   } else {
     let url =
       "https://script.google.com/macros/s/AKfycbzJbbe-S3idijgn-MDurYngjZ7cw_8pSvxPmnc-_d_QSGcMjITDX8gQtjNhCSwYbqnM/exec";
-    axios.post(url).then((res) => {
+    await axios({
+      method: "post",
+      url: url,
+      data: {
+        username: username,
+        password: password,
+      }
+    }).then((res) => {
       params["pesan"] = res;
+      return reply.send(params);
     });
     //return reply.view("/src/pages/dasboard.hbs", params);
   }
