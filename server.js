@@ -53,14 +53,21 @@ fastify.post("/", async function (request, reply) {
         rw: rw,
         username: username,
         password: password,
-      }
-    }).then((res) => {
-      params["pesan"] = res.data;
-      // return reply.send(params);
-    return reply.view("/src/pages/dasboard.hbs", params);
-    }).catch(err => {
-      console.log(err)
+      },
     })
+      .then((res) => {
+        params["pesan"] = res.data;
+        let pesanServer = res.data;
+      
+        if (pesanServer.pesan != "username/password salah") {
+          return reply.view("/src/pages/dasboard.hbs", JSON.stringify(params));
+        } else {
+          return reply.view("/src/pages/index.hbs", params);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 });
 
