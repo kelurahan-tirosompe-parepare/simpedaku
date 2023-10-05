@@ -56,11 +56,11 @@ fastify.post("/", async function (request, reply) {
       }
     }).then((res) => {
       params["pesan"] = res.data;
-      return reply.send(params);
+      // return reply.send(params);
+    return reply.view("/src/pages/dasboard.hbs", params);
     }).catch(err => {
       console.log(err)
     })
-    //return reply.view("/src/pages/dasboard.hbs", params);
   }
 });
 
