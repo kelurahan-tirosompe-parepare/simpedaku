@@ -44,6 +44,7 @@ fastify.post("/", async function (request, reply) {
   } else {
     let url =
       "https://script.google.com/macros/s/AKfycbzJbbe-S3idijgn-MDurYngjZ7cw_8pSvxPmnc-_d_QSGcMjITDX8gQtjNhCSwYbqnM/exec";
+
     await axios({
       method: "post",
       url: url,
@@ -52,7 +53,7 @@ fastify.post("/", async function (request, reply) {
         password: password,
       }
     }).then((res) => {
-      params["pesan"] = res;
+      params["pesan"] = res.data;
       return reply.send(params);
     }).catch(err => {
       console.log(err)
