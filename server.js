@@ -54,13 +54,13 @@ fastify.post("/", async function (request, reply) {
         username: username,
         password: password,
       },
-    })
-      .then((res) => {
+    }).then((res) => {
+      console.log(res.data)
         params["pesan"] = res.data;
         let pesanServer = res.data;
       
         if (pesanServer != "username/password salah") {
-          return reply.view("/src/pages/dasboard.hbs", JSON.stringify(params));
+          return reply.view("/src/pages/dasboard.hbs", JSON.stringify(params.pesan));
         } else {
           return reply.view("/src/pages/index.hbs", params);
         }
