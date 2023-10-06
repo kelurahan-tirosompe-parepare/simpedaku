@@ -60,7 +60,7 @@ fastify.post("/", async function (request, reply) {
         let pesanServer = res.data;
       
         if (pesanServer != "username/password salah") {
-          return reply.view("/src/pages/dasboard.hbs", JSON.stringify(params.pesan));
+          return reply.view("/src/pages/dasboard.hbs", params);
         } else {
           return reply.view("/src/pages/index.hbs", params);
         }
