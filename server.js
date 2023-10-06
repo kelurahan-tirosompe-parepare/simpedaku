@@ -54,11 +54,27 @@ fastify.post("/", async function (request, reply) {
         username: username,
         password: password,
       },
-    }).then((res) => {
-      console.log(res.data)
+    })
+      .then((res) => {
+        console.log(res.data);
+        let dataDb = {
+          no_keluarga: "",
+          kki: "",
+          nik: "",
+          nama: "",
+          hubungan: "",
+          tanggal_lahir: "",
+          usia: "",
+          jumlah_anak: "",
+          kesetaraan_jkn: "",
+          status_pus: "",
+          status_hamil: "",
+          password: "",
+        };
+
         params["pesan"] = res.data;
         let pesanServer = res.data;
-      
+
         if (pesanServer != "username/password salah") {
           return reply.view("/src/pages/dasboard.hbs", params);
         } else {
