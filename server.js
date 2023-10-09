@@ -92,9 +92,10 @@ fastify.post("/", async function (request, reply) {
   }
 });
 
-fastify.post("/:suket", async function (request, reply) {
-  
-}
+fastify.post("/suket/:jenisSuket", async function (request, reply) {
+   const { jenisSuket } = request.params;
+    
+})
 
 // Run the server and report out to the logs
 fastify.listen(
