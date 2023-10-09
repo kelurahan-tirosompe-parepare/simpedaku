@@ -24,13 +24,19 @@ fastify.register(require("@fastify/view"), {
 });
 
 // Load and parse SEO data
-const seo = require("./src/seo.json");
+const suket = require("./src/suket.json");
 
-if (seo.url === "glitch-default") {
-  seo.url = `https://${process.env.PROJECT_DOMAIN}.glitch.me`;
-}
+// if (seo.url === "glitch-default") {
+//   seo.url = `https://${process.env.PROJECT_DOMAIN}.glitch.me`;
+// }
 
-console.log(seo)
+console.log(suket)
+
+fastify.post("/suket/:jenisSuket", async function (request, reply) {
+   const { jenisSuket } = request.params;
+    return reply.view("/src/pages/dasboard.hbs", suket)
+    
+})
 
 fastify.get("/", function (request, reply) {
   // The Handlebars code will be able to access the parameter values and build them into the page
@@ -92,10 +98,7 @@ fastify.post("/", async function (request, reply) {
   }
 });
 
-fastify.post("/suket/:jenisSuket", async function (request, reply) {
-   const { jenisSuket } = request.params;
-    
-})
+
 
 // Run the server and report out to the logs
 fastify.listen(
