@@ -30,7 +30,7 @@ const suket = require("./src/suket.json");
 //   seo.url = `https://${process.env.PROJECT_DOMAIN}.glitch.me`;
 // }
 
-console.log(suket)
+// console.log(suket)
 
 fastify.post("/suket/:jenisSuket", async function (request, reply) {
    const { jenisSuket } = request.params;
@@ -48,10 +48,12 @@ fastify.post("/", async function (request, reply) {
   let password = request.body.password_admin;
   let rw = request.body.rw_admin;
   
-  console.log((username == "" && !Number.isInteger(rw) && password == "") )
+  console.log(username == true) 
+  console.log(!Number.isInteger(rw))
+  console.log(password == true) 
   
   let params = { pesan: "" };
-  if (!username && !Number.isInteger(rw) && !password) {
+  if (username || !Number.isInteger(rw) || password) {
     params["pesan"] = "tidak boleh kosong";
     return reply.view("/src/pages/index.hbs", params);
   } else {
