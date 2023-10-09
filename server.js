@@ -65,7 +65,7 @@ fastify.post("/", async function (request, reply) {
       },
     })
       .then((res) => {
-        console.log(res.data);
+        console.log(res);
         params["pesan"] = res.data;
         let pesanServer = res.data;
 
