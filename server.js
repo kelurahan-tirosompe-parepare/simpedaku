@@ -33,10 +33,9 @@ const suket = require("./src/suket.json");
 // console.log(suket)
 
 fastify.post("/suket/:jenisSuket", async function (request, reply) {
-   const { jenisSuket } = request.params;
-    return reply.view("/src/pages/dasboard.hbs", suket)
-    
-})
+  const { jenisSuket } = request.params;
+  return reply.view("/src/pages/dasboard.hbs", suket);
+});
 
 fastify.get("/", function (request, reply) {
   // The Handlebars code will be able to access the parameter values and build them into the page
@@ -47,67 +46,61 @@ fastify.post("/", async function (request, reply) {
   let username = request.body.username_admin;
   let password = request.body.password_admin;
   let rw = request.body.rw_admin;
-  
-  console.log(username == '')
-  console.log(Number.isInteger(rw))
-  console.log(password == '')
-  
+
+  console.log(username == "");
+  console.log((rw * 1) < 1);
+  console.log(password == "");
+
   let params = { pesan: "" };
-  if (username == ''){
-    params["pesan"] = "tidak boleh kosong";
-    if(!Number.isInteger(rw)){
-      if(password == '') {
-    params["pesan"] = "tidak boleh kosong";
+  if (username == "" || (rw * 1) < 1|| password == "") {
+    params["pesan"] = "salah";
     return reply.view("/src/pages/index.hbs", params);
-  }}}
-  
-    let url =
-      "https://script.google.com/macros/s/AKfycbzJbbe-S3idijgn-MDurYngjZ7cw_8pSvxPmnc-_d_QSGcMjITDX8gQtjNhCSwYbqnM/exec";
+  }
 
-    await axios({
-      method: "post",
-      url: url,
-      data: {
-        rw: rw,
-        username: username,
-        password: password,
-      },
+  let url =
+    "https://script.google.com/macros/s/AKfycbzJbbe-S3idijgn-MDurYngjZ7cw_8pSvxPmnc-_d_QSGcMjITDX8gQtjNhCSwYbqnM/exec";
+
+  await axios({
+    method: "post",
+    url: url,
+    data: {
+      rw: rw,
+      username: username,
+      password: password,
+    },
+  })
+    .then((res) => {
+      // console.log(res.data);
+      params["pesan"] = res.data;
+      let pesanServer = res.data;
+
+      let dataDb = {
+        no_keluarga: pesanServer[0],
+        kki: pesanServer[1],
+        nik: pesanServer[2],
+        nama: pesanServer[3],
+        hubungan: pesanServer[4],
+        tanggal_lahir: pesanServer[5],
+        usia: pesanServer[6],
+        jumlah_anak: pesanServer[7],
+        kesetaraan_jkn: pesanServer[8],
+        status_pus: pesanServer[9],
+        status_hamil: pesanServer[10],
+        password: pesanServer[11],
+      };
+
+      // console.log(dataDb)
+
+      if (pesanServer != "username/password salah") {
+        return reply.view("/src/pages/dasboard.hbs", dataDb);
+      } else {
+        return reply.view("/src/pages/index.hbs", params);
+      }
     })
-      .then((res) => {
-        // console.log(res.data);
-        params["pesan"] = res.data;
-        let pesanServer = res.data;
-
-        let dataDb = {
-          no_keluarga: pesanServer[0],
-          kki: pesanServer[1],
-          nik: pesanServer[2],
-          nama: pesanServer[3],
-          hubungan: pesanServer[4],
-          tanggal_lahir: pesanServer[5],
-          usia: pesanServer[6],
-          jumlah_anak: pesanServer[7],
-          kesetaraan_jkn: pesanServer[8],
-          status_pus: pesanServer[9],
-          status_hamil: pesanServer[10],
-          password: pesanServer[11],
-        };
-          
-        // console.log(dataDb)
-      
-        if (pesanServer != "username/password salah") {
-          return reply.view("/src/pages/dasboard.hbs", dataDb);
-        } else {
-          return reply.view("/src/pages/index.hbs", params);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  
+    .catch((err) => {
+      console.log(err);
+    });
 });
-
-
 
 // Run the server and report out to the logs
 fastify.listen(
