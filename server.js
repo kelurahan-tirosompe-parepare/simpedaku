@@ -47,8 +47,11 @@ fastify.post("/", async function (request, reply) {
   let username = request.body.username_admin;
   let password = request.body.password_admin;
   let rw = request.body.rw_admin;
+  
+  console.log((username == "" && !Number.isInteger(rw) && password == "") )
+  
   let params = { pesan: "" };
-  if (username == "") {
+  if (!username && !Number.isInteger(rw) && !password) {
     params["pesan"] = "tidak boleh kosong";
     return reply.view("/src/pages/index.hbs", params);
   } else {
@@ -65,7 +68,7 @@ fastify.post("/", async function (request, reply) {
       },
     })
       .then((res) => {
-        console.log(res);
+        // console.log(res.data);
         params["pesan"] = res.data;
         let pesanServer = res.data;
 
@@ -84,7 +87,7 @@ fastify.post("/", async function (request, reply) {
           password: pesanServer[11],
         };
           
-        console.log(dataDb)
+        // console.log(dataDb)
       
         if (pesanServer != "username/password salah") {
           return reply.view("/src/pages/dasboard.hbs", dataDb);
