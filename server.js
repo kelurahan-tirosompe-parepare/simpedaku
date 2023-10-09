@@ -48,15 +48,19 @@ fastify.post("/", async function (request, reply) {
   let password = request.body.password_admin;
   let rw = request.body.rw_admin;
   
-  console.log(username == true) 
-  console.log(!Number.isInteger(rw))
-  console.log(password == true) 
+  console.log(username == '')
+  console.log(Number.isInteger(rw))
+  console.log(password == '')
   
   let params = { pesan: "" };
-  if (username || !Number.isInteger(rw) || password) {
+  if (username == ''){
+    params["pesan"] = "tidak boleh kosong";
+    if(!Number.isInteger(rw)){
+      if(password == '') {
     params["pesan"] = "tidak boleh kosong";
     return reply.view("/src/pages/index.hbs", params);
-  } else {
+  }}}
+  
     let url =
       "https://script.google.com/macros/s/AKfycbzJbbe-S3idijgn-MDurYngjZ7cw_8pSvxPmnc-_d_QSGcMjITDX8gQtjNhCSwYbqnM/exec";
 
@@ -100,7 +104,7 @@ fastify.post("/", async function (request, reply) {
       .catch((err) => {
         console.log(err);
       });
-  }
+  
 });
 
 
