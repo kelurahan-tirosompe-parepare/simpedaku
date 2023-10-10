@@ -25,12 +25,17 @@
         Surat Keterangan
       </button>
       <ul class="dropdown-menu" id="suket">
-      <li><a
-        class="dropdown-item active"
-        id="dropdown-ghoib"
-        href="#dropdown-ghoib"
-        aria-controls="dropdown-ghoib"
-             >Ghoib</a></li>
+        
+        
+        {{#each listSuket}}
+          <li><a
+            class="dropdown-item"
+            id="dropdown-{{this}}"
+            href="#dropdown-{{this}}"
+            aria-controls="dropdown-{{this}}"
+                 >{{this}}</a></li>
+        {{/each}}
+        
         
       <li><a
         class="dropdown-item"

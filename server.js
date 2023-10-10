@@ -30,7 +30,7 @@ const suket = require("./src/suket.json");
 //   seo.url = `https://${process.env.PROJECT_DOMAIN}.glitch.me`;
 // }
 
-console.log(suket)
+console.log(suket);
 
 //Terima request untuk membentuk form di dashboard.hbs
 fastify.post("/suket/:jenisSuket", async function (request, reply) {
@@ -43,13 +43,13 @@ fastify.get("/", function (request, reply) {
   return reply.view("/src/pages/index.hbs");
 });
 
-fastify.post("/", async function (request, reply) {
+fastify.post("/login", async function (request, reply) {
   let username = request.body.username_admin;
   let password = request.body.password_admin;
   let rw = request.body.rw_admin;
 
   let params = { pesan: "" };
-  
+
   if (username == "" || Number.isNaN(rw * 1) || password == "") {
     params["pesan"] = "salah";
     return reply.view("/src/pages/index.hbs", params);
@@ -73,18 +73,21 @@ fastify.post("/", async function (request, reply) {
       let pesanServer = res.data;
 
       let dataDb = {
-        no_keluarga: pesanServer[0],
-        kki: pesanServer[1],
-        nik: pesanServer[2],
-        nama: pesanServer[3],
-        hubungan: pesanServer[4],
-        tanggal_lahir: pesanServer[5],
-        usia: pesanServer[6],
-        jumlah_anak: pesanServer[7],
-        kesetaraan_jkn: pesanServer[8],
-        status_pus: pesanServer[9],
-        status_hamil: pesanServer[10],
-        password: pesanServer[11],
+        dataUser: {
+          no_keluarga: pesanServer[0],
+          kki: pesanServer[1],
+          nik: pesanServer[2],
+          nama: pesanServer[3],
+          hubungan: pesanServer[4],
+          tanggal_lahir: pesanServer[5],
+          usia: pesanServer[6],
+          jumlah_anak: pesanServer[7],
+          kesetaraan_jkn: pesanServer[8],
+          status_pus: pesanServer[9],
+          status_hamil: pesanServer[10],
+          password: pesanServer[11],
+        },
+        dataList: Object.keys(suket),
       };
 
       // console.log(dataDb)
