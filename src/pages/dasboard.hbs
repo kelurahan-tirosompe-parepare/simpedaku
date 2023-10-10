@@ -12,7 +12,9 @@
   </head>
   <body>
     <div class="container">
-      <h1>Selamat datang {{dataUser.nama}}</h1>
+      <div style="height:100px" class="border-bottom">
+        <h1>{{dataUser.nama}}</h1>
+      </div>
       <!--      SURAT KETERANGAN-->
       <!--     <h3>SURAT KETERANGAN</h3> -->
       <div class="btn-group">
@@ -39,8 +41,8 @@
       </div>
 
       <!--  form -->
-      <div class="m-5 p-3 border">
-        <div id="namaForm"></div>
+      <div class="my-5 p-3 border">
+        <h3 id="namaForm" class="mb-3"></h3>
         <form id="kirim">
           <div id="isiForm" class="border p-3 mb-3">
 
@@ -62,18 +64,32 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      const templateForm = (isi) => { return `<div class="mb-3"> <label
+      const templateForm = (isi) => { 
+        return `<div class="mb-3"> <label
       for="form${isi}" class="form-label">${isi}</label> <input
       class="form-control" id="form${isi}" type="file" accept="image/*"
-      capture="user" /> </div>` } const dropdownItems =
-      document.querySelectorAll(".dropdown-item"); const listForm = JSON.parse('{{{dataForm}}}')
+      capture="user" /> </div>` };
+      
+      const dropdownItems = document.querySelectorAll(".dropdown-item"); 
+      const listForm = JSON.parse('{{{dataForm}}}');
+                                  
       dropdownItems.forEach((item) => {
-      item.addEventListener("click",function(event) { event.preventDefault();
-      $(namaForm).html($(item).html()) $(isiForm).html("") const itemId =
-      (item.getAttribute("id")).slice(9, item.getAttribute("id").length) const
-      formArr = listForm[itemId] formArr.forEach((item, index) => {
-      $(isiForm).prepend(templateForm(item)) }) }) }); $(kirim).on("submit",
-      function(ev){ ev.preventDefault() })
+      item.addEventListener("click",function(event) {
+          event.preventDefault();
+          $(namaForm).html($(item).html());
+            $(isiForm).html("");
+            const itemId = (item.getAttribute("id")).slice(9, item.getAttribute("id").length);
+            const formArr = listForm[itemId];
+        
+            formArr.forEach((item, index) => {
+                $(isiForm).prepend(templateForm(item)) }) 
+            }) 
+      }); 
+      
+      $(kirim).on("submit", function(ev){ 
+            ev.preventDefault() 
+      })
+      
     </script>
   </body>
 </html>
