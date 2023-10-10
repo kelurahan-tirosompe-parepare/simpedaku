@@ -64,14 +64,9 @@
         {{#each dataList.Keterangan.Ghoib}}
       <div class="mb-3">
         <label for="form{{this}}" class="form-label">{{this}}</label>
-        <input
-          type="text"
-          class="form-control"
-          id="form{{this}}"
-          placeholder="{{this}}"
-        />
-        {{/each}}
+        <input class="form-control" id="form{{this}}" type="file" accept="image/*" capture="user" />
       </div>
+        {{/each}}
     </div>
 
     <script
@@ -82,7 +77,7 @@
     <script>
       const dropdownItems = document.querySelectorAll(".dropdown-item");
       
-      {{log dat}}
+      {{log dataList}}
       
       dropdownItems.forEach((item) => {
           item.addEventListener("click",function(event) {
