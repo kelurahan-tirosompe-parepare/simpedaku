@@ -59,15 +59,16 @@
         </ul>
       </div>
     </div>
-
+    
+<!--  form -->
     <div class="mx-5">
       <form id="kirim">
-        {{#each dataList.Keterangan.Ghoib}}
+        
       <div class="mb-3">
         <label for="form{{this}}" class="form-label">{{this}}</label>
         <input class="form-control" id="form{{this}}" type="file" accept="image/*" capture="user" />
       </div>
-        {{/each}}
+        
         <button type="submit" class="btn btn-primary">Kirim</button>
       </form>
     </div>
@@ -87,8 +88,8 @@
           event.preventDefault(); 
         
           const itemId = (item.getAttribute("id")).slice(9, item.getAttribute("id").length)
-            console.log(itemId)
-            console.log(listForm[itemId])
+
+            console.log(listForm.Keterangan[itemId])
         }) 
       });
       
