@@ -25,13 +25,13 @@
           Surat Keterangan
         </button>
         <ul class="dropdown-menu" id="suket">
-          {{#each dataList}}
+          {{#each dataList.Keterangan}}
             <li><a
                 class="dropdown-item"
-                id="dropdown-{{this}}"
-                href="#dropdown-{{this}}"
-                aria-controls="dropdown-{{this}}"
-              >{{this}}</a></li>
+                id="dropdown-{{@key}}"
+                href="#dropdown-{{@key}}"
+                aria-controls="dropdown-{{@key}}"
+              >{{@key}}</a></li>
           {{/each}}
         </ul>
       </div>
@@ -48,31 +48,21 @@
           Surat Pengantar
         </button>
         <ul class="dropdown-menu" id="supen">
+  {{#each dataList.Pengantar}}
           <li><a
               class="dropdown-item"
-              id="dropdown-skck"
-              href="#dropdown-skck"
-              aria-controls="dropdown-skck"
-            >SKCK</a></li>
-          <li><a
-              class="dropdown-item"
-              id="dropdown-nikah"
-              href="#dropdown-nikah"
-              aria-controls="dropdown-nikah"
-            >Nikah</a></li>
-          <li><a
-              class="dropdown-item"
-              id="dropdown-ktp-kk"
-              href="#dropdown-ktp-kk"
-              aria-controls="dropdown-ktp-kk"
-            >KTP/KK</a></li>
+              id="dropdown-{{@key}}"
+              href="#dropdown-{{@key}}"
+              aria-controls="dropdown-{{@key}}"
+            >{{@key}}</a></li>
+  {{/each}}
         </ul>
       </div>
     </div>
 
-    <div>
+    <div class="mx-5">
+        {{#each dataList.Keterangan.Ghoib}}
       <div class="mb-3">
-        {{#each dataForm.Keterangan.Ghoib}}
         <label for="form{{this}}" class="form-label">{{this}}</label>
         <input
           type="text"
@@ -91,6 +81,8 @@
     ></script>
     <script>
       const dropdownItems = document.querySelectorAll(".dropdown-item");
+      
+      {{log dat}}
       
       dropdownItems.forEach((item) => {
           item.addEventListener("click",function(event) {
