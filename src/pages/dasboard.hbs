@@ -80,7 +80,7 @@
     <script>
       const dropdownItems = document.querySelectorAll(".dropdown-item");
       
-      const dataForm = {{{dataForm.Keterangan}}}
+      const listForm = JSON.parse('{{{dataForm}}}')
       
       dropdownItems.forEach((item) => {
           item.addEventListener("click",function(event) {
@@ -88,8 +88,7 @@
         
           const itemId = (item.getAttribute("id")).slice(9, item.getAttribute("id").length)
             console.log(itemId)
-          console.log(dataForm[itemId])
-          
+            console.log(listForm[itemId])
         }) 
       });
       
