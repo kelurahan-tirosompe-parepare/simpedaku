@@ -30,7 +30,7 @@ const suket = require("./src/suket.json");
 //   seo.url = `https://${process.env.PROJECT_DOMAIN}.glitch.me`;
 // }
 
-// console.log(suket)
+console.log(suket)
 
 fastify.post("/suket/:jenisSuket", async function (request, reply) {
   const { jenisSuket } = request.params;
@@ -47,9 +47,8 @@ fastify.post("/", async function (request, reply) {
   let password = request.body.password_admin;
   let rw = request.body.rw_admin;
 
-  console.log(Number.isNaN(rw * 1));
-
   let params = { pesan: "" };
+  
   if (username == "" || Number.isNaN(rw * 1) || password == "") {
     params["pesan"] = "salah";
     return reply.view("/src/pages/index.hbs", params);
