@@ -72,13 +72,13 @@
 
     <div>
       <div class="mb-3">
-        {{#each Keterangan}}
-        <label for="formGroupExampleInput" class="form-label">Example label</label>
+        {{#each dataForm.Keterangan.Ghoib}}
+        <label for="form{{this}}" class="form-label">{{this}}</label>
         <input
           type="text"
           class="form-control"
-          id="formGroupExampleInput"
-          placeholder="Example input placeholder"
+          id="form{{this}}"
+          placeholder="{{this}}"
         />
         {{/each}}
       </div>
