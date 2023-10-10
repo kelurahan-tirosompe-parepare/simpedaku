@@ -99,26 +99,15 @@
     <script>
       const dropdownItems = document.querySelectorAll(".dropdown-item");
       
-      dropdownItems.forEach((item) => { item.addEventListener("click",function(event) {
-        event.preventDefault(); 
+      dropdownItems.forEach((item) => {
+          item.addEventListener("click",function(event) {
+            
+          event.preventDefault(); 
         
-      const itemId = item.getAttribute("id");
-                       
-      fetch(`/suket/${itemId}`, {
-        method:"POST"
-      }).then((response) => { if (response.ok) {
-        return response.json() 
-      } else {
-      throw new Error("Gagal mengambil data dari server") 
-      }})
-        .then((data) => {
-      console.log(data) 
-      })
-        .catch((error) => {
-        console.error(error)
-      }) 
+          const itemId = item.getAttribute("id");
+          
         }) 
-            });
+      });
     </script>
   </body>
 </html>

@@ -33,10 +33,10 @@ const suket = require("./src/suket.json");
 console.log(suket);
 
 //Terima request untuk membentuk form di dashboard.hbs
-fastify.post("/suket/:jenisSuket", async function (request, reply) {
-  const { jenisSuket } = request.params;
-  return reply.view("/src/pages/dasboard.hbs", suket);
-});
+// fastify.get("/suket/:jenisSuket", async function (request, reply) {
+//   const { jenisSuket } = request.params;
+//   return reply.send(suket);
+// });
 
 fastify.get("/", function (request, reply) {
   // The Handlebars code will be able to access the parameter values and build them into the page
@@ -92,7 +92,8 @@ fastify.post("/dashboard", async function (request, reply) {
           status_hamil: pesanServer[10],
           password: pesanServer[11],
         },
-        dataList: Object.keys(suket['Keterangan'])
+        dataList: Object.keys(suket['Keterangan']),
+        dataForm: suket
       };
 
       // console.log(dataDb)
@@ -107,6 +108,9 @@ fastify.post("/dashboard", async function (request, reply) {
       console.log(err);
     });
 });
+
+
+
 
 // Run the server and report out to the logs
 fastify.listen(
