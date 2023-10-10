@@ -80,7 +80,7 @@
     <script>
       const dropdownItems = document.querySelectorAll(".dropdown-item");
       
-      localStorage.setItem("dataList", `${JSON.stringify({{dataList}})`);
+      localStorage.setItem("dataList", `{{log dataList}}`);
       
       dropdownItems.forEach((item) => {
           item.addEventListener("click",function(event) {
