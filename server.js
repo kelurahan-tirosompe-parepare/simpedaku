@@ -87,8 +87,7 @@ fastify.post("/dashboard", async function (request, reply) {
           status_hamil: pesanServer[10],
           password: pesanServer[11],
         },
-        dataList: Object.keys(suket['Keterangan']),
-        dataForm: suket
+        dataList: Object.keys(suket['Keterangan'])
       };
 
       // console.log(dataDb)
