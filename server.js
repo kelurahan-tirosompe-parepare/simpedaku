@@ -43,7 +43,7 @@ fastify.get("/", function (request, reply) {
   return reply.view("/src/pages/index.hbs");
 });
 
-fastify.post("/login", async function (request, reply) {
+fastify.post("/dashboard", async function (request, reply) {
   let username = request.body.username_admin;
   let password = request.body.password_admin;
   let rw = request.body.rw_admin;
@@ -87,7 +87,8 @@ fastify.post("/login", async function (request, reply) {
           status_hamil: pesanServer[10],
           password: pesanServer[11],
         },
-        dataList: Object.keys(suket),
+        dataList: Object.keys(suket['Keterangan']),
+        dataForm: suket
       };
 
       // console.log(dataDb)
