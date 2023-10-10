@@ -32,6 +32,7 @@ const suket = require("./src/suket.json");
 
 console.log(suket)
 
+//Terima request untuk membentuk form di dashboard.hbs
 fastify.post("/suket/:jenisSuket", async function (request, reply) {
   const { jenisSuket } = request.params;
   return reply.view("/src/pages/dasboard.hbs", suket);
