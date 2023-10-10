@@ -66,8 +66,8 @@
     <script>
       const templateForm = (isi) => { 
         return `<div class="mb-3"> <label
-      for="form${isi}" class="form-label">${isi}</label> <input
-      class="form-control" id="form${isi}" type="file" accept="image/*"
+      for="form${isi}" class="form-label">${isi}</label> 
+      <input name="${isi}" class="form-control" id="form${isi}" type="file" accept="image/*"
       capture="user" /> </div>` };
       
       const dropdownItems = document.querySelectorAll(".dropdown-item"); 
@@ -88,7 +88,8 @@
       
       $(kirim).on("submit", function(ev){ 
             ev.preventDefault() 
-        $.post()
+        console.log(ev.target)
+        // $.post( "test.php", { name: "John", time: "2pm" } );
       })
       
     </script>
