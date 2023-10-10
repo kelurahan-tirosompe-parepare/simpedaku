@@ -64,36 +64,51 @@
     <div class="mx-5">
       <form id="kirim">
         
-      <div class="mb-3">
-        <label for="form{{this}}" class="form-label">{{this}}</label>
-        <input class="form-control" id="form{{this}}" type="file" accept="image/*" capture="user" />
-      </div>
+      
         
         <button type="submit" class="btn btn-primary">Kirim</button>
       </form>
     </div>
 
     <script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script>
+    <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
     <script>
+      const templateForm = (isi) => {
+        return `<div class="mb-3">
+        <label for="form${isi}" class="form-label">${isi}</label>
+        <input class="form-control" id="form${isi}" type="file" accept="image/*" capture="user" />
+      </div>`
+      }
+      
       const dropdownItems = document.querySelectorAll(".dropdown-item");
       
       const listForm = JSON.parse('{{{dataForm}}}')
       
       dropdownItems.forEach((item) => {
-          item.addEventListener("click",function(event) {
+          item.on("click",function(event) {
           event.preventDefault(); 
         
           const itemId = (item.getAttribute("id")).slice(9, item.getAttribute("id").length)
 
-            console.log(listForm.Keterangan[itemId])
+            const formArr = listForm.Keterangan[itemId]
+            
+            formArr.forEach((index, item) => {
+              $(kirim).prepend(templateForm(item))
+            })
+            
+            
+            
         }) 
       });
       
-      kirim.addEventListener("submit", function(ev){
+      $(kirim).on("submit", function(ev){
         ev.preventDefault()
       })
     </script>
