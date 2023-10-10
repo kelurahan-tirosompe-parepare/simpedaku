@@ -47,12 +47,10 @@ fastify.post("/", async function (request, reply) {
   let password = request.body.password_admin;
   let rw = request.body.rw_admin;
 
-  console.log(username == "");
-  console.log((rw * 1) < 1);
-  console.log(password == "");
+  console.log(Number.isNaN(rw * 1));
 
   let params = { pesan: "" };
-  if (username == "" || (rw * 1) < 1|| password == "") {
+  if (username == "" || Number.isNaN(rw * 1) || password == "") {
     params["pesan"] = "salah";
     return reply.view("/src/pages/index.hbs", params);
   }

@@ -1,31 +1,31 @@
 {
-  "keterangan": {
-    "Ghoib": [],
-    "Belum Menikah": [],
-    "Nama Sama": [],
-    "Tinggal Sementara": [],
-    "Orangtua Wali": [],
-    "Bepergian": [],
-    "Tempat Usaha": [],
-    "Berpenghasilan": [],
-    "Janda/Duda": [],
-    "Izin Pelataran": [],
-    "Izin Keramaian": [],
-    "Rekomendasi": [],
-    "Kematian": [],
-    "Kelahiran": [],
-    "Memiliki Rumah": [],
-    "Pisah Ranjang": [],
-    "Tanah Wakaf": [],
-    "Tidak Memiliki PBB": [],
-    "Pengaktifan BPJS": [],
-    "Penerbitan PBB": [],
-    "Izin Orangtua": [],
-    "Kurang Mampu": []
+  "Keterangan": {
+    "Ghoib": ["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "Belum Menikah":["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "Nama Sama":["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "Tinggal Sementara":["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "Orangtua Wali":["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "Bepergian":["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "Tempat Usaha":["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "Berpenghasilan":["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "Janda/Duda":["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "Izin Pelataran":["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "Izin Keramaian":["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "Rekomendasi":["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "Kematian":["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "Kelahiran":["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "Memiliki Rumah":["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "Pisah Ranjang":["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "Tanah Wakaf":["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "Tidak Memiliki PBB":["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "Pengaktifan BPJS":["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "Penerbitan PBB":["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "Izin Orangtua":["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "Kurang Mampu": ["KTP", "KK", "Bukti pelunasan PBB terakhir"]
   },
-  "pernyataan": {
-    "SKCK": [],
-    "Nikah": [],
-    "KTP/KK": []
+  "Pengantar": {
+    "SKCK":["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "Nikah":["KTP", "KK", "Bukti pelunasan PBB terakhir"],
+    "KTP/KK": ["KTP", "KK", "Bukti pelunasan PBB terakhir"]
   }
 }
