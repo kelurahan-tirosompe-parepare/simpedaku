@@ -80,17 +80,15 @@
     <script>
       const dropdownItems = document.querySelectorAll(".dropdown-item");
       
-      localStorage.setItem("dataList" : '{{{dataForm}}}')
-      
+      const dataForm = {{{dataForm.Keterangan}}}
       
       dropdownItems.forEach((item) => {
           item.addEventListener("click",function(event) {
-            
           event.preventDefault(); 
         
-          const itemId = item.getAttribute("id");
-            
+          const itemId = (item.getAttribute("id")).slice(9, item.getAttribute("id").length)
             console.log(itemId)
+          console.log(dataForm[itemId])
           
         }) 
       });
