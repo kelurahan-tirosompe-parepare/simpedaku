@@ -80,9 +80,8 @@
     <script>
       const dropdownItems = document.querySelectorAll(".dropdown-item");
       
-      {{dataList}}
+      localStorage.setItem("dataList" : '{{{dataForm}}}')
       
-      Handlebars.register('ok', )
       
       dropdownItems.forEach((item) => {
           item.addEventListener("click",function(event) {
