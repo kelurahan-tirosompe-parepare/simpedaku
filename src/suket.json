@@ -1,5 +1,4 @@
 {
-  "Keterangan": {
     "Ghoib": ["KTP", "KK", "Pelunasan PBB terakhir"],
     "Belum Menikah":["KTP", "KK", "Pelunasan PBB terakhir"],
     "Nama Sama":["KTP", "KK", "Pelunasan PBB terakhir"],
@@ -21,11 +20,8 @@
     "Pengaktifan BPJS":["KTP", "KK", "Pelunasan PBB terakhir", "Foto kartu BPJS"],
     "Penerbitan PBB":["KTP", "KK", "Bukti atas hak"],
     "Izin Orangtua":["KTP", "KK", "Pelunasan PBB terakhir", "Pernyataan Orang Tua"],
-    "Kurang Mampu": ["KTP", "KK", "Pelunasan PBB terakhir"]
-  },
-  "Pengantar": {
+    "Kurang Mampu": ["KTP", "KK", "Pelunasan PBB terakhir"],
     "SKCK":["KTP", "KK", "Pelunasan PBB terakhir"],
     "Nikah":["KTP kedua mempelai", "KK kedua mempelai", "Pelunasan PBB terakhir", "Akta lahir kedua mempelai", "Ijazah terakhir kedua mempelai", "Bukti catin"],
     "Perubahan KTP/KK": ["KTP", "KK", "Pelunasan PBB terakhir"]
-  }
 }

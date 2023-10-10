@@ -11,6 +11,7 @@
     />
   </head>
   <body>
+    <div class="container">
     <h1>Selamat datang {{dataUser.nama}}</h1>
     <!--      SURAT KETERANGAN-->
     <!--     <h3>SURAT KETERANGAN</h3> -->
@@ -22,10 +23,10 @@
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          Surat Keterangan
+          -- Pilih --
         </button>
         <ul class="dropdown-menu" id="suket">
-          {{#each dataList.Keterangan}}
+          {{#each dataList}}
             <li><a
                 class="dropdown-item"
                 id="dropdown-{{@key}}"
@@ -35,41 +36,18 @@
           {{/each}}
         </ul>
       </div>
-
-      <!--     <h3>SURAT PENGANTAR</h3> -->
-      <!--      SURAT PENGANTAR -->
-      <div class="dropdown">
-        <button
-          class="btn btn-secondary dropdown-toggle"
-          type="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          Surat Pengantar
-        </button>
-        <ul class="dropdown-menu" id="supen">
-  {{#each dataList.Pengantar}}
-          <li><a
-              class="dropdown-item"
-              id="dropdown-{{@key}}"
-              href="#dropdown-{{@key}}"
-              aria-controls="dropdown-{{@key}}"
-            >{{@key}}</a></li>
-  {{/each}}
-        </ul>
-      </div>
     </div>
     
 <!--  form -->
     <div class="mx-5">
       <form id="kirim">
-        
+        <div id="isiForm">
       
-        
+        </div>
         <button type="submit" class="btn btn-primary">Kirim</button>
       </form>
     </div>
-
+    </div>
     <script
   src="https://code.jquery.com/jquery-3.7.1.min.js"
   integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
@@ -92,19 +70,16 @@
       const listForm = JSON.parse('{{{dataForm}}}')
       
       dropdownItems.forEach((item) => {
-          item.on("click",function(event) {
+          item.addEventListener("click",function(event) {
           event.preventDefault(); 
-        
+        $(isiForm).html("")
           const itemId = (item.getAttribute("id")).slice(9, item.getAttribute("id").length)
 
-            const formArr = listForm.Keterangan[itemId]
+            const formArr = listForm[itemId]
             
-            formArr.forEach((index, item) => {
-              $(kirim).prepend(templateForm(item))
+            formArr.forEach((item, index) => {
+              $(isiForm).prepend(templateForm(item))
             })
-            
-            
-            
         }) 
       });
       
