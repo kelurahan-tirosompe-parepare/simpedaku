@@ -25,8 +25,6 @@
         Surat Keterangan
       </button>
       <ul class="dropdown-menu" id="suket">
-        
-        
         {{#each dataList}}
           <li><a
             class="dropdown-item"
@@ -35,134 +33,6 @@
             aria-controls="dropdown-{{this}}"
                  >{{this}}</a></li>
         {{/each}}
-        
-        
-<!--       <li><a
-        class="dropdown-item"
-        id="dropdown-belum-menikah"
-        href="#dropdown-belum-menikah"
-        aria-controls="dropdown-belum-menikah"
-             >Belum Menikah</a></li>
-      <li><a
-        class="dropdown-item"
-        id="dropdown-nama-sama"
-        href="#dropdown-nama-sama"
-        aria-controls="dropdown-nama-sama"
-             >Nama Sama</a></li>
-      <li><a
-        class="dropdown-item"
-        id="dropdown-tinggal-sementara"
-        href="#dropdown-tinggal-sementara"
-        aria-controls="dropdown-tinggal-sementara"
-             >Tinggal Sementara</a></li>
-      <li><a
-        class="dropdown-item"
-        id="dropdown-orangtua-wali"
-        href="#dropdown-orangtua-wali"
-        aria-controls="dropdown-orangtua-wali"
-             >Orangtua Wali</a></li>
-      <li><a
-        class="dropdown-item"
-        id="dropdown-bepergian"
-        href="#dropdown-bepergian"
-        aria-controls="dropdown-bepergian"
-             >Bepergian</a></li>
-      <li><a
-        class="dropdown-item"
-        id="dropdown-tempat-usaha"
-        href="#dropdown-tempat-usaha"
-        aria-controls="dropdown-tempat-usaha"
-             >Tempat Usaha</a></li>
-      <li><a
-        class="dropdown-item"
-        id="dropdown-berpenghasilan"
-        href="#dropdown-berpenghasilan"
-        aria-controls="dropdown-berpenghasilan"
-             >Berpenghasilan</a></li>
-      <li><a
-        class="dropdown-item"
-        id="dropdown-janda-duda"
-        href="#dropdown-janda-duda"
-        aria-controls="dropdown-janda-duda"
-             >Janda/Duda</a></li>
-      <li><a
-        class="dropdown-item"
-        id="dropdown-izin-pelataran"
-        href="#dropdown-izin-pelataran"
-        aria-controls="dropdown-izin-pelataran"
-             >Izin Pelataran</a></li>
-      <li><a
-        class="dropdown-item"
-        id="dropdown-izin-keramaian"
-        href="#dropdown-izin-keramaian"
-        aria-controls="dropdown-izin-keramaian"
-             >Izin Keramaian</a></li>
-      <li><a
-        class="dropdown-item"
-        id="dropdown-rekomendasi"
-        href="#dropdown-rekomendasi"
-        aria-controls="dropdown-rekomendasi"
-             >Rekomendasi</a></li>
-      <li><a
-        class="dropdown-item"
-        id="dropdown-kematian"
-        href="#dropdown-kematian"
-        aria-controls="dropdown-kematian"
-             >Kematian</a></li>
-      <li><a
-        class="dropdown-item"
-        id="dropdown-kelahiran"
-        href="#dropdown-kelahiran"
-        aria-controls="dropdown-kelahiran"
-             >Kelahiran</a></li>
-      <li><a
-        class="dropdown-item"
-        id="dropdown-memiliki-rumah"
-        href="#dropdown-memiliki-rumah"
-        aria-controls="dropdown-memiliki-rumah"
-             >Memiliki Rumah</a></li>
-      <li><a
-        class="dropdown-item"
-        id="dropdown-pisah-ranjang"
-        href="#dropdown-pisah-ranjang"
-        aria-controls="dropdown-pisah-ranjang"
-             >Pisah Ranjang</a></li>
-      <li><a
-        class="dropdown-item"
-        id="dropdown-tanah-wakaf"
-        href="#dropdown-tanah-wakaf"
-        aria-controls="dropdown-tanah-wakaf"
-             >Tanah Wakaf</a></li>
-      <li><a
-        class="dropdown-item"
-        id="dropdown-tidak-memiliki-pbb"
-        href="#dropdown-tidak-memiliki-pbb"
-        aria-controls="dropdown-tidak-memiliki-pbb"
-             >Tidak Memiliki PBB</a></li>
-      <li><a
-        class="dropdown-item"
-        id="dropdown-pengaktifan-bpjs"
-        href="#dropdown-pengaktifan-bpjs"
-        aria-controls="dropdown-pengaktifan-bpjs"
-             >Pengaktifan BPJS</a></li>
-      <li><a
-        class="dropdown-item"
-        id="dropdown-penerbitan-pbb"
-        href="#dropdown-penerbitan-pbb"
-        aria-controls="dropdown-penerbitan-pbb"
-             >Penerbitan PBB</a></li>
-      <li><a
-        class="dropdown-item"
-        id="dropdown-izin-orangtua"
-        href="#dropdown-izin-orangtua"
-        aria-controls="dropdown-izin-orangtua"
-             >Izin Orangtua</a></li>
-      <li><a
-        class="dropdown-item"
-        id="dropdown-kurang-mampu"
-        href="#dropdown-kurang-mampu"
-        aria-controls="dropdown-kurang-mampu"
-             >Kurang Mampu</a></li> -->
      </ul>
     </div>
     
@@ -203,10 +73,12 @@
     
     
     <div>
-      {{#each people}}
-        <li>{{this}}</li>
+      <ul>
+      {{#each dataForm}}
+        <li>{{this.Keterangan}}</li>
       {{/each}}
-    </div>
+      </ul>
+        </div>
     
     
     <script
