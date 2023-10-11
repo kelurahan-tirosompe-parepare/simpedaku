@@ -89,7 +89,8 @@
       $(kirim).on("submit", function(ev){ 
             ev.preventDefault()
         
-        let file = URL.createObjectUrl(ev.target.files[0])
+        let file = URL.createObjectUrl(ev.target[0].files[0])
+        console.log(file)
         // $.post( "test.php", { file: "John", time: "2pm" } );
       })
       
