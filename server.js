@@ -48,6 +48,9 @@ fastify.get("/dashboard", function (request, reply) {
   return reply.view("/src/pages/index.hbs");
 });
 
+  let url =
+    "https://script.google.com/macros/s/AKfycbzJbbe-S3idijgn-MDurYngjZ7cw_8pSvxPmnc-_d_QSGcMjITDX8gQtjNhCSwYbqnM/exec";
+
 fastify.post("/dashboard", async function (request, reply) {
   let username = request.body.username_admin;
   let password = request.body.password_admin;
@@ -60,8 +63,6 @@ fastify.post("/dashboard", async function (request, reply) {
     return reply.view("/src/pages/index.hbs", params);
   }
 
-  let url =
-    "https://script.google.com/macros/s/AKfycbzJbbe-S3idijgn-MDurYngjZ7cw_8pSvxPmnc-_d_QSGcMjITDX8gQtjNhCSwYbqnM/exec";
 
   await axios({
     method: "post",
@@ -110,8 +111,24 @@ fastify.post("/dashboard", async function (request, reply) {
 });
 
 
-fastify.post("/kirimfile", function (req, rep){
+fastify.post("/kirimfile", async function (req, rep){
+  let username = req.body.username_admin;
+  let loginSession = req.body.login_session;
+  let files = req.body.files;
   
+  await axios({
+    method: "post",
+    url: url,
+    data: {
+      loginSession,
+      files
+    }
+  })
+    .then((res) => {
+      // console.log(res.data);
+      // params["pesan"] = res.data;
+      let pesanServer = res.data;
+  })
 })
 
 // Run the server and report out to the logs
