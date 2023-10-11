@@ -110,7 +110,9 @@ fastify.post("/dashboard", async function (request, reply) {
 });
 
 
-
+fastify.post("/kirimfile", function (req, rep){
+  
+})
 
 // Run the server and report out to the logs
 fastify.listen(
