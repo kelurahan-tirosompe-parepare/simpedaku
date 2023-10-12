@@ -95,10 +95,13 @@
        // var fileInput = $('#fileInput')[0].files[0];
        //  console.log(fileInput)
     var formData = new FormData($('#kirim')[0]);
-        console.log($('#kirim')[0].files)
+        console.log(ev.target.length)
     if (formData) {
-      const values = Object.fromEntries(formData.entries());
-      console.log(values);
+      const fileList = Object.fromEntries(formData.entries());
+      for (const [key, value] of Object.entries(object1)) {
+          console.log(`${key}: ${value}`);
+      };
+      
 //       // formData.append('file', fileInput);
       
 //       $.post('kirimfile', {dataFile : formData})
