@@ -43,7 +43,7 @@
       <!--  form -->
       <div class="my-3 p-3 border">
         <h3 id="namaForm" class="mb-3"></h3>
-        <form id="kirim">
+        <form id="kirim" enctype="multipart/form-data">
           <div id="isiForm" class="border p-3 mb-3">
 
           </div>
@@ -51,6 +51,9 @@
             <button type="submit" class="btn btn-primary">Kirim</button>
           </div>
         </form>
+        <p id="status">
+          
+        </p>
       </div>
     </div>
     <script
@@ -92,7 +95,7 @@
        // var fileInput = $('#fileInput')[0].files[0];
        //  console.log(fileInput)
     var formData = new FormData($('#kirim')[0]);
-console.log(formData)
+console.log($('#kirim')[0])
     if (formData) {
       // formData.append('file', fileInput);
       
