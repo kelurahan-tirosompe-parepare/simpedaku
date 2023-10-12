@@ -116,19 +116,31 @@ fastify.post("/dashboard", async function (request, reply) {
 });
 
 
-fastify.post("/kirimfile", { preHandler: storage.single('KTP') }, async function (req, rep){
+fastify.post("/kirimfile", async function (req, rep){
   // let username = req.body.username_admin;
   // let loginSession = req.body.login_session;
  const part = await req.file();
   const imageData = part.file;
   
-  try {
-    const imageBuffer = req.file.buffer;
-    // Mengirim data gambar sebagai base64 ke Google Script
-    const base64ImageData = Utilities.base64Encode(imageBuffer);
-    const response = await kirimKeGoogleScript(base64ImageData);
+ try {
 
-    rep.send(response);
+    const responses = {};
+
+    for (const jenisFile of jenisFileDibutuhkan) {
+      if (req.files[jenisFile]) {
+        const fileBuffer = req.files[jenisFile][0].buffer;
+
+        // Mengubah buffer gambar ke base64
+        const base64ImageData = fileBuffer.toString('base64');
+
+        // Kirim data gambar ke Google Script
+        const response = await kirimKeGoogleScript(base64ImageData);
+
+        responses[jenisFile] = response;
+      }
+    }
+
+    rep.send(responses);
   } catch (err) {
     rep.status(500).send(err);
   }
