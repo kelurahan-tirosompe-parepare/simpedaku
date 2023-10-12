@@ -95,17 +95,18 @@
        // var fileInput = $('#fileInput')[0].files[0];
        //  console.log(fileInput)
     var formData = new FormData($('#kirim')[0]);
-      console.log(formData)
-        
+        console.log($('#kirim')[0].files)
     if (formData) {
-      // formData.append('file', fileInput);
+      const values = Object.fromEntries(formData.entries());
+      console.log(values);
+//       // formData.append('file', fileInput);
       
-      $.post('kirimfile', {dataFile : formData})
-        .done(function( data ) {
-       $('#status').text("Data Loaded: " + data );
-      })
+//       $.post('kirimfile', {dataFile : formData})
+//         .done(function( data ) {
+//        $('#status').text("Data Loaded: " + data );
+//       })
     } else {
-      $('#status').text('Pilih gambar terlebih dahulu.');
+//       $('#status').text('Pilih gambar terlebih dahulu.');
     }
       })
       
