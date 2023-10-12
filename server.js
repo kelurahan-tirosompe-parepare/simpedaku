@@ -23,7 +23,7 @@ fastify.register(require("@fastify/view"), {
   },
 });
 
-fastify.register(require('fastify-multipart'));
+fastify.register(require('@fastify/multipart'))
 
 // Load and parse SEO data
 const suket = require("./src/suket.json");
