@@ -93,7 +93,7 @@
             ev.preventDefault()
         
           var formData = new FormData(ev.target);
-          fd.append( 'file', input.files[0] );
+          // fd.append( 'file', input.files[0] );
               // console.log(ev.target.length)
           if (formData) {
             const fileList = Object.fromEntries(formData.entries());
