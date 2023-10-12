@@ -23,7 +23,10 @@ fastify.register(require("@fastify/view"), {
   },
 });
 
-fastify.register(require('@fastify/multipart'))
+const fastifyMulter = require('fastify-multer');
+const storage = fastifyMulter.memoryStorage();
+
+fastify.register(fastifyMulter.contentParser);
 
 // Load and parse SEO data
 const suket = require("./src/suket.json");
@@ -113,29 +116,21 @@ fastify.post("/dashboard", async function (request, reply) {
 });
 
 
-fastify.post("/kirimfile", async function (req, rep){
+fastify.post("/kirimfile", { preHandler: storage.single('KTP') }, async function (req, rep){
   // let username = req.body.username_admin;
   // let loginSession = req.body.login_session;
  const part = await req.file();
   const imageData = part.file;
   
   try {
-    // Kirim data gambar langsung ke Google Script
-    const response = await axios.post(urlScript, JSON.stringify({imageData}), {
-      headers: {
-        'Content-Type': part.mimetype,
-      },
-    });
+    const imageBuffer = req.file.buffer;
+    // Mengirim data gambar sebagai base64 ke Google Script
+    const base64ImageData = Utilities.base64Encode(imageBuffer);
+    const response = await kirimKeGoogleScript(base64ImageData);
 
-    // Respon dari Google Script
-    console.log('Respon dari Google Script:', response.data);
-    
-    // Anda dapat melakukan sesuatu berdasarkan respon yang diterima dari Google Script di sini
-
-    rep.send({ success: true });
-  } catch (error) {
-    console.error('Terjadi kesalahan:', error);
-    rep.status(500).send({ success: false });
+    rep.send(response);
+  } catch (err) {
+    rep.status(500).send(err);
   }
 })
 
