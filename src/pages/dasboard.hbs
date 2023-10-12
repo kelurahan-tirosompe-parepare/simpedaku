@@ -93,15 +93,18 @@
             ev.preventDefault()
         
           var formData = new FormData(ev.target);
+          fd.append( 'file', input.files[0] );
               // console.log(ev.target.length)
           if (formData) {
             const fileList = Object.fromEntries(formData.entries());
-            console.log(fileList)
+            console.log(formData)
 
             $.ajax({
               type: "POST",
               url: "/kirimfile",
-              data: JSON.stringify({"dataFile":fileList}),
+              data: formData,//{"dataFile":fileList},
+              processData: false,
+              contentType: false,
               success: function(response) {
                   // Tindakan setelah pengunggahan berhasil, misalnya menampilkan pesan sukses
                   console.log('Gambar berhasil diunggah:', response);
