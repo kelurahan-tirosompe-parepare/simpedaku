@@ -89,26 +89,24 @@
             }) 
       }); 
       
-      $(kirim).on("submit", function(ev){ 
+      $(kirim).on("submit", async function(ev){ 
             ev.preventDefault()
         
-       // var fileInput = $('#fileInput')[0].files[0];
-       //  console.log(fileInput)
-    var formData = new FormData($('#kirim')[0]);
-        // console.log(ev.target.length)
-    if (formData) {
-      const fileList = Object.fromEntries(formData.entries());
-console.log(fileList)
+          var formData = new FormData(ev.target);
+              // console.log(ev.target.length)
+          if (formData) {
+            const fileList = await Object.fromEntries(formData.entries());
+            console.log(fileList)
+            
+            $.post('/kirimfile', {dataFile:JSON.stringify(fileList)})
+              .done(function( data ) {
+             $('#status').text("Data Loaded: " + data );
+            })
+            
       
-//       // formData.append('file', fileInput);
-      
-      $.post('/kirimfile', {dataFile:JSON.stringify(fileList)})
-        .done(function( data ) {
-       $('#status').text("Data Loaded: " + data );
-      })
-    } else {
-//       $('#status').text('Pilih gambar terlebih dahulu.');
-    }
+          } else {
+            $('#status').text('Pilih gambar terlebih dahulu.');
+          }
       })
       
       
