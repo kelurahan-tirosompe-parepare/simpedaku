@@ -23,6 +23,8 @@ fastify.register(require("@fastify/view"), {
   },
 });
 
+fastify.register(require('fastify-multipart'));
+
 // Load and parse SEO data
 const suket = require("./src/suket.json");
 
@@ -48,7 +50,7 @@ fastify.get("/dashboard", function (request, reply) {
   return reply.view("/src/pages/index.hbs");
 });
 
-  let url =
+  let urlScript =
     "https://script.google.com/macros/s/AKfycbzJbbe-S3idijgn-MDurYngjZ7cw_8pSvxPmnc-_d_QSGcMjITDX8gQtjNhCSwYbqnM/exec";
 
 fastify.post("/dashboard", async function (request, reply) {
@@ -66,7 +68,7 @@ fastify.post("/dashboard", async function (request, reply) {
 
   await axios({
     method: "post",
-    url: url,
+    url: urlScript,
     data: {
       rw: rw,
       username: username,
@@ -114,21 +116,27 @@ fastify.post("/dashboard", async function (request, reply) {
 fastify.post("/kirimfile", async function (req, rep){
   let username = req.body.username_admin;
   let loginSession = req.body.login_session;
-  let files = req.body.files;
+ const part = await req.file();
+  const imageData = part.file;
   
-  await axios({
-    method: "post",
-    url: url,
-    data: {
-      loginSession,
-      files
-    }
-  })
-    .then((res) => {
-      // console.log(res.data);
-      // params["pesan"] = res.data;
-      let pesanServer = res.data;
-  })
+  try {
+    // Kirim data gambar langsung ke Google Script
+    const response = await axios.post(urlScript, imageData, {
+      headers: {
+        'Content-Type': part.mimetype,
+      },
+    });
+
+    // Respon dari Google Script
+    console.log('Respon dari Google Script:', response.data);
+    
+    // Anda dapat melakukan sesuatu berdasarkan respon yang diterima dari Google Script di sini
+
+    rep.send({ success: true });
+  } catch (error) {
+    console.error('Terjadi kesalahan:', error);
+    rep.status(500).send({ success: false });
+  }
 })
 
 // Run the server and report out to the logs
