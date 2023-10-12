@@ -95,12 +95,17 @@
        // var fileInput = $('#fileInput')[0].files[0];
        //  console.log(fileInput)
     var formData = new FormData($('#kirim')[0]);
-        console.log(ev.target.length)
+        // console.log(ev.target.length)
     if (formData) {
       const fileList = Object.fromEntries(formData.entries());
-      for (const [key, value] of Object.entries(object1)) {
-          console.log(`${key}: ${value}`);
+      let isi = {}
+      for (const [key, value] of Object.entries(fileList)) {
+        isi[key] = imgToBase64(value).then(res => {
+          
+        })
       };
+      
+      console.log(isi)
       
 //       // formData.append('file', fileInput);
       
@@ -114,7 +119,8 @@
       })
       
       
-      function imgToBase64(file){
+      async function imgToBase64(file){
+        let imageBase64Stringsep
         let reader = new FileReader();
             console.log("next");
  
@@ -125,9 +131,9 @@
                 imageBase64Stringsep = base64String;
  
                 // alert(imageBase64Stringsep);
-                console.log(base64String);
+                // console.log(base64String);
             }
-            reader.readAsDataURL(file);
+            await reader.readAsDataURL(file);
         
         return imageBase64Stringsep
       }
