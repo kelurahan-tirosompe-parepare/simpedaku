@@ -121,7 +121,7 @@ fastify.post("/kirimfile", async function (req, rep){
   
   try {
     // Kirim data gambar langsung ke Google Script
-    const response = await axios.post(urlScript, imageData, {
+    const response = await axios.post(urlScript, JSON.stringify({imageData}), {
       headers: {
         'Content-Type': part.mimetype,
       },
