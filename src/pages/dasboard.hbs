@@ -98,10 +98,20 @@
             const fileList = await Object.fromEntries(formData.entries());
             console.log(fileList)
             
-            $.post('/kirimfile', {dataFile:JSON.stringify(fileList)})
-              .done(function( data ) {
-             $('#status').text("Data Loaded: " + data );
-            })
+            $.ajax({
+              type: "POST",
+              url: urlScript,
+              data: fileList,
+              success: function(response) {
+                  // Tindakan setelah pengunggahan berhasil, misalnya menampilkan pesan sukses
+                  console.log('Gambar berhasil diunggah:', response);
+                },
+                error: function() {
+                  // Tindakan jika terjadi kesalahan
+                  console.log('Terjadi kesalahan saat mengunggah gambar.');
+                },
+              // dataType: dataType
+            });
             
       
           } else {
