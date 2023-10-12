@@ -114,8 +114,8 @@ fastify.post("/dashboard", async function (request, reply) {
 
 
 fastify.post("/kirimfile", async function (req, rep){
-  let username = req.body.username_admin;
-  let loginSession = req.body.login_session;
+  // let username = req.body.username_admin;
+  // let loginSession = req.body.login_session;
  const part = await req.file();
   const imageData = part.file;
   
