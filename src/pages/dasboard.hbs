@@ -95,24 +95,15 @@
        // var fileInput = $('#fileInput')[0].files[0];
        //  console.log(fileInput)
     var formData = new FormData($('#kirim')[0]);
-      console.log($('#kirim')[0])
+      console.log(formData)
         
     if (formData) {
       // formData.append('file', fileInput);
       
-      $.ajax({
-        url: '/kirimfile', // Ganti dengan URL Google Script Anda
-        type: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function(response) {
-          $('#status').text('Gambar berhasil diunggah ke Google Drive.');
-        },
-        error: function(xhr, status, error) {
-          $('#status').text('Gagal mengunggah gambar' + error);
-        }
-      });
+      $.post('kirimfile', {dataFile : formData})
+        .done(function( data ) {
+       $('#status').text("Data Loaded: " + data );
+      })
     } else {
       $('#status').text('Pilih gambar terlebih dahulu.');
     }

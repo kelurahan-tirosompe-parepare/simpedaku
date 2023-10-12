@@ -23,11 +23,6 @@ fastify.register(require("@fastify/view"), {
   },
 });
 
-const fastifyMulter = require('fastify-multer');
-const storage = fastifyMulter.memoryStorage();
-
-fastify.register(fastifyMulter.contentParser);
-
 // Load and parse SEO data
 const suket = require("./src/suket.json");
 
@@ -35,7 +30,7 @@ const suket = require("./src/suket.json");
 //   seo.url = `https://${process.env.PROJECT_DOMAIN}.glitch.me`;
 // }
 
-console.log(suket);
+// console.log(suket);
 
 //Terima request untuk membentuk form di dashboard.hbs
 // fastify.get("/suket/:jenisSuket", async function (request, reply) {
@@ -121,29 +116,28 @@ fastify.post("/kirimfile", async function (req, rep){
   // let loginSession = req.body.login_session;
  const part = await req.file();
   const imageData = part.file;
-  
- try {
+  console.log(imageData)
+//  try {
+//     const responses = {};
 
-    const responses = {};
+//     for (const jenisFile of jenisFileDibutuhkan) {
+//       if (req.files[jenisFile]) {
+//         const fileBuffer = req.files[jenisFile][0].buffer;
 
-    for (const jenisFile of jenisFileDibutuhkan) {
-      if (req.files[jenisFile]) {
-        const fileBuffer = req.files[jenisFile][0].buffer;
+//         // Mengubah buffer gambar ke base64
+//         const base64ImageData = fileBuffer.toString('base64');
 
-        // Mengubah buffer gambar ke base64
-        const base64ImageData = fileBuffer.toString('base64');
+//         // Kirim data gambar ke Google Script
+//         const response = await kirimKeGoogleScript(base64ImageData);
 
-        // Kirim data gambar ke Google Script
-        const response = await kirimKeGoogleScript(base64ImageData);
+//         responses[jenisFile] = response;
+//       }
+//     }
 
-        responses[jenisFile] = response;
-      }
-    }
-
-    rep.send(responses);
-  } catch (err) {
-    rep.status(500).send(err);
-  }
+//     rep.send(responses);
+//   } catch (err) {
+//     rep.status(500).send(err);
+//   }
 })
 
 // Run the server and report out to the logs
