@@ -89,15 +89,15 @@
       $(kirim).on("submit", function(ev){ 
             ev.preventDefault()
         
-       var fileInput = $('#fileInput')[0].files[0];
-        console.log(fileInput)
-    var formData = new FormData();
-
-    if (fileInput) {
-      formData.append('file', fileInput);
+       // var fileInput = $('#fileInput')[0].files[0];
+       //  console.log(fileInput)
+    var formData = new FormData($('#kirim')[0]);
+console.log(formData)
+    if (formData) {
+      // formData.append('file', fileInput);
       
       $.ajax({
-        url: 'URL_SCRIPT_ANDA', // Ganti dengan URL Google Script Anda
+        url: '/kirimfile', // Ganti dengan URL Google Script Anda
         type: 'POST',
         data: formData,
         contentType: false,
