@@ -111,13 +111,13 @@ fastify.post("/dashboard", async function (request, reply) {
 });
 
 
-fastify.post("/kirimfile", async function (req, rep){
+fastify.post("/kirimfile",  function (req, rep){
   // let username = req.body.username_admin;
   // let loginSession = req.body.login_session;
- const part = await req.file();
-  const imageData = part.file;
-  console.log(imageData)
-//  try {
+ const part =  req.body.dataFile;
+  // const imageData = part.file;
+  console.log(part)
+ try {
 //     const responses = {};
 
 //     for (const jenisFile of jenisFileDibutuhkan) {
@@ -134,10 +134,10 @@ fastify.post("/kirimfile", async function (req, rep){
 //       }
 //     }
 
-//     rep.send(responses);
-//   } catch (err) {
-//     rep.status(500).send(err);
-//   }
+    rep.send(part);
+  } catch (err) {
+    rep.status(500).send(err);
+  }
 })
 
 // Run the server and report out to the logs

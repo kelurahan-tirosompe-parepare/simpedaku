@@ -98,45 +98,19 @@
         // console.log(ev.target.length)
     if (formData) {
       const fileList = Object.fromEntries(formData.entries());
-      let isi = {}
-      for (const [key, value] of Object.entries(fileList)) {
-        isi[key] = imgToBase64(value).then(res => {
-          
-        })
-      };
-      
-      console.log(isi)
+console.log(fileList)
       
 //       // formData.append('file', fileInput);
       
-//       $.post('kirimfile', {dataFile : formData})
-//         .done(function( data ) {
-//        $('#status').text("Data Loaded: " + data );
-//       })
+      $.post('/kirimfile', {dataFile:JSON.stringify(fileList)})
+        .done(function( data ) {
+       $('#status').text("Data Loaded: " + data );
+      })
     } else {
 //       $('#status').text('Pilih gambar terlebih dahulu.');
     }
       })
       
-      
-      async function imgToBase64(file){
-        let imageBase64Stringsep
-        let reader = new FileReader();
-            console.log("next");
- 
-            reader.onload = function () {
-                base64String = reader.result.replace("data:", "")
-                    .replace(/^.+,/, "");
- 
-                imageBase64Stringsep = base64String;
- 
-                // alert(imageBase64Stringsep);
-                // console.log(base64String);
-            }
-            await reader.readAsDataURL(file);
-        
-        return imageBase64Stringsep
-      }
       
     </script>
   </body>
