@@ -97,7 +97,7 @@
               // console.log(ev.target.length)
           if (formData) {
             const fileList = Object.fromEntries(formData.entries());
-            console.log(formData)
+            console.log(fileList)
 
             $.ajax({
               type: "POST",
@@ -115,8 +115,6 @@
                 },
               // dataType: dataType
             });
-            
-      
           } else {
             $('#status').text('Pilih gambar terlebih dahulu.');
           }
