@@ -27,17 +27,17 @@ fastify.register(require("@fastify/view"), {
 // Load and parse SEO data
 const suket = require("./src/suket.json");
 
-// if (seo.url === "glitch-default") {
-//   seo.url = `https://${process.env.PROJECT_DOMAIN}.glitch.me`;
-// }
+async function kirimGscript(data){
+  let urlScript =
+    "https://script.google.com/macros/s/AKfycbzJbbe-S3idijgn-MDurYngjZ7cw_8pSvxPmnc-_d_QSGcMjITDX8gQtjNhCSwYbqnM/exec";
+  
+  return await axios({
+    method: "post",
+    url: urlScript,
+    data: data,
+  })
+}
 
-// console.log(suket);
-
-//Terima request untuk membentuk form di dashboard.hbs
-// fastify.get("/suket/:jenisSuket", async function (request, reply) {
-//   const { jenisSuket } = request.params;
-//   return reply.send(suket);
-// });
 
 fastify.get("/", function (request, reply) {
   // The Handlebars code will be able to access the parameter values and build them into the page
@@ -49,14 +49,20 @@ fastify.get("/dashboard", function (request, reply) {
   return reply.view("/src/pages/index.hbs");
 });
 
-  let urlScript =
-    "https://script.google.com/macros/s/AKfycbzJbbe-S3idijgn-MDurYngjZ7cw_8pSvxPmnc-_d_QSGcMjITDX8gQtjNhCSwYbqnM/exec";
+  
 
 fastify.post("/dashboard", async function (request, reply) {
   let username = request.body.username_admin;
   let password = request.body.password_admin;
   let rw = request.body.rw_admin;
-
+  
+  let data = {
+      rw: rw,
+      username: username,
+      password: password
+    }
+  
+  
   let params = { pesan: "" };
 
   if (username == "" || Number.isNaN(rw * 1) || password == "") {
@@ -65,15 +71,7 @@ fastify.post("/dashboard", async function (request, reply) {
   }
 
 
-  await axios({
-    method: "post",
-    url: urlScript,
-    data: {
-      rw: rw,
-      username: username,
-      password: password,
-    },
-  })
+  await kirimGscript(data)
     .then((res) => {
       // console.log(res.data);
       params["pesan"] = res.data;
@@ -113,7 +111,12 @@ fastify.post("/dashboard", async function (request, reply) {
 
 
 fastify.post("/kirimfile",  async function (req, reply){
-  console.log(req.body.upload)
+  console.log(req.body)
+  
+  kirimGscript(req.body)
+  .then(resp => {
+    console.log(resp)
+  })
  // const files = await req.saveRequestFiles()
  //  console.log(files[0].type) // "file"
  //  console.log(files[0].filepath)
@@ -137,3 +140,5 @@ fastify.listen(
     console.log(`Your app is listening on ${address}`);
   }
 );
+
+
