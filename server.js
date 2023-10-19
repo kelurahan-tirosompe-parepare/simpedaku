@@ -117,11 +117,11 @@ fastify.post("/kirimfile",  async function (req, reply){
   kirimGscript(berkas)
   .then(resp => {
     console.log(resp.data)
+    reply.send(resp.data)
     // return resp.data.arrayBuffer()
   })
   // .then(resp => {
   //   console.log(resp)
-  //    reply.send(resp)
   // })
  // const files = await req.saveRequestFiles()
  //  console.log(files[0].type) // "file"
