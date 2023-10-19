@@ -15,7 +15,7 @@ fastify.register(require("@fastify/static"), {
 
 // Formbody lets us parse incoming forms
 fastify.register(require("@fastify/formbody"));
-fastify.register(require('@fastify/multipart'))
+fastify.register(require('@fastify/multipart'),  { attachFieldsToBody: 'keyValues' })
 
 // View is a templating manager for fastify
 fastify.register(require("@fastify/view"), {
@@ -112,14 +112,18 @@ fastify.post("/dashboard", async function (request, reply) {
 });
 
 
-fastify.post("/kirimfile",  async function (req, rep){
-  const parts = req.files()
-  for await (const part of parts) {
-    console.log(part.filename)
-    // await pump(part.file, fs.createWriteStream(part.filename))
-  }
-  
-  rep.send()
+fastify.post("/kirimfile",  async function (req, reply){
+  console.log(req.body.upload)
+ // const files = await req.saveRequestFiles()
+ //  console.log(files[0].type) // "file"
+ //  console.log(files[0].filepath)
+ //  console.log(files[0].fieldname)
+ //  console.log(files[0].filename)
+ //  console.log(files[0].encoding)
+ //  console.log(files[0].mimetype)
+ //  console.log(files[0].fields) // other parsed parts
+
+  reply.send()
 })
 
 // Run the server and report out to the logs
