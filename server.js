@@ -117,7 +117,7 @@ fastify.post("/kirimfile",  function (req, rep){
   // let loginSession = req.body.login_session;
    // const part =  await req.file();
     // const imageData = part.file;
-    console.log(req)
+    console.log(req.file.buffer)
    // try {
 //     const responses = {};
 
@@ -135,7 +135,7 @@ fastify.post("/kirimfile",  function (req, rep){
 //       }
 //     }
 
-    rep.send(req);
+    rep.send(req.file.buffer);
   // } catch (err) {
   //   rep.status(500).send(err);
   // }
