@@ -113,16 +113,13 @@ fastify.post("/dashboard", async function (request, reply) {
 
 
 fastify.post("/kirimfile",  async function (req, rep){
- const parts = req.files()
- 
-for await (const part of parts) {
-
-   // upload and save the file
-    await part.file
-  console.log(part)
- }
+  const parts = req.files()
+  for await (const part of parts) {
+    console.log(part.filename)
+    // await pump(part.file, fs.createWriteStream(part.filename))
+  }
   
-  return {message : 'files uploaded' }
+  rep.send()
 })
 
 // Run the server and report out to the logs
