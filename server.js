@@ -112,33 +112,17 @@ fastify.post("/dashboard", async function (request, reply) {
 });
 
 
-fastify.post("/kirimfile",  function (req, rep){
-  // let username = req.body.username_admin;
-  // let loginSession = req.body.login_session;
-   // const part =  await req.file();
-    // const imageData = part.file;
-    console.log(req.file.buffer)
-   // try {
-//     const responses = {};
+fastify.post("/kirimfile",  async function (req, rep){
+ const parts = req.files()
+ 
+for await (const part of parts) {
 
-//     for (const jenisFile of jenisFileDibutuhkan) {
-//       if (req.files[jenisFile]) {
-//         const fileBuffer = req.files[jenisFile][0].buffer;
-
-//         // Mengubah buffer gambar ke base64
-//         const base64ImageData = fileBuffer.toString('base64');
-
-//         // Kirim data gambar ke Google Script
-//         const response = await kirimKeGoogleScript(base64ImageData);
-
-//         responses[jenisFile] = response;
-//       }
-//     }
-
-    rep.send(req.file.buffer);
-  // } catch (err) {
-  //   rep.status(500).send(err);
-  // }
+   // upload and save the file
+    await part.file
+  console.log(part)
+ }
+  
+  return {message : 'files uploaded' }
 })
 
 // Run the server and report out to the logs
