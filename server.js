@@ -114,10 +114,11 @@ fastify.post("/kirimfile",  async function (req, reply){
   console.log(req.body)
   let berkas = {berkas:req.body}
   console.log(berkas)
-  // kirimGscript(req.body)
-  // .then(resp => {
-    // console.log(resp)
-  // })
+  kirimGscript(berkas)
+  .then(resp => {
+    console.log(resp)
+     reply.send(resp)
+  })
  // const files = await req.saveRequestFiles()
  //  console.log(files[0].type) // "file"
  //  console.log(files[0].filepath)
@@ -127,7 +128,7 @@ fastify.post("/kirimfile",  async function (req, reply){
  //  console.log(files[0].mimetype)
  //  console.log(files[0].fields) // other parsed parts
 
-  reply.send()
+ 
 })
 
 // Run the server and report out to the logs
