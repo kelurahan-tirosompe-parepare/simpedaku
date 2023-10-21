@@ -75,7 +75,11 @@
       
       const dropdownItems = document.querySelectorAll(".dropdown-item"); 
       const listForm = JSON.parse('{{{dataForm}}}');
-                                  
+      const dataUser = JSON.parse('{{{dataUser}}}');
+      const nik = dataUser.nik
+      const password = dataUser.password
+      const rw = dataUser.rw
+      
       dropdownItems.forEach((item) => {
       item.addEventListener("click",function(event) {
           event.preventDefault();
@@ -95,14 +99,18 @@
           var formData = new FormData(ev.target);
           // fd.append( 'file', input.files[0] );
               // console.log(ev.target.length)
+        
           if (formData) {
             const fileList = Object.fromEntries(formData.entries());
             console.log(fileList)
-
+            formData.append('nik', nik);
+            formData.apppend('password', password);
+            formData.append('rw', rw);
+            
             $.ajax({
               type: "POST",
               url: "/kirimfile",
-              data: formData,//{"dataFile":fileList},
+              data: formData,
               processData: false,
               contentType: false,
               success: function(response) {

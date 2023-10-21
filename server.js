@@ -38,14 +38,6 @@ async function kirimGscript(data){
   })
 }
 
-// COOKIE
-function setCookie(cname, cvalue, exdays) {
-  const d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  let expires = "expires="+ d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
 
 fastify.get("/", function (request, reply) {
   // The Handlebars code will be able to access the parameter values and build them into the page
@@ -86,7 +78,7 @@ fastify.post("/dashboard", async function (request, reply) {
       let pesanServer = res.data;
 
       let dataDb = {
-        dataUser: {
+        dataUser: JSON.stringify({
           no_keluarga: pesanServer[0],
           kki: pesanServer[1],
           nik: pesanServer[2],
@@ -99,7 +91,7 @@ fastify.post("/dashboard", async function (request, reply) {
           status_pus: pesanServer[9],
           status_hamil: pesanServer[10],
           password: pesanServer[11],
-        },
+        }),
         dataList: suket,
         dataForm: JSON.stringify(suket)
       };
