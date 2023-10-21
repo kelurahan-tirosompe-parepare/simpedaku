@@ -104,9 +104,12 @@
             const fileList = Object.fromEntries(formData.entries());
             // console.log(fileList)
             formData.append('nik', nik);
-            formData.apppend('password', password);
+            formData.append('password', password);
             formData.append('rw', rw);
-            console.log(formData)
+            
+            for (const value of formData.values()) {
+              console.log(value);
+            }
             
             $.ajax({
               type: "POST",
