@@ -118,21 +118,7 @@ fastify.post("/kirimfile",  async function (req, reply){
   .then(resp => {
     console.log(resp.data)
     reply.send(resp.data)
-    // return resp.data.arrayBuffer()
   })
-  // .then(resp => {
-  //   console.log(resp)
-  // })
- // const files = await req.saveRequestFiles()
- //  console.log(files[0].type) // "file"
- //  console.log(files[0].filepath)
- //  console.log(files[0].fieldname)
- //  console.log(files[0].filename)
- //  console.log(files[0].encoding)
- //  console.log(files[0].mimetype)
- //  console.log(files[0].fields) // other parsed parts
-
- 
 })
 
 // Run the server and report out to the logs
