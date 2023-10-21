@@ -30,6 +30,7 @@ const suket = require("./src/suket.json");
 async function kirimGscript(data){
   // let urlScript = "https://script.google.com/macros/s/AKfycbzJbbe-S3idijgn-MDurYngjZ7cw_8pSvxPmnc-_d_QSGcMjITDX8gQtjNhCSwYbqnM/exec";
   let urlScript = "https://script.google.com/macros/s/AKfycbwDXO3TvaJUqaAxrZ3i2zX7oyKJlEbkZEXPcrzk6_0/dev"
+  
   return await axios({
     method: "post",
     url: urlScript,
@@ -99,7 +100,7 @@ fastify.post("/dashboard", async function (request, reply) {
       // console.log(dataDb)
 
       if (pesanServer != "username/password salah") {
-        return reply.view("/src/pages/dasboard.hbs", dataDb);
+        return reply.view("/src/pages/dashboard.hbs", dataDb);
       } else {
         return reply.view("/src/pages/index.hbs", params);
       }
