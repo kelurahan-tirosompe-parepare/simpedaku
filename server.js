@@ -78,7 +78,7 @@ fastify.post("/dashboard", async function (request, reply) {
       let pesanServer = res.data;
 
       let dataDb = {
-        dataUser: JSON.stringify({
+        dataUser: {
           no_keluarga: pesanServer[0],
           kki: pesanServer[1],
           nik: pesanServer[2],
@@ -91,7 +91,8 @@ fastify.post("/dashboard", async function (request, reply) {
           status_pus: pesanServer[9],
           status_hamil: pesanServer[10],
           password: pesanServer[11],
-        }),
+          rw: pesanServer[12]
+        },
         dataList: suket,
         dataForm: JSON.stringify(suket)
       };
