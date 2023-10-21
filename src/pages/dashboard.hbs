@@ -105,9 +105,6 @@
           if (formData) {
             const fileList = Object.fromEntries(formData.entries());
             // console.log(fileList)
-            formData.append('nik', nik);
-            formData.append('password', password);
-            formData.append('rw', rw);
             
             for (const value of formData.values()) {
               console.log(value);
@@ -116,7 +113,7 @@
             $.ajax({
               type: "POST",
               url: "/kirimfile",
-              data: formData,
+              data: [formData, objUser],
               processData: false,
               contentType: false,
               success: function(response) {
