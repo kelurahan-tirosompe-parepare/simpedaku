@@ -1,5 +1,6 @@
 const path = require("path");
 // const {data} = require("./appscript.js")
+
 const axios = require("axios");
 
 // Require the fastify framework and instantiate it
@@ -38,7 +39,6 @@ async function kirimGscript(data){
   })
 }
 
-
 fastify.get("/", function (request, reply) {
   // The Handlebars code will be able to access the parameter values and build them into the page
   return reply.view("/src/pages/index.hbs");
@@ -48,8 +48,6 @@ fastify.get("/dashboard", function (request, reply) {
   // The Handlebars code will be able to access the parameter values and build them into the page
   return reply.view("/src/pages/index.hbs");
 });
-
-  
 
 fastify.post("/dashboard", async function (request, reply) {
   let username = request.body.username_admin;
@@ -133,5 +131,3 @@ fastify.listen(
     console.log(`Your app is listening on ${address}`);
   }
 );
-
-
