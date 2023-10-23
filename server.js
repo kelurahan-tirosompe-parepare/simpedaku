@@ -57,7 +57,8 @@ fastify.post("/dashboard", async function (request, reply) {
   let data = {
       rw: rw,
       username: username,
-      password: password
+      password: password,
+      mode: 'login'
     }
   
   
