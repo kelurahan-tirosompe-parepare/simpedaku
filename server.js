@@ -116,7 +116,7 @@ fastify.post("/kirimfile",  async function (req, reply){
   console.log(berkas)
   kirimGscript(berkas)
   .then(resp => {
-    console.log(resp.data)
+    console.log(JSON.parse(resp.data))
     reply.send(resp.data)
   })
 })
