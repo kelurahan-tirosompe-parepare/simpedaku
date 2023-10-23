@@ -71,7 +71,7 @@ fastify.post("/dashboard", async function (request, reply) {
 
   await kirimGscript(data)
     .then((res) => {
-      // console.log(res.data);
+      console.log(res.data);
       params["pesan"] = res.data;
       let pesanServer = res.data;
 
