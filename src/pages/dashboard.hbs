@@ -83,6 +83,11 @@
       crossorigin="anonymous"
     ></script>
     <script>
+      let submitMati = $('button[type="submit"]').hasClass('disabled')
+      if(!submitMati){
+        $('button[type="submit"]').addClass('disabled')
+      }
+      
       const modalLoading = new bootstrap.Modal('#modalLoading')
       
       const templateForm = (isi) => { 
@@ -108,9 +113,16 @@
             }) 
       }); 
       
+      var terisi = false
+      $('input').each(function(){
+          if(!this.value){
+              terisi = false
+              return false
+          }
+      })
       
-      
-      $(kirim).on("submit", async function(ev){ 
+      if(terisi){
+        $(kirim).on("submit", async function(ev){ 
             ev.preventDefault()
         
           var formData = new FormData(ev.target);
@@ -120,6 +132,7 @@
               formData.append("rw", {{dataUser.rw}})
 
           if (formData) {
+            $('button[type="submit"]').removeClass('disabled')
             const fileList = Object.fromEntries(formData.entries());
             // console.log(fileList)
             
@@ -152,6 +165,9 @@
             $('#status').text('Pilih gambar terlebih dahulu.');
           }
       })
+      }else{
+        alert('semua berkas harus lengkap!')
+      }
       
       
     </script>
