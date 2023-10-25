@@ -66,7 +66,7 @@
 
           </div>
           <div class="text-end">
-            <button type="submit" class="btn btn-primary">Kirim</button>
+            <button type="submit" class="btn btn-primary disabled">Kirim</button>
           </div>
         </form>
         <p id="status">
@@ -102,9 +102,15 @@
       const listForm = JSON.parse('{{{dataForm}}}');
 
       
+                                  
       dropdownItems.forEach((item) => {
       item.addEventListener("click",function(event) {
           event.preventDefault();
+          
+          if($('input')){
+            $('button[type="submit"]').removeClass('disabled')
+          }
+        
           $(namaForm).html($(item).html());
             $(isiForm).html("");
             const itemId = (item.getAttribute("id")).slice(9, item.getAttribute("id").length);
@@ -158,8 +164,8 @@
               }})
               .done(function(response) {
                   // Tindakan setelah pengunggahan berhasil, misalnya menampilkan pesan sukses
-                  
-                  alert(`Gambar berhasil diunggah: ${JSON.stringify(response)}`);
+                  $('input').val('')
+                  alert(`Gambar berhasil diunggah: ${response.pesanServer}`);
                 })
               .fail(function( err ) {
                 // Tindakan jika terjadi kesalahan
