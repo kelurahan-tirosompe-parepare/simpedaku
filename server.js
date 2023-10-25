@@ -31,7 +31,7 @@ const suket = require("./src/suket.json");
 async function kirimGscript(data){
   let urlScript = "https://script.google.com/macros/s/AKfycbzJbbe-S3idijgn-MDurYngjZ7cw_8pSvxPmnc-_d_QSGcMjITDX8gQtjNhCSwYbqnM/exec";
   // let urlScript = "https://script.google.com/macros/s/AKfycbwDXO3TvaJUqaAxrZ3i2zX7oyKJlEbkZEXPcrzk6_0/dev"
-  
+  console.log(data)
   return await axios({
     method: "post",
     url: urlScript,
@@ -72,7 +72,7 @@ fastify.post("/dashboard", async function (request, reply) {
 
   await kirimGscript(data)
     .then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       params["pesan"] = res.data;
       let pesanServer = res.data;
 
@@ -112,7 +112,7 @@ fastify.post("/dashboard", async function (request, reply) {
 
 fastify.post("/kirimfile",  async function (req, reply){
   // console.log(req.body)
-  let berkas = JSON.stringify({berkas:req.body, mode: 'berkas'})
+  let berkas = {berkas:req.body, mode: 'berkas'}
   // console.log(berkas)
   kirimGscript(berkas)
   .then(resp => {
