@@ -95,8 +95,8 @@
         
           var formData = new FormData(ev.target);
         
-              formData.append("nik", {{dataUser.nik}})
-              formData.append("password", {{dataUser.password}}) 
+              formData.append("nik", "{{dataUser.nik}}")
+              formData.append("password", "{{dataUser.password}}") 
               formData.append("rw", {{dataUser.rw}})
 
           if (formData) {
