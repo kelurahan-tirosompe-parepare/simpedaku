@@ -120,7 +120,7 @@ fastify.post("/kirimfile",  async function (req, reply){
     reply.send(resp.data)
   })
   .catch(err => {
-    console.log(err)
+    reply.send(err)
   })
 })
 

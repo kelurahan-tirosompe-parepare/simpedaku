@@ -115,11 +115,11 @@
               contentType: false,
               success: function(response) {
                   // Tindakan setelah pengunggahan berhasil, misalnya menampilkan pesan sukses
-                  console.log('Gambar berhasil diunggah:', response);
+                  alert('Gambar berhasil diunggah:', response.pesanServer);
                 },
                 error: function() {
                   // Tindakan jika terjadi kesalahan
-                  console.log('Terjadi kesalahan saat mengunggah gambar.');
+                  alert('Terjadi kesalahan saat mengunggah gambar.');
                 },
               // dataType: dataType
             });
