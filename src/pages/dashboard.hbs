@@ -100,6 +100,8 @@
         
           var formData = new FormData(ev.target);
         
+              formData.append(objUser)
+        
           if (formData) {
             const fileList = Object.fromEntries(formData.entries());
             // console.log(fileList)
@@ -111,7 +113,7 @@
             $.ajax({
               type: "POST",
               url: "/kirimfile",
-              data: JSON.stringify([formData, objUser]),
+              data: formData,
               processData: false,
               contentType: false,
               success: function(response) {
