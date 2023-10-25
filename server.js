@@ -114,7 +114,7 @@ fastify.post("/kirimfile",  async function (req, reply){
   // console.log(req.body)
   let berkas = {berkas:req.body, mode: 'berkas'}
   // console.log(berkas)
-  kirimGscript(berkas)
+  await kirimGscript(berkas)
   .then(resp => {
     console.log(resp.data)
     reply.send(resp.data)
