@@ -119,6 +119,9 @@ fastify.post("/kirimfile",  async function (req, reply){
     console.log(resp.data)
     reply.send(resp.data)
   })
+  .catch(err => {
+    console.log(err)
+  })
 })
 
 // Run the server and report out to the logs
