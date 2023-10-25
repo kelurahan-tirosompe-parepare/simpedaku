@@ -122,7 +122,7 @@
               .done(function(response) {
                   // Tindakan setelah pengunggahan berhasil, misalnya menampilkan pesan sukses
                   
-                  alert(`Gambar berhasil diunggah: ${response.pesanServer}`);
+                  alert(`Gambar berhasil diunggah: ${JSON.stringify(response)}`);
                 })
               .fail(function( err ) {
                 // Tindakan jika terjadi kesalahan
