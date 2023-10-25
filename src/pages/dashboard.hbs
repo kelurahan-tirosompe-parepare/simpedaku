@@ -13,17 +13,17 @@
   <body>
 <!-- Modal -->
 <div class="modal" id="modalLoading" tabindex="-1" aria-labelledby="modalLoadingLabel" aria-hidden="true">
-  <div class="row align-items-center h-100">
-    <div class="col">
-      <div class="modal-content bg-transparent border-0 mt-5">
-          <div class="d-flex justify-content-center">
-              <div class="spinner-border text-light" role="status">
+      <div class="modal-content bg-transparent border-0">
+          <div class="row align-items-center h-100">
+            <div class="col">
+              <div class="d-flex justify-content-center">
+                <div class="spinner-border text-light" role="status">
                   <span class="visually-hidden">Loading...</span>
+                </div>
               </div>
+            </div>
           </div>
       </div>
-    </div>
-  </div>
 </div>
 
     
@@ -64,7 +64,7 @@
 
           </div>
           <div class="text-end">
-            <button type="submit" class="btn btn-primary disabled">Kirim</button>
+            <button type="submit" class="btn btn-primary">Kirim</button>
           </div>
         </form>
         <p id="status">
@@ -83,10 +83,10 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      let submitMati = $('button[type="submit"]').hasClass('disabled')
-      if(!submitMati){
-        $('button[type="submit"]').addClass('disabled')
-      }
+      // let submitMati = $('button[type="submit"]').hasClass('disabled')
+      // if(!submitMati){
+      //   $('button[type="submit"]').addClass('disabled')
+      // }
       
       const modalLoading = new bootstrap.Modal('#modalLoading')
       
@@ -113,18 +113,23 @@
             }) 
       }); 
       
-      var terisi = false
-      $('input').each(function(){
-          if(!this.value){
-              terisi = false
-              return false
-          }
-      })
-      
-      if(terisi){
+
         $(kirim).on("submit", async function(ev){ 
             ev.preventDefault()
-        
+          
+              var kosong = false
+              $('input').each(function(){
+                  if(!this.value){
+                      kosong = true
+                      return false
+                  }
+              })
+          
+          if(kosong){
+            alert('Lengkapi berkas!')
+            return false
+          }
+          
           var formData = new FormData(ev.target);
         
               formData.append("nik", "{{dataUser.nik}}")
@@ -165,9 +170,6 @@
             $('#status').text('Pilih gambar terlebih dahulu.');
           }
       })
-      }else{
-        alert('semua berkas harus lengkap!')
-      }
       
       
     </script>
