@@ -121,11 +121,12 @@
               }})
               .done(function(response) {
                   // Tindakan setelah pengunggahan berhasil, misalnya menampilkan pesan sukses
-                  alert('Gambar berhasil diunggah:', response.pesanServer);
+                  
+                  alert(`Gambar berhasil diunggah: ${response.pesanServer}`);
                 })
               .fail(function( err ) {
                 // Tindakan jika terjadi kesalahan
-                alert(err);
+                alert(JSON.stringfy(err));
               })
               .always(function(){
                 $('#loading').html("")
