@@ -12,14 +12,18 @@
   </head>
   <body>
 <!-- Modal -->
-<div class="modal" id="modalLoading" tabindex="-1" aria-labelledby="modalLoadingLabel" aria-hidden="true"  data-bs-backdrop="false">
-    <div class="modal-content border-0 my-auto">
+<div class="modal" id="modalLoading" tabindex="-1" aria-labelledby="modalLoadingLabel" aria-hidden="true">
+  <div class="row align-items-center h-100">
+    <div class="col">
+      <div class="modal-content bg-transparent border-0 mt-5">
           <div class="d-flex justify-content-center">
-              <div class="spinner-border" role="status">
+              <div class="spinner-border text-light" role="status">
                   <span class="visually-hidden">Loading...</span>
               </div>
           </div>
+      </div>
     </div>
+  </div>
 </div>
 
     
@@ -60,7 +64,7 @@
 
           </div>
           <div class="text-end">
-            <button type="submit" class="btn btn-primary">Kirim</button>
+            <button type="submit" class="btn btn-primary disabled">Kirim</button>
           </div>
         </form>
         <p id="status">
@@ -103,6 +107,8 @@
                 $(isiForm).prepend(templateForm(item)) }) 
             }) 
       }); 
+      
+      
       
       $(kirim).on("submit", async function(ev){ 
             ev.preventDefault()
