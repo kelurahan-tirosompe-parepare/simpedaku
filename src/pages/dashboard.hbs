@@ -115,20 +115,21 @@
               processData: false,
               contentType: false,
               beforeSend: function(){
-                $('loading').html(`<div class="spinner-border" role="status">
+                $('#loading').html(`<div class="spinner-border" role="status">
                                     <span class="visually-hidden">Loading...</span>
                                   </div>`)
-              },
-              success: function(response) {
+              }})
+              .done(function(response) {
                   // Tindakan setelah pengunggahan berhasil, misalnya menampilkan pesan sukses
                   alert('Gambar berhasil diunggah:', response.pesanServer);
-                },
-                error: function( err ) {
-                  // Tindakan jika terjadi kesalahan
-                  alert(err);
-                },
-              // dataType: dataType
-            });
+                })
+              .fail(function( err ) {
+                // Tindakan jika terjadi kesalahan
+                alert(err);
+              })
+              .always(function(){
+                $('#loading').html("")
+              })
           } else {
             $('#status').text('Pilih gambar terlebih dahulu.');
           }
