@@ -75,12 +75,7 @@
       
       const dropdownItems = document.querySelectorAll(".dropdown-item"); 
       const listForm = JSON.parse('{{{dataForm}}}');
-//console.log(listForm)
-      const objUser = {
-                    nik : "{{dataUser.nik}}", 
-                    password : "{{dataUser.password}}", 
-                    rw : "{{dataUser.rw}}"
-                    }
+
       
       dropdownItems.forEach((item) => {
       item.addEventListener("click",function(event) {
@@ -100,8 +95,10 @@
         
           var formData = new FormData(ev.target);
         
-              formData.append(objUser)
-        
+              formData.append("nik", {{dataUser.nik}})
+              formData.append("password", {{dataUser.password}}) 
+              formData.append("rw", {{dataUser.rw}})
+
           if (formData) {
             const fileList = Object.fromEntries(formData.entries());
             // console.log(fileList)
