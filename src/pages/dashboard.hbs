@@ -11,8 +11,21 @@
     />
   </head>
   <body>
+
+<!-- SIDEBAR -->
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">SIMPEDAKU</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
     
-<!-- Modal LOADING -->
+  </div>
+</div>
+    
+<!-- MODAL LOADING -->
 <div class="modal" id="modalLoading" tabindex="-1" aria-labelledby="modalLoadingLabel" aria-hidden="true">
   <div class="modal-dialog h-100">
       <div class="modal-content bg-transparent border-0 h-100">
@@ -29,9 +42,8 @@
    </div>
 </div>
 
-    
     <div class="container">
-      <div style="height:100px" class="border-bottom mb-5">
+      <div style="height:100px" class="border-bottom">
         <h1>{{dataUser.nama}}</h1>
       </div>
       
@@ -59,7 +71,7 @@
         </div>
       </div>
 
-      <!--  FORM UPLOAD BERKAS -->
+<!--  FORM UPLOAD BERKAS -->
       <div class="my-3 p-3 border">
         <h3 id="namaForm" class="mb-3"></h3>
         <form id="kirim" enctype="multipart/form-data">
@@ -72,7 +84,9 @@
         </form>
         <p id="status"></p>
       </div>
-      
+ 
+    </div>
+    
 <!--    MODAL KET. RT/RW    -->
 <div class="modal fade" id="modalKeteranganRt" tabindex="-1" aria-labelledby="modalKeteranganRtLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -94,8 +108,7 @@
     </div>
   </div>
 </div>
-      
-    </div>
+     
     <script
       src="https://code.jquery.com/jquery-3.7.1.min.js"
       integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
