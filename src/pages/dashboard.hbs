@@ -163,6 +163,10 @@
             $('button[type="submit"]').removeClass('disabled')
           }
         
+        $('#kirim input').change(function(){
+              console.log(this.files[0].size)
+          })
+        
           $(namaForm).html($(item).html());
             $(isiForm).html("");
             const itemId = (item.getAttribute("id")).slice(9, item.getAttribute("id").length);
