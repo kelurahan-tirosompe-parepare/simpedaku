@@ -82,7 +82,10 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <input type="password" class="">
+        <div class="mb-3">
+          <label for="passwordRt" class="form-label">Passkey RT/RW</label>
+          <input type="password" class="form-control" id="passwordRt">
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -144,8 +147,8 @@
         $(kirim).on("submit", async function(ev){ 
             ev.preventDefault()
           
-              var kosong = false
-              $('input').each(function(){
+              let kosong = false
+              $('#kirim input').each(function(){
                   if(!this.value){
                       kosong = true
                       return false
