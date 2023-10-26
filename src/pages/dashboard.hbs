@@ -172,10 +172,10 @@
                 $(isiForm).prepend(templateForm(item)) 
             }) 
         
-                   let maxFileSize = 100000000    
+                   let maxFileSize = 1000000
           $('#kirim input').change(function(){
             if(this.files[0].size > maxFileSize){
-              alert("ukuran file melebihi 100MB")
+              alert("ukuran file melebihi 1MB")
               this.value = ""
               return false
             }
