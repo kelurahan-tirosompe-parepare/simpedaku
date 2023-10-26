@@ -154,7 +154,7 @@
       
       const dropdownItems = document.querySelectorAll(".dropdown-item"); 
       const listForm = JSON.parse('{{{dataForm}}}');
-           
+      
       dropdownItems.forEach((item) => {
       item.addEventListener("click",function(event) {
           event.preventDefault();
@@ -163,12 +163,12 @@
             $('button[type="submit"]').removeClass('disabled')
           }
         
-          let maxFileSize = 100000000    
-          $('#kirim input').change(function(){
-            if(this.files[0].size > maxFileSize){
-              alert("ukuran file melebihi 100MB")
-              this.value = ""
-            }
+         let maxFileSize = 100000000    
+            $('#kirim input').change(function(){
+              if(this.files[0].size > maxFileSize){
+                alert("ukuran file melebihi 100MB")
+                this.value = ""
+              }
           })
         
           $(namaForm).html($(item).html());
