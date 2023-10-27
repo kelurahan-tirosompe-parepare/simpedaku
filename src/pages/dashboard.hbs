@@ -203,11 +203,11 @@
               formData.append("nik", "{{dataUser.nik}}")
               formData.append("password", "{{dataUser.password}}") 
               formData.append("rw", {{dataUser.rw}})
-              formData.append("jenis_layanan", )
+              formData.append("jenis_layanan", $(namaForm).html())
 
           if (formData) {
             $('button[type="submit"]').removeClass('disabled')
-            const fileList = Object.fromEntries(formData.entries());
+            // const fileList = Object.fromEntries(formData.entries());
             // console.log(fileList)
             
             for (const value of formData.values()) {
