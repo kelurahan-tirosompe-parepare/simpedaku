@@ -138,10 +138,6 @@
     ></script>
     
     <script>
-      // let submitMati = $('button[type="submit"]').hasClass('disabled')
-      // if(!submitMati){
-      //   $('button[type="submit"]').addClass('disabled')
-      // }
       
       const modalLoading = new bootstrap.Modal('#modalLoading')
       const modalKeteranganRt = new bootstrap.Modal('#modalKeteranganRt')
@@ -168,22 +164,21 @@
             const itemId = (item.getAttribute("id")).slice(9, item.getAttribute("id").length);
             const formArr = listForm[itemId];
         
+            //isi form input berkas dengan suket.json
             formArr.forEach((item, index) => {
                 $(isiForm).prepend(templateForm(item)) 
             }) 
-        
-                   let maxFileSize = 1000000
-          $('#kirim input').change(function(){
-            if(this.files[0].size > maxFileSize){
-              alert("ukuran file melebihi 1MB")
-              this.value = ""
-              return false
-            }
-          })
-        
+          
+            //besar maksimal file yang diupload
+            let maxFileSize = 1000000 //1MB
+            $('#kirim input').change(function(){
+              if(this.files[0].size > maxFileSize){
+                alert("ukuran file melebihi 1MB")
+                this.value = ""
+                return false
+              }
+            })
           }) 
-        
-
       }); 
       
 
@@ -208,6 +203,7 @@
               formData.append("nik", "{{dataUser.nik}}")
               formData.append("password", "{{dataUser.password}}") 
               formData.append("rw", {{dataUser.rw}})
+              formData.append("jenis_layanan", )
 
           if (formData) {
             $('button[type="submit"]').removeClass('disabled')
