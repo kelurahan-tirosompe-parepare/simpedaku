@@ -35,8 +35,8 @@ fastify.register(require("@fastify/view"), {
   }
 });
 
-fastify.addHook('preHandler', (request, reply, done) => {
-  console.log('hook:', request.headers)
+fastify.addHook('preValidation', (request, reply, done) => {
+  console.log('hook:', request.body)
   done()
 })
 
