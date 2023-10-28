@@ -3,8 +3,7 @@ const path = require("path");
 
 const axios = require("axios");
 
-const token = Math.random().toString(36).slice(2)
-const tirsom = '' //user id
+var token, tirsom //user id
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
@@ -36,6 +35,11 @@ fastify.register(require("@fastify/view"), {
   }
 });
 
+fastify.addHook('preHandler', (request, reply, done) => {
+  console.log('hook:', request.headers)
+  done()
+})
+
 // Load and parse SEO data
 const suket = require("./src/suket.json");
 
@@ -53,7 +57,7 @@ async function kirimGscript(data){
 fastify.get("/", function (request, reply) {
   // The Handlebars code will be able to access the parameter values and build them into the page
   // reply.removeHeader('set-cookie')
-  // token = Math.random().toString(36).slice(2)
+  token = Math.random().toString(36).slice(2)
   console.log(token)
   
   var now = new Date();
