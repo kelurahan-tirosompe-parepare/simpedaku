@@ -54,7 +54,7 @@ fastify.get("/", function (request, reply) {
   // The Handlebars code will be able to access the parameter values and build them into the page
   // reply.removeHeader('set-cookie')
   token = Math.random().toString(36).slice(2)
-  console.log(token)
+  // console.log(token)
   
   var now = new Date();
   var time = now.getTime();
@@ -122,6 +122,7 @@ fastify.post("/login", async function (request, reply) {
 
       if (pesanServer != "username/password salah") {
         tirsom = dataDb.dataUser.nik
+        console.log(token)
         
         var now = new Date();
         var time = now.getTime();
@@ -165,6 +166,8 @@ fastify.post("/kirimfile",  async function (req, reply){
 
 // validasi kuki
 function kukiValidation(kuki){
+  console.log('tirsom:', tirsom)
+  console.log('token:', token)
   try{
     let kukis = {}
     kukis['token'] = (kuki.split(';')[1]).split("=")[1]
