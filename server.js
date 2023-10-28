@@ -57,7 +57,7 @@ fastify.get("/", function (request, reply) {
 //   return reply.view("/src/pages/index.hbs");
 // });
 
-fastify.get("/riwayat", function(req, rep){
+fastify.post("/riwayat", function(req, rep){
   return rep.view("/src/pages/riwayat.hbs");
 })
 
