@@ -23,6 +23,13 @@ fastify.register(require("@fastify/view"), {
   engine: {
     handlebars: require("handlebars"),
   },
+  options: {
+    partials: {
+      header: './src/partials/header.hbs',
+      navigation: './src/partials/navigation.hbs',
+      modal_loading: './src/partials/loading.hbs'
+    }
+  }
 });
 
 // Load and parse SEO data
