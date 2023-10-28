@@ -3,7 +3,7 @@ const path = require("path");
 
 const axios = require("axios");
 
-const sessions = ''
+let sessions = ''
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
@@ -125,7 +125,7 @@ fastify.post("/login", async function (request, reply) {
     });
 });
 
-fastify.post("/riwayat", function(req, rep){
+fastify.get("/riwayat", function(req, rep){
   console.log(req.headers)
   return rep.view("/src/pages/riwayat.hbs");
 })
