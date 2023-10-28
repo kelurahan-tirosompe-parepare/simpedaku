@@ -111,10 +111,7 @@ fastify.post("/login", async function (request, reply) {
       // console.log(dataDb)
 
       if (pesanServer != "username/password salah") {
-        tokens.secret(function (err, secret) {
-          if (err) throw err
-          // do something with the secret
-        })
+        
         reply.header('set-cookie', 'foo');
         return reply.view("/src/pages/dashboard.hbs", dataDb);
       } else {
