@@ -3,7 +3,7 @@ const path = require("path");
 
 const axios = require("axios");
 
-var token, tirsom //user id
+let token, tirsom //user id
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
@@ -35,8 +35,8 @@ fastify.register(require("@fastify/view"), {
   }
 });
 
-fastify.addHook('preValidation', (request, reply, done) => {
-  console.log('hook:', request.body)
+fastify.addHook('onRequest', (request, reply, done) => {
+  console.log('hook:', request.headers.cookie)
   done()
 })
 
