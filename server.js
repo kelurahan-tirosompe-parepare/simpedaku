@@ -27,7 +27,8 @@ fastify.register(require("@fastify/view"), {
     partials: {
       header: './src/partials/header.hbs',
       navigation: './src/partials/navigation.hbs',
-      modal_loading: './src/partials/loading.hbs'
+      modal_loading: './src/partials/loading.hbs',
+      jquery_bootstrap: './src/partials/jquery_bootstrap.hbs'
     }
   }
 });
@@ -51,12 +52,14 @@ fastify.get("/", function (request, reply) {
   return reply.view("/src/pages/index.hbs");
 });
 
-fastify.get("/dashboard", function (request, reply) {
-  // The Handlebars code will be able to access the parameter values and build them into the page
-  return reply.view("/src/pages/index.hbs");
-});
+// fastify.get("/dashboard", function (request, reply) {
+//   // The Handlebars code will be able to access the parameter values and build them into the page
+//   return reply.view("/src/pages/index.hbs");
+// });
 
-fastify
+fastify.get("/riwayat", function(req, rep){
+  return rep.view("/src/pages/riwayat.hbs");
+})
 
 fastify.post("/login", async function (request, reply) {
   let username = request.body.username_admin;
