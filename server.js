@@ -51,6 +51,9 @@ async function kirimGscript(data){
 
 fastify.get("/", function (request, reply) {
   // The Handlebars code will be able to access the parameter values and build them into the page
+  // reply.removeHeader('set-cookie')
+  sessions = Math.random().toString(36).slice(2)
+  reply.header('set-cookie', ["token="+ sessions]);
   return reply.view("/src/pages/index.hbs");
 });
 
@@ -110,8 +113,8 @@ fastify.post("/login", async function (request, reply) {
       // console.log(dataDb)
 
       if (pesanServer != "username/password salah") {
-        sessions = Math.random().toString(36).slice(2)
-        reply.header('set-cookie', ["tirsom="+ sessions]);
+        
+        reply.header('set-cookie', ["tirsom="+ dataDb.dataUser.nik]);
         return reply.view("/src/pages/dashboard.hbs", dataDb);
       } else {
         return reply.view("/src/pages/index.hbs", params);
