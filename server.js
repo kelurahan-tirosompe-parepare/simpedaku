@@ -54,7 +54,8 @@ fastify.get("/", function (request, reply) {
   // The Handlebars code will be able to access the parameter values and build them into the page
   // reply.removeHeader('set-cookie')
   token = Math.random().toString(36).slice(2)
-  reply.header('set-cookie', ["token="+ token]);
+  console.log(token)
+  reply.header('set-cookie', [`token=${token}`,'']);
   return reply.view("/src/pages/index.hbs");
 });
 
@@ -128,8 +129,9 @@ fastify.post("/login", async function (request, reply) {
 
 fastify.get("/riwayat", function(req, rep){
   let cookie = req.headers.cookie
-  console.log(token)
-  if(bacaKuki(cookie)['token'] == token && bacaKuki(cookie)['token'] == token){
+  console.log('token :', token)
+  console.log(bacaKuki(cookie)['token'])
+  if(bacaKuki(cookie)['token'] == token && bacaKuki(cookie)['tirsom'] == tirsom){
     return rep.view("/src/pages/riwayat.hbs");  
   }
   
@@ -153,8 +155,8 @@ fastify.post("/kirimfile",  async function (req, reply){
 // baca kuki
 function bacaKuki(data){
   let kuki = {}
-  kuki['token'] = (data.split(';')[0]).split("=")[1]
-  kuki['tirsom'] = (data.split(';')[1]).split("=")[1]
+  kuki['token'] = (data.split(';')[1]).split("=")[1]
+  kuki['tirsom'] = (data.split(';')[0]).split("=")[1]
   return kuki
 }
 
