@@ -122,7 +122,13 @@ fastify.post("/login", async function (request, reply) {
 
       if (pesanServer != "username/password salah") {
         tirsom = dataDb.dataUser.nik
-        reply.header('set-cookie', ["tirsom="+ dataDb.dataUser.nik]);
+        
+        var now = new Date();
+        var time = now.getTime();
+        var expireTime = time + 1000*36000;
+        now.setTime(expireTime);
+        
+        reply.header('set-cookie', [`tirsom=${tirsom} ;Expires=${now.toUTCString()};HttpOnly=true;Secure=true`]);
         return reply.view("/src/pages/dashboard.hbs", dataDb);
       } else {
         return reply.view("/src/pages/index.hbs", params);
