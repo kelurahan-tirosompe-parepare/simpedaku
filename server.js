@@ -3,7 +3,8 @@ const path = require("path");
 
 const axios = require("axios");
 
-let sessions = ''
+let token = ''
+let tirsom = '' //user id
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
@@ -52,8 +53,8 @@ async function kirimGscript(data){
 fastify.get("/", function (request, reply) {
   // The Handlebars code will be able to access the parameter values and build them into the page
   // reply.removeHeader('set-cookie')
-  sessions = Math.random().toString(36).slice(2)
-  reply.header('set-cookie', ["token="+ sessions]);
+  token = Math.random().toString(36).slice(2)
+  reply.header('set-cookie', ["token="+ token]);
   return reply.view("/src/pages/index.hbs");
 });
 
@@ -113,7 +114,7 @@ fastify.post("/login", async function (request, reply) {
       // console.log(dataDb)
 
       if (pesanServer != "username/password salah") {
-        
+        tirsom = 
         reply.header('set-cookie', ["tirsom="+ dataDb.dataUser.nik]);
         return reply.view("/src/pages/dashboard.hbs", dataDb);
       } else {
@@ -127,7 +128,7 @@ fastify.post("/login", async function (request, reply) {
 
 fastify.get("/riwayat", function(req, rep){
   let cookie = req.headers.cookie
-  let cookie1 = (cookie.split(';')[0]).split()
+  let cookie1 = (cookie.split(';')[0]).split("=")
   // let cookie1 = [cookie.replace('=', ':').replace('=', ':').replace(';', ',')]
   console.log(cookie1)
   return rep.view("/src/pages/riwayat.hbs");
