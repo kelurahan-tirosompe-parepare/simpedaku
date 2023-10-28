@@ -55,7 +55,13 @@ fastify.get("/", function (request, reply) {
   // reply.removeHeader('set-cookie')
   token = Math.random().toString(36).slice(2)
   console.log(token)
-  reply.header('set-cookie', [`token=${token}`,'']);
+  
+  var now = new Date();
+  var time = now.getTime();
+  var expireTime = time + 1000*36000;
+  now.setTime(expireTime);
+  
+  reply.header('set-cookie', [`token=${token};Expires=${now.toUTCString()};HttpOnly=true;Secure=true`]);
   return reply.view("/src/pages/index.hbs");
 });
 
