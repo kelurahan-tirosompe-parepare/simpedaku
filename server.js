@@ -3,8 +3,8 @@ const path = require("path");
 
 const axios = require("axios");
 
-let token = ''
-let tirsom = '' //user id
+const token = Math.random().toString(36).slice(2)
+const tirsom = '' //user id
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
@@ -53,8 +53,8 @@ async function kirimGscript(data){
 fastify.get("/", function (request, reply) {
   // The Handlebars code will be able to access the parameter values and build them into the page
   // reply.removeHeader('set-cookie')
-  token = Math.random().toString(36).slice(2)
-  // console.log(token)
+  // token = Math.random().toString(36).slice(2)
+  console.log(token)
   
   var now = new Date();
   var time = now.getTime();
@@ -65,10 +65,14 @@ fastify.get("/", function (request, reply) {
   return reply.view("/src/pages/index.hbs");
 });
 
-// fastify.get("/dashboard", function (request, reply) {
-//   // The Handlebars code will be able to access the parameter values and build them into the page
-//   return reply.view("/src/pages/index.hbs");
-// });
+fastify.get("/dashboard", function (req, reply) {
+  let cookies = kukiValidation(req.headers.cookie)
+  if(cookies){
+    return reply.view("/src/pages/dashboard.hbs");
+  }
+  
+    return reply.view("/src/pages/index.hbs"); 
+});
 
 
 fastify.post("/login", async function (request, reply) {
