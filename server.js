@@ -56,7 +56,9 @@ fastify.get("/dashboard", function (request, reply) {
   return reply.view("/src/pages/index.hbs");
 });
 
-fastify.post("/dashboard", async function (request, reply) {
+fastify
+
+fastify.post("/login", async function (request, reply) {
   let username = request.body.username_admin;
   let password = request.body.password_admin;
   let rw = request.body.rw_admin;
