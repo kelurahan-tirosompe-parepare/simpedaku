@@ -127,9 +127,9 @@ fastify.post("/login", async function (request, reply) {
 
 fastify.get("/riwayat", function(req, rep){
   let cookie = req.headers.cookie
-  
+  let cookie1 = (cookie.split(';')[0]).split()
   // let cookie1 = [cookie.replace('=', ':').replace('=', ':').replace(';', ',')]
-  console.log(cookie)
+  console.log(cookie1)
   return rep.view("/src/pages/riwayat.hbs");
 })
 
