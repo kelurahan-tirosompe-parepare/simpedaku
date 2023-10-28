@@ -3,6 +3,8 @@ const path = require("path");
 
 const axios = require("axios");
 
+const sessions = ''
+
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
   logger: false,
@@ -108,8 +110,8 @@ fastify.post("/login", async function (request, reply) {
       // console.log(dataDb)
 
       if (pesanServer != "username/password salah") {
-        
-        reply.header('set-cookie', ["tirsom="+Math.random().toString(36).slice(2)]);
+        sessions = Math.random().toString(36).slice(2)
+        reply.header('set-cookie', ["tirsom="+ sessions]);
         return reply.view("/src/pages/dashboard.hbs", dataDb);
       } else {
         return reply.view("/src/pages/index.hbs", params);
@@ -121,7 +123,7 @@ fastify.post("/login", async function (request, reply) {
 });
 
 fastify.post("/riwayat", function(req, rep){
-  
+  console.log(req.headers)
   return rep.view("/src/pages/riwayat.hbs");
 })
 
