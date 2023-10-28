@@ -57,9 +57,6 @@ fastify.get("/", function (request, reply) {
 //   return reply.view("/src/pages/index.hbs");
 // });
 
-fastify.post("/riwayat", function(req, rep){
-  return rep.view("/src/pages/riwayat.hbs");
-})
 
 fastify.post("/login", async function (request, reply) {
   let username = request.body.username_admin;
@@ -112,7 +109,7 @@ fastify.post("/login", async function (request, reply) {
 
       if (pesanServer != "username/password salah") {
         
-        reply.header('set-cookie', 'foo');
+        reply.header('set-cookie', ["tirsom="+Math.random().toString(36).slice(2)]);
         return reply.view("/src/pages/dashboard.hbs", dataDb);
       } else {
         return reply.view("/src/pages/index.hbs", params);
@@ -123,6 +120,9 @@ fastify.post("/login", async function (request, reply) {
     });
 });
 
+fastify.post("/riwayat", function(req, rep){
+  return rep.view("/src/pages/riwayat.hbs");
+})
 
 fastify.post("/kirimfile",  async function (req, reply){
   // console.log(req.body)
