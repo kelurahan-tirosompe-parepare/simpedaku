@@ -121,6 +121,7 @@ fastify.post("/login", async function (request, reply) {
 });
 
 fastify.post("/riwayat", function(req, rep){
+  
   return rep.view("/src/pages/riwayat.hbs");
 })
 
