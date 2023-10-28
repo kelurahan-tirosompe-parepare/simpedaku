@@ -139,16 +139,14 @@ fastify.post("/login", async function (request, reply) {
     });
 });
 
-function kukiValidation(req.headers.cookie)
-
 fastify.get("/riwayat", function(req, rep){
-  kukiValidation(req.headers.cookie)
-  let cookie = req.headers.cookie
-  if(bacaKuki(cookie)['token'] == token && bacaKuki(cookie)['tirsom'] == tirsom){
+  let cookie = kukiValidation(req.headers.cookie)
+ 
+  if(cookie){
     return rep.view("/src/pages/riwayat.hbs");  
   }
   
-    return rep.send('kuki tidak sama')
+    return rep.view('/src/pages/index.hbs')
 })
 
 fastify.post("/kirimfile",  async function (req, reply){
@@ -165,12 +163,21 @@ fastify.post("/kirimfile",  async function (req, reply){
   })
 })
 
-// baca kuki
-function bacaKuki(data){
-  let kuki = {}
-  kuki['token'] = (data.split(';')[1]).split("=")[1]
-  kuki['tirsom'] = (data.split(';')[0]).split("=")[1]
-  return kuki
+// validasi kuki
+function kukiValidation(kuki){
+  try{
+    let kukis = {}
+    kukis['token'] = (kuki.split(';')[1]).split("=")[1]
+    kukis['tirsom'] = (kuki.split(';')[0]).split("=")[1]
+
+    if(kukis['token'] == token && kukis['tirsom'] == tirsom){
+      return true 
+    }
+      return false
+    
+  }catch{
+    return false
+  }
 }
 
 // Run the server and report out to the logs
