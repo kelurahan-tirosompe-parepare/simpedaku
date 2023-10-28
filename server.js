@@ -35,8 +35,11 @@ fastify.register(require("@fastify/view"), {
   }
 });
 
-fastify.addHook('onRequest', (request, reply, done) => {
-  console.log('hook:', request.headers.cookie)
+fastify.addHook('preValidation', (request, reply, done) => {
+  if(!kukiValidation(request.headers.cookie)){
+    reply.view('/src/pages/index.hbs')
+  }
+  
   done()
 })
 
