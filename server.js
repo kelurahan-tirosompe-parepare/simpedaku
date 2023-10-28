@@ -139,10 +139,11 @@ fastify.post("/login", async function (request, reply) {
     });
 });
 
+function kukiValidation(req.headers.cookie)
+
 fastify.get("/riwayat", function(req, rep){
+  kukiValidation(req.headers.cookie)
   let cookie = req.headers.cookie
-  console.log('token :', token)
-  console.log(bacaKuki(cookie)['token'])
   if(bacaKuki(cookie)['token'] == token && bacaKuki(cookie)['tirsom'] == tirsom){
     return rep.view("/src/pages/riwayat.hbs");  
   }
