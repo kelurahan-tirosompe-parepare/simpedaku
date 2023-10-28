@@ -114,7 +114,7 @@ fastify.post("/login", async function (request, reply) {
       // console.log(dataDb)
 
       if (pesanServer != "username/password salah") {
-        tirsom = 
+        tirsom = dataDb.dataUser.nik
         reply.header('set-cookie', ["tirsom="+ dataDb.dataUser.nik]);
         return reply.view("/src/pages/dashboard.hbs", dataDb);
       } else {
@@ -128,10 +128,12 @@ fastify.post("/login", async function (request, reply) {
 
 fastify.get("/riwayat", function(req, rep){
   let cookie = req.headers.cookie
-  let cookie1 = (cookie.split(';')[0]).split("=")
-  // let cookie1 = [cookie.replace('=', ':').replace('=', ':').replace(';', ',')]
-  console.log(cookie1)
-  return rep.view("/src/pages/riwayat.hbs");
+  console.log(token)
+  if(bacaKuki(cookie)['token'] == token && bacaKuki(cookie)['token'] == token){
+    return rep.view("/src/pages/riwayat.hbs");  
+  }
+  
+    return rep.send('kuki tidak sama')
 })
 
 fastify.post("/kirimfile",  async function (req, reply){
@@ -147,6 +149,14 @@ fastify.post("/kirimfile",  async function (req, reply){
     reply.send(err)
   })
 })
+
+// baca kuki
+function bacaKuki(data){
+  let kuki = {}
+  kuki['token'] = (data.split(';')[0]).split("=")[1]
+  kuki['tirsom'] = (data.split(';')[1]).split("=")[1]
+  return kuki
+}
 
 // Run the server and report out to the logs
 fastify.listen(
