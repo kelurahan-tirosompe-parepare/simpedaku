@@ -35,14 +35,14 @@ fastify.register(require("@fastify/view"), {
   }
 });
 
-fastify.addHook('preValidation', (request, reply, done) => {
-  // if(!kukiValidation(request.headers.cookie)){
-  //   reply.view('/src/pages/index.hbs')
-  // }
-  console.log(request.headers)
+// fastify.addHook('preValidation', (request, reply, done) => {
+//   // if(!kukiValidation(request.headers.cookie)){
+//   //   reply.view('/src/pages/index.hbs')
+//   // }
+//   console.log(request.headers)
   
-  done()
-})
+//   done()
+// })
 
 // Load and parse SEO data
 const suket = require("./src/suket.json");
@@ -70,6 +70,7 @@ fastify.get("/", function (request, reply) {
   now.setTime(expireTime);
   
   reply.header('set-cookie', [`token=${token};Expires=${now.toUTCString()};HttpOnly=true;Secure=true`]);
+  console.log(reply.getHeader)
   return reply.view("/src/pages/index.hbs");
 });
 
@@ -79,6 +80,7 @@ fastify.get("/dashboard", function (req, reply) {
     return reply.view("/src/pages/dashboard.hbs");
   }
   
+    // reply.headers('set-cookie', [`tirsom=${tirsom} ;Expires=${Date.now()}`])
     return reply.redirect("/"); 
 });
 
