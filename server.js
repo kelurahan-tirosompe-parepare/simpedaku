@@ -35,42 +35,19 @@ fastify.register(require("@fastify/view"), {
   }
 });
 
-// fastify.addHook('preValidation', (request, reply, done) => {
-//   // if(!kukiValidation(request.headers.cookie)){
-//   //   reply.view('/src/pages/index.hbs')
-//   // }
-//   console.log(request.headers)
-  
-//   done()
-// })
 
 // Load and parse SEO data
 const suket = require("./src/suket.json");
 
-async function kirimGscript(data){
-  let urlScript = "https://script.google.com/macros/s/AKfycbzJbbe-S3idijgn-MDurYngjZ7cw_8pSvxPmnc-_d_QSGcMjITDX8gQtjNhCSwYbqnM/exec";
-  // let urlScript = "https://script.google.com/macros/s/AKfycbwDXO3TvaJUqaAxrZ3i2zX7oyKJlEbkZEXPcrzk6_0/dev"
-  console.log(data)
-  return await axios({
-    method: "post",
-    url: urlScript,
-    data: data,
-  })
-}
-
 fastify.get("/", function (request, reply) {
-  // The Handlebars code will be able to access the parameter values and build them into the page
-  // reply.removeHeader('set-cookie')
+
   token = Math.random().toString(36).slice(2)
-  console.log(token)
   
   var now = new Date();
   var time = now.getTime();
   var expireTime = time + 1000*36000;
   now.setTime(expireTime);
-  
-  reply.removeHeader('set-cookie')
-  console.log(reply.getHeader('set-cookie'))
+
   reply.header('set-cookie', [`token=${token};Expires=${now.toUTCString()};HttpOnly=true;Secure=true`]);
   return reply.view("/src/pages/index.hbs");
 });
@@ -202,6 +179,17 @@ function kukiValidation(kuki){
   }catch{
     return false
   }
+}
+
+async function kirimGscript(data){
+  let urlScript = "https://script.google.com/macros/s/AKfycbzJbbe-S3idijgn-MDurYngjZ7cw_8pSvxPmnc-_d_QSGcMjITDX8gQtjNhCSwYbqnM/exec";
+  // let urlScript = "https://script.google.com/macros/s/AKfycbwDXO3TvaJUqaAxrZ3i2zX7oyKJlEbkZEXPcrzk6_0/dev"
+  console.log(data)
+  return await axios({
+    method: "post",
+    url: urlScript,
+    data: data,
+  })
 }
 
 // Run the server and report out to the logs
