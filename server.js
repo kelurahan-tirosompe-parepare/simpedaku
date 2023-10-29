@@ -36,19 +36,19 @@ fastify.register(require("@fastify/view"), {
 });
 
 
-const expire = ()=>{
-  var now = new Date();
-  var time = now.getTime();
-  var expireTime = time + 1000*36000;
-  return now.setTime(expireTime)
+function setCookie(exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  let expires = d.toUTCString();
+  return expires
+  // document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
-console.log(expire())
 
 fastify.register(require('@fastify/cookie'))
 fastify.register(require('@fastify/session'), {
     cookieName: 'sessionId',
     secret: "Math.random().toString(36).slice(2)",
-    cookie: { secure: false, maxAge: expire() }
+    cookie: { secure: false, expires: setCookie(1) }
   })
 
 // Load and parse SEO data
