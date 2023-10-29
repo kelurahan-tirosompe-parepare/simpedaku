@@ -39,8 +39,7 @@ fastify.register(require('@fastify/cookie'))
 fastify.register(require('@fastify/session'), {
     cookieName: 'sessionId',
     secret: 'a secret with minimum length of 32 characters',
-    cookie: { secure: false },
-    expires: 1800000
+    cookie: { secure: false, maxAge: Date.getTime() + 1000*36000 }
   })
 
 // Load and parse SEO data
