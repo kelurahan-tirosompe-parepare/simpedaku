@@ -124,6 +124,7 @@ fastify.post("/dashbord", async function (request, reply) {
       if (pesanServer != "username/password salah") {
         
         request.session.authenticated = true
+        request.session.set('dataDb', dataDb.dataUser)
         
         return reply.view("/src/pages/dashboard.hbs", dataDb);
       } else {
@@ -138,7 +139,8 @@ fastify.post("/dashbord", async function (request, reply) {
 
 fastify.get("/riwayat", function(req, rep){
  if(req.session.authenticated){
-   console.log(req.headers)
+   let dataUser = req.session.get('dataDb')
+   
     return rep.view("/src/pages/riwayat.hbs");
   }else{
     return rep.redirect("/"); 
