@@ -36,7 +36,12 @@ fastify.register(require("@fastify/view"), {
 });
 
 fastify.register(require('@fastify/cookie'))
-
+fastify.register(require('@fastify/session'), {
+    cookieName: 'sessionId',
+    secret: 'a secret with minimum length of 32 characters',
+    cookie: { secure: false },
+    expires: 1800000
+  })
 
 // Load and parse SEO data
 const suket = require("./src/suket.json");
@@ -44,10 +49,10 @@ const suket = require("./src/suket.json");
 fastify.get("/", function (request, reply) {
   // token = Math.random().toString(36).slice(2)
   
-  var now = new Date();
-  var time = now.getTime();
-  var expireTime = time + 1000*36000;
-  now.setTime(expireTime);
+  // var now = new Date();
+  // var time = now.getTime();
+  // var expireTime = time + 1000*36000;
+  // now.setTime(expireTime);
 
   // reply.header('set-cookie', [`token=${token};Expires=${now.toUTCString()};HttpOnly=true;Secure=true`]);
   return reply.view("/src/pages/index.hbs");
@@ -117,14 +122,15 @@ fastify.post("/login", async function (request, reply) {
         tirsom = dataDb.dataUser.nik
         // console.log(token)
         
-        var now = new Date();
-        var time = now.getTime();
-        var expireTime = time + 1000*36000;
-        now.setTime(expireTime);
+        // var now = new Date();
+        // var time = now.getTime();
+        // var expireTime = time + 1000*36000;
+        // now.setTime(expireTime);
         
-        reply.header('set-cookie', [`tirsom=${tirsom} ;Expires=${now.toUTCString()};HttpOnly=true;Secure=true`]);
+        request.session.authenticated = true
+        
+        // reply.header('set-cookie', [`tirsom=${tirsom} ;Expires=${now.toUTCString()};HttpOnly=true;Secure=true`]);
         reply.view("/src/pages/dashboard.hbs", dataDb);
-        reply.redirect("dashboard")
       } else {
         reply.view("/src/pages/index.hbs", params)
         reply.redirect("/")
