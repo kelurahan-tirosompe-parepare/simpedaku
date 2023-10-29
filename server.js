@@ -71,7 +71,7 @@ fastify.get("/dashboard", function (req, reply) {
 });
 
 
-fastify.post("/login", async function (request, reply) {
+fastify.post("/dashbord", async function (request, reply) {
   let username = request.body.username_admin;
   let password = request.body.password_admin;
   let rw = request.body.rw_admin;
@@ -143,9 +143,6 @@ fastify.post("/login", async function (request, reply) {
     });
 });
 
-// fastify.get("/login", function(req,res){
-//   res.redirect('/dashboard')
-// })
 
 fastify.get("/riwayat", function(req, rep){
 //   let cookie = kukiValidation(req.headers.cookie)
