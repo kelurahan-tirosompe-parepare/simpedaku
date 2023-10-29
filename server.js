@@ -35,11 +35,19 @@ fastify.register(require("@fastify/view"), {
   }
 });
 
+
+const expire = ()=>{
+  var now = new Date();
+  var time = now.getTime();
+ var expireTime = time + 1000*36000;
+  return now.setTime(expireTime)
+}
+
 fastify.register(require('@fastify/cookie'))
 fastify.register(require('@fastify/session'), {
     cookieName: 'sessionId',
     secret: 'a secret with minimum length of 32 characters',
-    cookie: { secure: false, maxAge: Date.getTime() + 1000*36000 }
+    cookie: { secure: false, Expires: expire().toUTCString() }
   })
 
 // Load and parse SEO data
