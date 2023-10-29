@@ -142,15 +142,21 @@ fastify.post("/login", async function (request, reply) {
         now.setTime(expireTime);
         
         reply.header('set-cookie', [`tirsom=${tirsom} ;Expires=${now.toUTCString()};HttpOnly=true;Secure=true`]);
-        return reply.view("/src/pages/dashboard.hbs", dataDb);
+        reply.view("/src/pages/dashboard.hbs", dataDb);
+        reply.redirect("dashboard")
       } else {
-        return reply.view("/src/pages/index.hbs", params);
+        reply.view("/src/pages/index.hbs", params)
+        reply.redirect("/")
       }
     })
     .catch((err) => {
       console.log(err);
     });
 });
+
+fastify.get("/login", function(req,res){
+  res.redirect('/dashboard')
+})
 
 fastify.get("/riwayat", function(req, rep){
   let cookie = kukiValidation(req.headers.cookie)
