@@ -60,7 +60,7 @@ async function kirimGscript(data){
 
 fastify.get("/", function (request, reply) {
   // The Handlebars code will be able to access the parameter values and build them into the page
-  reply.removeHeader('set-cookie')
+  // reply.removeHeader('set-cookie')
   token = Math.random().toString(36).slice(2)
   console.log(token)
   
@@ -69,8 +69,9 @@ fastify.get("/", function (request, reply) {
   var expireTime = time + 1000*36000;
   now.setTime(expireTime);
   
+  reply.removeHeader('set-cookie')
+  console.log(reply.getHeader('set-cookie'))
   reply.header('set-cookie', [`token=${token};Expires=${now.toUTCString()};HttpOnly=true;Secure=true`]);
-  console.log(reply.getHeader)
   return reply.view("/src/pages/index.hbs");
 });
 

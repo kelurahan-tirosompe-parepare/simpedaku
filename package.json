@@ -15,7 +15,8 @@
     "urllib": "^3.19.3",
     "axios": "^1.5.1",
     "fastify-multer": "^2.0.3",
-    "@fastify/multipart": "^8.0.0"
+    "@fastify/multipart": "^8.0.0",
+    "@fastify/cookie": "^9.1.0"
   },
   "engines": {
     "node": "14.x"
