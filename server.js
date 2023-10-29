@@ -35,31 +35,13 @@ fastify.register(require("@fastify/view"), {
   }
 });
 
-fastify.register(require('@fastify/cookie'), {
-  secret: Math.random().toString(36).slice(2), // for cookies signature
-  hook: 'onRequest', // set to false to disable cookie autoparsing or set autoparsing on any of the following hooks: 'onRequest', 'preParsing', 'preHandler', 'preValidation'. default: 'onRequest'
-  parseOptions: {}  // options for parsing cookies
-})
+fastify.register(require('@fastify/cookie'))
+
 
 // Load and parse SEO data
 const suket = require("./src/suket.json");
 
 fastify.get("/", function (request, reply) {
-  
-  const aCookieValue = request.cookies.cookieName
-
-  const bCookie = request.unsignCookie(request.cookies.cookieSigned);
-  reply
-    .setCookie('foo', 'foo', {
-      domain: 'plastic-obsidian-dodo.glitch.me',
-      path: '/'
-    })
-    .cookie('baz', 'baz') // alias for setCookie
-    .setCookie('bar', 'bar', {
-      path: '/',
-      signed: true
-    })
-    .view("/src/pages/index.hbs");
   // token = Math.random().toString(36).slice(2)
   
   var now = new Date();
@@ -68,7 +50,7 @@ fastify.get("/", function (request, reply) {
   now.setTime(expireTime);
 
   // reply.header('set-cookie', [`token=${token};Expires=${now.toUTCString()};HttpOnly=true;Secure=true`]);
-  // return reply.view("/src/pages/index.hbs");
+  return reply.view("/src/pages/index.hbs");
 });
 
 fastify.get("/dashboard", function (req, reply) {
