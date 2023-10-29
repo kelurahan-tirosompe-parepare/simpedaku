@@ -36,9 +36,10 @@ fastify.register(require("@fastify/view"), {
 });
 
 fastify.addHook('preValidation', (request, reply, done) => {
-  if(!kukiValidation(request.headers.cookie)){
-    reply.view('/src/pages/index.hbs')
-  }
+  // if(!kukiValidation(request.headers.cookie)){
+  //   reply.view('/src/pages/index.hbs')
+  // }
+  console.log(request.headers)
   
   done()
 })
@@ -59,7 +60,7 @@ async function kirimGscript(data){
 
 fastify.get("/", function (request, reply) {
   // The Handlebars code will be able to access the parameter values and build them into the page
-  // reply.removeHeader('set-cookie')
+  reply.removeHeader('set-cookie')
   token = Math.random().toString(36).slice(2)
   console.log(token)
   
