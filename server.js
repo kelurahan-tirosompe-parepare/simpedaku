@@ -39,15 +39,15 @@ fastify.register(require("@fastify/view"), {
 const expire = ()=>{
   var now = new Date();
   var time = now.getTime();
- var expireTime = time + 1000*36000;
+  var expireTime = time + 1000*36000;
   return now.setTime(expireTime)
 }
 
 fastify.register(require('@fastify/cookie'))
 fastify.register(require('@fastify/session'), {
     cookieName: 'sessionId',
-    secret: 'a secret with minimum length of 32 characters',
-    cookie: { secure: false, Expires: expire().toUTCString() }
+    secret: Math.random().toString(36).slice(2),
+    cookie: { secure: false, expires: expire() }
   })
 
 // Load and parse SEO data
@@ -56,12 +56,6 @@ const suket = require("./src/suket.json");
 fastify.get("/", function (request, reply) {
   // token = Math.random().toString(36).slice(2)
   
-  // var now = new Date();
-  // var time = now.getTime();
-  // var expireTime = time + 1000*36000;
-  // now.setTime(expireTime);
-
-  // reply.header('set-cookie', [`token=${token};Expires=${now.toUTCString()};HttpOnly=true;Secure=true`]);
   return reply.view("/src/pages/index.hbs");
 });
 
@@ -128,19 +122,10 @@ fastify.post("/dashbord", async function (request, reply) {
       // console.log(dataDb)
 
       if (pesanServer != "username/password salah") {
-        // tirsom = dataDb.dataUser.nik
-        // console.log(token)
-        
-        // var now = new Date();
-        // var time = now.getTime();
-        // var expireTime = time + 1000*36000;
-        // now.setTime(expireTime);
         
         request.session.authenticated = true
         
-        // reply.header('set-cookie', [`tirsom=${tirsom} ;Expires=${now.toUTCString()};HttpOnly=true;Secure=true`]);
         return reply.view("/src/pages/dashboard.hbs", dataDb);
-        // reply.redirect('/dashboard')
       } else {
         return reply.view("/src/pages/index.hbs", params)
       }
@@ -152,13 +137,12 @@ fastify.post("/dashbord", async function (request, reply) {
 
 
 fastify.get("/riwayat", function(req, rep){
-//   let cookie = kukiValidation(req.headers.cookie)
- 
-//   if(cookie){
-//     return rep.view("/src/pages/riwayat.hbs");  
-//   }
-  
-    return rep.view('/src/pages/index.hbs')
+ if(req.session.authenticated){
+    return rep.view("/src/pages/riwayat.hbs");
+  }else{
+    return rep.redirect("/"); 
+  }
+
 })
 
 fastify.post("/kirimfile",  async function (req, reply){
