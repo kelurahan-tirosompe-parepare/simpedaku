@@ -132,10 +132,10 @@ fastify.post("/login", async function (request, reply) {
         request.session.authenticated = true
         
         // reply.header('set-cookie', [`tirsom=${tirsom} ;Expires=${now.toUTCString()};HttpOnly=true;Secure=true`]);
+        return reply.view("/src/pages/dashboard.hbs", dataDb);
         // reply.redirect('/dashboard')
-        reply.view("/src/pages/dashboard.hbs", dataDb);
       } else {
-        reply.view("/src/pages/index.hbs", params)
+        return reply.view("/src/pages/index.hbs", params)
       }
     })
     .catch((err) => {
