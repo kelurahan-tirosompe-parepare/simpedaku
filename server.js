@@ -60,12 +60,14 @@ fastify.get("/", function (request, reply) {
 
 fastify.get("/dashboard", function (req, reply) {
   // let cookies = kukiValidation(req.headers.cookie)
-  // if(cookies){
-  //   return reply.view("/src/pages/dashboard.hbs");
-  // }
+  console.log((req.session.authenticated))
+  if(req.session.authenticated){
+    return reply.view("/src/pages/dashboard.hbs");
+  }else{
+    return reply.redirect("/"); 
+  }
   
     // reply.headers('set-cookie', [`tirsom=${tirsom} ;Expires=${Date.now()}`])
-    return reply.redirect("/"); 
 });
 
 
@@ -119,7 +121,7 @@ fastify.post("/login", async function (request, reply) {
       // console.log(dataDb)
 
       if (pesanServer != "username/password salah") {
-        tirsom = dataDb.dataUser.nik
+        // tirsom = dataDb.dataUser.nik
         // console.log(token)
         
         // var now = new Date();
@@ -130,10 +132,10 @@ fastify.post("/login", async function (request, reply) {
         request.session.authenticated = true
         
         // reply.header('set-cookie', [`tirsom=${tirsom} ;Expires=${now.toUTCString()};HttpOnly=true;Secure=true`]);
+        // reply.redirect('/dashboard')
         reply.view("/src/pages/dashboard.hbs", dataDb);
       } else {
         reply.view("/src/pages/index.hbs", params)
-        reply.redirect("/")
       }
     })
     .catch((err) => {
@@ -141,9 +143,9 @@ fastify.post("/login", async function (request, reply) {
     });
 });
 
-fastify.get("/login", function(req,res){
-  res.redirect('/dashboard')
-})
+// fastify.get("/login", function(req,res){
+//   res.redirect('/dashboard')
+// })
 
 fastify.get("/riwayat", function(req, rep){
 //   let cookie = kukiValidation(req.headers.cookie)
