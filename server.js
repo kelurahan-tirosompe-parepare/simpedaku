@@ -42,12 +42,13 @@ const expire = ()=>{
   var expireTime = time + 1000*36000;
   return now.setTime(expireTime)
 }
+console.log(expire())
 
 fastify.register(require('@fastify/cookie'))
 fastify.register(require('@fastify/session'), {
     cookieName: 'sessionId',
-    secret: Math.random().toString(36).slice(2),
-    cookie: { secure: false, expires: expire() }
+    secret: "Math.random().toString(36).slice(2)",
+    cookie: { secure: false, maxAge: expire() }
   })
 
 // Load and parse SEO data
@@ -60,7 +61,6 @@ fastify.get("/", function (request, reply) {
 });
 
 fastify.get("/dashboard", function (req, reply) {
-  // let cookies = kukiValidation(req.headers.cookie)
   console.log((req.session.authenticated))
   if(req.session.authenticated){
     return reply.view("/src/pages/dashboard.hbs");
@@ -138,6 +138,7 @@ fastify.post("/dashbord", async function (request, reply) {
 
 fastify.get("/riwayat", function(req, rep){
  if(req.session.authenticated){
+   console.log(req.headers)
     return rep.view("/src/pages/riwayat.hbs");
   }else{
     return rep.redirect("/"); 
