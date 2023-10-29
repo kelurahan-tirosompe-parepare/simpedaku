@@ -79,7 +79,7 @@ fastify.get("/dashboard", function (req, reply) {
     return reply.view("/src/pages/dashboard.hbs");
   }
   
-    return reply.view("/src/pages/index.hbs"); 
+    return reply.redirect("/"); 
 });
 
 
