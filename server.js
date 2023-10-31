@@ -140,7 +140,11 @@ fastify.post("/dashbord", async function (request, reply) {
 fastify.get("/riwayat", function(req, rep){
  if(req.session.authenticated){
    let dataUser = req.session.get('dataDb')
-   
+   console.log(dataUser)
+   kirimGscript(dataUser)
+     .then(resp => {
+       console.log(resp) 
+     })
     return rep.view("/src/pages/riwayat.hbs");
   }else{
     return rep.redirect("/"); 
@@ -162,24 +166,6 @@ fastify.post("/kirimfile",  async function (req, reply){
   })
 })
 
-// validasi kuki
-function kukiValidation(kuki){
-  console.log('tirsom:', tirsom)
-  console.log('token:', token)
-  try{
-    let kukis = {}
-    kukis['token'] = (kuki.split(';')[1]).split("=")[1]
-    kukis['tirsom'] = (kuki.split(';')[0]).split("=")[1]
-
-    if(kukis['token'] == token && kukis['tirsom'] == tirsom){
-      return true 
-    }
-      return false
-    
-  }catch{
-    return false
-  }
-}
 
 async function kirimGscript(data){
   let urlScript = "https://script.google.com/macros/s/AKfycbzJbbe-S3idijgn-MDurYngjZ7cw_8pSvxPmnc-_d_QSGcMjITDX8gQtjNhCSwYbqnM/exec";
@@ -191,6 +177,25 @@ async function kirimGscript(data){
     data: data,
   })
 }
+
+// validasi kuki
+// function kukiValidation(kuki){
+//   console.log('tirsom:', tirsom)
+//   console.log('token:', token)
+//   try{
+//     let kukis = {}
+//     kukis['token'] = (kuki.split(';')[1]).split("=")[1]
+//     kukis['tirsom'] = (kuki.split(';')[0]).split("=")[1]
+
+//     if(kukis['token'] == token && kukis['tirsom'] == tirsom){
+//       return true 
+//     }
+//       return false
+    
+//   }catch{
+//     return false
+//   }
+// }
 
 // Run the server and report out to the logs
 fastify.listen(
