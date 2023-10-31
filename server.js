@@ -141,8 +141,8 @@ fastify.get("/riwayat", function(req, rep){
  if(req.session.authenticated){
    let dataUser = req.session.get('dataDb')
    // console.log(dataUser.nik)
-   let data = {riwayat:dataUser, mode: 'riwayat'}
-   kirimGscript(data)
+   let riwayat = {riwayat:dataUser, mode: 'riwayat'}
+   kirimGscript(riwayat)
      .then(resp => {
        console.log(resp.data) 
      })
