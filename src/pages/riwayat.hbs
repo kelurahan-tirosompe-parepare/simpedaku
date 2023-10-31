@@ -20,17 +20,17 @@
   <tbody id="bodyRiwayat">
     {{#each dataRiwayat}}
     <tr>
-      <th scope="row">1</th>
-      <td></td>
-      <td>Otto</td>
+      <th scope="row">{{@index}}</th>
+      <td>{{this.[0]}}</td>
+      <td>{{this}}</td>
       <td class="text-center">
         <span class="bg-success p-1 rounded text-light">
-        ada
+        {{this}}
         </span>
       </td>
       <td class="text-center">
         <span class="bg-success p-1 rounded text-light">
-        selesai
+        {{this}}
         </span>
       </td>
       <td class="text-center">
@@ -93,11 +93,10 @@
   
   // function tambahBaris(){
   //   let no, tgl, layanan, ketRt, status
-    {{#each dataRiwayat}}
-      let data = {{this}}
-      const barisBaru = isiBaris(1, data[0], data[3], data[4], data[5])
-      $('#bodyRiwayat').prepend(barisBaru)
-    {{/each}}
+
+    //   const barisBaru = isiBaris(1, data[0], data[3], data[4], data[5])
+    //   $('#bodyRiwayat').prepend(barisBaru)
+
   // }
   
   function cetak(ini){
