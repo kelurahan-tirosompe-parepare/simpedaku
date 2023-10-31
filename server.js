@@ -35,6 +35,10 @@ fastify.register(require("@fastify/view"), {
   }
 });
 
+hbs.registerHelper('loud', function (aString) {
+    return aString.toUpperCase()
+})
+
 
 function setCookie(exdays) {
   const d = new Date();
