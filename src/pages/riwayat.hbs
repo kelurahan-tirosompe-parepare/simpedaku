@@ -17,7 +17,7 @@
       <th scope="col" class="text-center">Cetak</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="bodyRiwayat">
     <tr>
       <th scope="row">1</th>
       <td>Mark</td>
@@ -57,11 +57,13 @@
     </ul>
   </nav>
 </div>
-
+<button class="btn btn-primary" onclick="tambahBaris()">
+  tambah baris
+</button>
 {{>jquery_bootstrap}}
 <!-- script -->
 <script>
-  const isiBaris = (){
+  const isiBaris = (no, tgl, layanan, ketRt, status) => {
     return `<tr>
       <th scope="row">${no}</th>
       <td>${tgl}</td>
@@ -86,6 +88,16 @@
       </td>
     </tr>`
   }
+  
+  function tambahBaris(){
+    const barisBaru = isiBaris(1, '31/10/2023', 'SKCK', 'tunda', 'ket. RT/RW')
+    $('#bodyRiwayat').html(barisBaru)
+  }
+  
+  function cetak(ini){
+    console.log(ini)
+  }
+  
 </script>
 </body>
 </html>
