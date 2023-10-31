@@ -140,10 +140,11 @@ fastify.post("/dashbord", async function (request, reply) {
 fastify.get("/riwayat", function(req, rep){
  if(req.session.authenticated){
    let dataUser = req.session.get('dataDb')
-   console.log(dataUser.nik)
-   kirimGscript(dataUser)
+   // console.log(dataUser.nik)
+   let data = {riwayat:dataUser, mode: 'riwayat'}
+   kirimGscript(data)
      .then(resp => {
-       console.log(resp) 
+       console.log(resp.data) 
      })
     return rep.view("/src/pages/riwayat.hbs");
   }else{
