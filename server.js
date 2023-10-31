@@ -140,7 +140,7 @@ fastify.post("/dashbord", async function (request, reply) {
 fastify.get("/riwayat", function(req, rep){
  if(req.session.authenticated){
    let dataUser = req.session.get('dataDb')
-   console.log(dataUser)
+   console.log(dataUser.nik)
    kirimGscript(dataUser)
      .then(resp => {
        console.log(resp) 
