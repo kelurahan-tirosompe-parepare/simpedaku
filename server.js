@@ -56,7 +56,7 @@ const suket = require("./src/suket.json");
 
 fastify.get("/", function (request, reply) {
   // token = Math.random().toString(36).slice(2)
-  
+  req.
   return reply.view("/src/pages/index.hbs");
 });
 
