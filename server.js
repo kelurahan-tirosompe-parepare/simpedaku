@@ -54,10 +54,10 @@ fastify.register(require('@fastify/session'), {
 // Load and parse SEO data
 const suket = require("./src/suket.json");
 
-fastify.get("/", function (request, reply) {
+fastify.get("/", function (req, rep) {
   // token = Math.random().toString(36).slice(2)
-  req.
-  return reply.view("/src/pages/index.hbs");
+  req.session.authenticated = false
+  return rep.view("/src/pages/index.hbs");
 });
 
 fastify.get("/dashboard", function (req, reply) {
