@@ -2,7 +2,7 @@ const path = require("path");
 // const {data} = require("./appscript.js")
 
 const axios = require("axios");
-
+const handlebars = require("handlebars")
 let token, tirsom //user id
 
 // Require the fastify framework and instantiate it
@@ -23,7 +23,7 @@ fastify.register(require('@fastify/multipart'),  { attachFieldsToBody: 'keyValue
 // View is a templating manager for fastify
 fastify.register(require("@fastify/view"), {
   engine: {
-    handlebars: require("handlebars"),
+    handlebars: handlebars,
   },
   options: {
     partials: {
@@ -35,9 +35,9 @@ fastify.register(require("@fastify/view"), {
   }
 });
 
-// hbs.registerHelper('loud', function (aString) {
-//     return aString.toUpperCase()
-// })
+handlebars.registerHelper('noUrut', function (index) {
+    return index + 1
+})
 
 
 function setCookie(exdays) {
