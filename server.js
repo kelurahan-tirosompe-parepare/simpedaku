@@ -144,6 +144,7 @@ fastify.get("/riwayat", function(req, rep){
    let riwayat = {riwayat:dataUser, mode: 'riwayat'}
    kirimGscript(riwayat)
      .then(resp => {
+     console.log(resp.data.pesanServer)
       return rep.view("/src/pages/riwayat.hbs", {dataRiwayat: resp.data.pesanServer});
      })
    

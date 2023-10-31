@@ -91,7 +91,9 @@
   
   function tambahBaris(){
     let no, tgl, layanan, ketRt, status
-    console.log("{{dataRiwayat}}"")
+    {{#each dataRiwayat}}
+      {{this}}
+    {{/each}}
     const barisBaru = isiBaris(1, '31/10/2023', 'SKCK', 'tunda', 'ket. RT/RW')
     $('#bodyRiwayat').prepend(barisBaru)
   }
