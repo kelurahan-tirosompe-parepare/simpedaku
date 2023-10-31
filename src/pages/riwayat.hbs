@@ -18,9 +18,10 @@
     </tr>
   </thead>
   <tbody id="bodyRiwayat">
+    {{#each dataRiwayat}}
     <tr>
       <th scope="row">1</th>
-      <td>Mark</td>
+      <td></td>
       <td>Otto</td>
       <td class="text-center">
         <span class="bg-success p-1 rounded text-light">
@@ -41,6 +42,7 @@
       </span>
       </td>
     </tr>
+    {{/each}}
   </tbody>
 </table>
   <nav aria-label="Table navigation riwayat">
@@ -89,14 +91,14 @@
     </tr>`
   }
   
-  function tambahBaris(){
-    let no, tgl, layanan, ketRt, status
+  // function tambahBaris(){
+  //   let no, tgl, layanan, ketRt, status
     {{#each dataRiwayat}}
-      {{this}}
+      let data = {{this}}
+      const barisBaru = isiBaris(1, data[0], data[3], data[4], data[5])
+      $('#bodyRiwayat').prepend(barisBaru)
     {{/each}}
-    const barisBaru = isiBaris(1, '31/10/2023', 'SKCK', 'tunda', 'ket. RT/RW')
-    $('#bodyRiwayat').prepend(barisBaru)
-  }
+  // }
   
   function cetak(ini){
     console.log(ini)
