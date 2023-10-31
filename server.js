@@ -35,9 +35,9 @@ fastify.register(require("@fastify/view"), {
   }
 });
 
-hbs.registerHelper('loud', function (aString) {
-    return aString.toUpperCase()
-})
+// hbs.registerHelper('loud', function (aString) {
+//     return aString.toUpperCase()
+// })
 
 
 function setCookie(exdays) {
