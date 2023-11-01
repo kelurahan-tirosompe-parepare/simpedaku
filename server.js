@@ -166,6 +166,25 @@ fastify.get("/riwayat", function(req, rep){
 
 })
 
+
+fastify.get("/akun", function(req, rep){
+ if(req.session.authenticated){
+   let dataUser = (req.session.get('dataDb')).dataUser
+   // console.log(dataUser.nik)
+   let riwayat = {riwayat:dataUser, mode: 'riwayat'}
+   kirimGscript(riwayat)
+     .then(resp => {
+     console.log(resp.data.pesanServer)
+      return rep.view("/src/pages/akun.hbs", {dataRiwayat: resp.data.pesanServer});
+     })
+   
+  }else{
+    return rep.redirect("/"); 
+  }
+
+})
+
+
 fastify.post("/kirimfile",  async function (req, reply){
   // console.log(req.body)
   let berkas = {berkas:req.body, mode: 'berkas'}
