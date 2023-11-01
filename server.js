@@ -39,6 +39,10 @@ handlebars.registerHelper('noUrut', function (index) {
     return index + 1
 })
 
+handlebars.registerHelper('warna', function(warna){
+  const pilihan = ["biru", "abu","hijau","jingga", "kuning", "merah", "putih", "hitam"]
+  
+})
 
 function setCookie(exdays) {
   const d = new Date();
