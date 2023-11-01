@@ -73,9 +73,9 @@ fastify.get("/", function (req, rep) {
 });
 
 fastify.get("/dashboard", function (req, reply) {
-  console.log((req.session.authenticated))
+  // console.log((req.session.authenticated))
   if(req.session.authenticated){
-    return reply.view("/src/pages/dashboard.hbs");
+    return reply.view("/src/pages/dashboard.hbs", req.session.get('dataDb'));
   }else{
     return reply.redirect("/"); 
   }
@@ -136,7 +136,7 @@ fastify.post("/dashbord", async function (request, reply) {
       if (pesanServer != "username/password salah") {
         
         request.session.authenticated = true
-        request.session.set('dataDb', dataDb.dataUser)
+        request.session.set('dataDb', dataDb)
         
         return reply.view("/src/pages/dashboard.hbs", dataDb);
       } else {
@@ -151,7 +151,7 @@ fastify.post("/dashbord", async function (request, reply) {
 
 fastify.get("/riwayat", function(req, rep){
  if(req.session.authenticated){
-   let dataUser = req.session.get('dataDb')
+   let dataUser = (req.session.get('dataDb')).dataUser
    // console.log(dataUser.nik)
    let riwayat = {riwayat:dataUser, mode: 'riwayat'}
    kirimGscript(riwayat)
