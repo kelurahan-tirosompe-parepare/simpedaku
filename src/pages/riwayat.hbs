@@ -20,16 +20,16 @@
   <tbody id="bodyRiwayat">
     {{#each dataRiwayat}}
     <tr>
-      <th scope="row">{{#noUrut @index}}</th>
+      <th scope="row">{{noUrut @index}}</th>
       <td>{{this.[0]}}</td>
       <td>{{this.[3]}}</td>
       <td class="text-center">
-        <span class="btn bg-{{#if this.[4]=ada}}primary {{/if}} p-1 rounded text-light">
+        <span class="btn bg-{{warna this.[4]}} p-1 rounded text-light">
         {{this.[4]}}
         </span>
       </td>
       <td class="text-center">
-        <span class="bg-success p-1 rounded text-light">
+        <span class="bg-{{warna this.[5]}} p-1 rounded text-light">
         {{this.[5]}}
         </span>
       </td>

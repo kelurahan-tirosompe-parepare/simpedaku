@@ -41,7 +41,11 @@ handlebars.registerHelper('noUrut', function (index) {
 
 handlebars.registerHelper('warna', function(warna){
   const pilihan = {"biru" : "primary", "abu" : "secondary", "hijau" : "success","jingga" : "info", "kuning" :"warning", "merah" : "danger", "putih" : "light", "hitam" : "dark"}
-  return pilihan[warna]
+  if(warna == 'ada' || warna == 'selesai'){
+    return 'success'
+  }else{
+    return 'warning'
+  }
 })
 
 function setCookie(exdays) {
