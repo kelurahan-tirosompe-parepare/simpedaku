@@ -1,11 +1,8 @@
 # TODO 🚧
 
-1. gabungkan cookie :  `token + tirsom`
+1. session :  
 
-
-
-
-
+`token + tirsom`
 
 ```js
 const favorites = [];
