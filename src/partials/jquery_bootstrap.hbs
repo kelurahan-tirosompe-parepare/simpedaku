@@ -10,9 +10,12 @@
     ></script>
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 <script>
- new Splide('.splide', {
-            width: '80%'
-            }).mount();
-  
+var splide = new Splide( '.splide', {
+  type    : 'loop',
+  perPage : 1,
+  autoplay: true,
+} );
+
+splide.mount();
   
 </script>
