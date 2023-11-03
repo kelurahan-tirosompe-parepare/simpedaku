@@ -83,6 +83,13 @@ fastify.get("/dashboard", function (req, reply) {
     // reply.headers('set-cookie', [`tirsom=${tirsom} ;Expires=${Date.now()}`])
 });
 
+fastify.get("/belanja/:produk", function(req, rep){
+  if(req.session.authenticated){
+    return rep.view("/src/pages/belanja.hbs")
+    }else{
+      return rep.redirect("/")
+    }
+})
 
 fastify.post("/dashbord", async function (request, reply) {
   let username = request.body.username_admin;
