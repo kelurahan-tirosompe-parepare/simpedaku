@@ -18,5 +18,12 @@ var splide = new Splide( '.splide', {
 } );
 
 splide.mount();
+
+ new Splide( '#thumbnail-carousel', {
+		fixedWidth: 100,
+		gap       : 10,
+		rewind    : true,
+		pagination: false,
+  } ).mount();
   
 </script>
