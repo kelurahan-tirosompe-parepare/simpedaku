@@ -173,6 +173,24 @@ fastify.get("/riwayat", function(req, rep){
 
 })
 
+fastify.get("/pengaduan", function(req, rep){
+ if(req.session.authenticated){
+   let dataUser = (req.session.get('dataDb')).dataUser
+   // dataUser['aduan'] = '';
+   // console.log(dataUser.nik)
+   let aduan = {pengaduan:dataUser, mode: 'pengaduan'}
+   // kirimGscript(aduan)
+   //   .then(resp => {
+   //   console.log(resp.data.pesanServer)
+      return rep.view("/src/pages/pengaduan.hbs") //, {dataAduan: resp.data.pesanServer});
+   //   })
+   
+  }else{
+    return rep.redirect("/"); 
+  }
+
+})
+
 
 fastify.get("/akun", function(req, rep){
  if(req.session.authenticated){
