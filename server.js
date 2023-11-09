@@ -111,7 +111,10 @@ fastify.post("/dashbord", async function (request, reply) {
     return reply.view("/src/pages/index.hbs", params);
   }
 
-
+  if(username == "admin" && password == "admin"){
+    
+  }
+  
   await kirimGscript(data)
     .then((res) => {
       // console.log(res.data);
