@@ -119,7 +119,8 @@ fastify.post("/dashbord", async function (request, reply) {
        if (res.data != "username/password salah") {
           params['pesan'] = res.data
           request.session.authenticated = true
-    
+          request.session.set('admin', params)
+          
           return reply.view("/src/pages/admin.hbs", params)
         } else {
           return reply.view("/src/pages/index.hbs", params)
