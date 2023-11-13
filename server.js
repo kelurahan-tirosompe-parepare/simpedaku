@@ -115,9 +115,16 @@ fastify.post("/dashbord", async function (request, reply) {
     data.mode = 'admin';
     await kirimGscript(data)
       .then((res) => {
-      // console.log(res.data.pesanServer)
-      params['pesan'] = res.data.pesanServer]
-      return reply.view("/src/pages/admin.hbs", params)
+      
+       if (res.data != "username/password salah") {
+          params['pesan'] = res.data
+          request.session.authenticated = true
+    
+          return reply.view("/src/pages/admin.hbs", params)
+        } else {
+          return reply.view("/src/pages/index.hbs", params)
+        }
+
     })
   }
   
