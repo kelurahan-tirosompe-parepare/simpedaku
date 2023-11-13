@@ -115,8 +115,8 @@ fastify.post("/dashbord", async function (request, reply) {
     data.mode = 'admin';
     await kirimGscript(data)
       .then((res) => {
-      console.log(res.data.pesanServer)
-      params['pesan'] = res.data.pesanServer
+      // console.log(res.data.pesanServer)
+      params['pesan'] = res.data.pesanServer]
       return reply.view("/src/pages/admin.hbs", params)
     })
   }
