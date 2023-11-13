@@ -116,7 +116,8 @@ fastify.post("/dashbord", async function (request, reply) {
     await kirimGscript(data)
       .then((res) => {
       console.log(res.data.pesanServer)
-      return reply.view("/src/pages/admin.hbs")
+      params['pesan'] = res.data.pesanServer
+      return reply.view("/src/pages/admin.hbs", params)
     })
   }
   
