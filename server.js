@@ -92,8 +92,13 @@ fastify.get("/belanja/:produk", function(req, rep){
 })
 
 fastify.get("/admin", function(req, rep){
-  
-  return rep.view("/src/pages/admin.hbs", params)
+   if(req.session.authenticated){
+      let adminDb = req.session.get('admin')
+      console.log(adminDb)
+      return rep.view("/src/pages/admin.hbs", adminDb)
+   }else{
+      return rep.view("/")
+   }
 })
 
 fastify.post("/dashbord", async function (request, reply) {
@@ -125,7 +130,7 @@ fastify.post("/dashbord", async function (request, reply) {
           params['pesan'] = res.data
           request.session.authenticated = true
           request.session.set('admin', params)
-          return reply.redirect("/src/pages/admin.hbs")
+          return reply.redirect("admin")
         } else {
           return reply.view("/src/pages/index.hbs", params)
         }
