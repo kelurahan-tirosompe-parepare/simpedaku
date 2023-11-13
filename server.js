@@ -91,6 +91,11 @@ fastify.get("/belanja/:produk", function(req, rep){
     }
 })
 
+fastify.get("/admin", function(req, rep){
+  
+  return rep.view("/src/pages/admin.hbs", params)
+})
+
 fastify.post("/dashbord", async function (request, reply) {
   let username = request.body.username_admin;
   let password = request.body.password_admin;
@@ -120,8 +125,7 @@ fastify.post("/dashbord", async function (request, reply) {
           params['pesan'] = res.data
           request.session.authenticated = true
           request.session.set('admin', params)
-          
-          return reply.view("/src/pages/admin.hbs", params)
+          return reply.redirect("/src/pages/admin.hbs")
         } else {
           return reply.view("/src/pages/index.hbs", params)
         }
