@@ -39,8 +39,8 @@ handlebars.registerHelper('noUrut', function (index) {
     return index + 1
 })
 
-handlebars.registerHelper('bikinLink', function (link, berkas) {
-    return `<a href="${link}">`
+handlebars.registerHelper('bikinLink', function (url, title) {
+    return `<a href="${url}">${title}</a>`
 })
 
 handlebars.registerHelper('warna', function(warna){
