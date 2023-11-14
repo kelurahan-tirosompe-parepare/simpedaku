@@ -39,6 +39,10 @@ handlebars.registerHelper('noUrut', function (index) {
     return index + 1
 })
 
+handlebars.registerHelper('bikinLink', function (link, berkas) {
+    return `<a href="${link}">`
+})
+
 handlebars.registerHelper('warna', function(warna){
   const pilihan = {"biru" : "primary", "abu" : "secondary", "hijau" : "success","jingga" : "info", "kuning" :"warning", "merah" : "danger", "putih" : "light", "hitam" : "dark"}
   if(warna == 'ada' || warna == 'selesai'){
