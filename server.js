@@ -1,5 +1,6 @@
 const path = require("path");
-// const {data} = require("./appscript.js")
+import PhotoSwipeLightbox from 'photoswipe/lightbox';
+import 'photoswipe/style.css';
 
 const axios = require("axios");
 const handlebars = require("handlebars")
