@@ -35,6 +35,8 @@ fastify.register(require("@fastify/view"), {
   }
 });
 
+
+//REGISTER HELPER =============================================
 handlebars.registerHelper('noUrut', function (index) {
     return index + 1
 })
@@ -51,6 +53,13 @@ handlebars.registerHelper('warna', function(warna){
     return 'warning'
   }
 })
+
+handlebars.registerHelper('link', function(arr){
+  console.log(this)
+  return this
+})
+
+//\\=========================================================
 
 function setCookie(exdays) {
   const d = new Date();
