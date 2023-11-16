@@ -7,7 +7,7 @@ let token, tirsom //user id
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
-  logger: false,
+  logger: true,
 });
 
 // Setup our static files
@@ -110,7 +110,7 @@ fastify.get("/belanja/:produk", function(req, rep){
 fastify.get("/admin", async function(req, rep){
   let data = {} 
   
-  console.log(rep.statusCode)
+  console.log(req.session)
   
   if(req.session.authenticated){
      data['mode'] = 'admin';
