@@ -30,7 +30,9 @@ fastify.register(require("@fastify/view"), {
       header: './src/partials/header.hbs',
       navigation: './src/partials/navigation.hbs',
       modal_loading: './src/partials/loading.hbs',
-      jquery_bootstrap: './src/partials/jquery_bootstrap.hbs'
+      jquery_bootstrap: './src/partials/jquery_bootstrap.hbs',
+      admin_jquery_bootstrap: './src/partials/adminjqbootstrap.hbs',
+      admin_navigation: './src/partials/adminnavigation.hbs',
     }
   }
 });
@@ -118,7 +120,7 @@ fastify.get("/belanja/:produk", function(req, rep){
 
 
 
-//=====================================================================
+//============          ADMIN         =============================
 
 fastify.get("/admin", async function(req, rep){
   let data = {} 
@@ -139,6 +141,14 @@ fastify.get("/admin", async function(req, rep){
    }else{
       return rep.redirect("/")
    }
+})
+
+fastify.get("/admin-umkm", function(req, res){
+  if(req.session.authenticated){
+    return res.view("/src/pages/admin/admin-umkm.hbs")
+  }else{
+    return res.redirect("/")
+  }
 })
 
 //=================================================================================
