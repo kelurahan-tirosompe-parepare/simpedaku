@@ -134,7 +134,7 @@ fastify.get("/admin", async function(req, rep){
       data.shift()
       // console.log('pesan server untuk admin= ', data)
       
-      return rep.view("/src/pages/admin.hbs", {riwayat: data})
+      return rep.view("/src/pages/admin/admin.hbs", {riwayat: data})
     })
    }else{
       return rep.redirect("/")
