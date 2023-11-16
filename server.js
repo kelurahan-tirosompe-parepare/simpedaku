@@ -1,5 +1,5 @@
 const path = require("path");
-//import PhotoSwipeLightbox from 'photoswipe/lightbox');
+const phsw = require('./node_modules/photoswipe/dist/')
 //const photoStyle = require('photoswipe/style.css');
 
 const axios = require("axios");
