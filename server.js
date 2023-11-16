@@ -1,7 +1,7 @@
 const path = require("path");
-const PhotoSwipe = require('./node_modules/photoswipe/dist/photoswipe.esm.js')
+const phsw = require('./node_modules/photoswipe/dist/photoswipe.cjs')
 //const phswStyle = require('./node_modules/dist/photoswipe/photoswipe.css');
-console.log(PhotoSwipe)
+console.log(phsw)
 
 const axios = require("axios");
 const handlebars = require("handlebars")
