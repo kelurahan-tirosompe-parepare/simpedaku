@@ -98,17 +98,18 @@ fastify.get("/belanja/:produk", function(req, rep){
 fastify.get("/admin", async function(req, rep){
   let data = {} 
   
-  console.log(req.session.authenticated)
+  console.log(rep.statusCode)
   
   if(req.session.authenticated){
      data['mode'] = 'admin';
     await kirimGscript(data)
       .then((res) => {
       // let adminDb = req.session.get('admin')
+      let data = res.data.pesanServer
+      data.shift()
+      console.log('pesan server untuk admin= ', data)
       
-      console.log('pesan server untuk admin= ', res.data.pesanServer)
-      
-      return rep.view("/src/pages/admin.hbs", {riwayat: res.data.pesanServer})
+      return rep.view("/src/pages/admin.hbs", {riwayat: data})
     })
    }else{
       return rep.view("/")
