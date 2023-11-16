@@ -54,9 +54,10 @@ handlebars.registerHelper('warna', function(warna){
   }
 })
 
-handlebars.registerHelper('link', function(arr){
-  console.log(this)
-  return this
+handlebars.registerHelper('link', function(items, options){
+  console.log(items)
+  
+  return items
 })
 
 //\\=========================================================
