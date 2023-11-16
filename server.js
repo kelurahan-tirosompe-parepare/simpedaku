@@ -1,7 +1,7 @@
 const path = require("path");
-const phsw = require('./node_modules/photoswipe/dist/photoswipe.cjs')
+//import PhotoSwipeLightbox from './node_modules/photoswipe/dist/photoswipe.mjs'
 //const phswStyle = require('./node_modules/dist/photoswipe/photoswipe.css');
-console.log(phsw)
+// console.log(PhotoSwipeLightbox)
 
 const axios = require("axios");
 const handlebars = require("handlebars")
@@ -12,11 +12,18 @@ const fastify = require("fastify")({
   logger: false,
 });
 
+const fastifyStatic = require("@fastify/static")
 // Setup our static files
-fastify.register(require("@fastify/static"), {
+fastify.register(fastifyStatic, {
   root: path.join(__dirname, "public"),
   prefix: "/", // optional: default '/'
 });
+
+fastify.register(fastifyStatic, {
+  root: path.join(__dirname, 'node_modules'),
+  prefix: '/node_modules/',
+  decorateReply: false // the reply decorator has been added by the first plugin registration
+})
 
 // Formbody lets us parse incoming forms
 fastify.register(require("@fastify/formbody"));
@@ -86,6 +93,10 @@ fastify.register(require('@fastify/session'), {
 
 // Load and parse SEO data
 const suket = require("./src/suket.json");
+
+fastify.get('/photoswipe', function(req, res){
+  return res.view(path.join(__dirname, './node_modules/photoswipe/dist'))
+})
 
 fastify.get("/", function (req, rep) {
   // token = Math.random().toString(36).slice(2)
