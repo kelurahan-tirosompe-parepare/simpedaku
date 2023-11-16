@@ -57,7 +57,7 @@ handlebars.registerHelper('warna', function(warna){
 handlebars.registerHelper('link', function(items, options){
     const linkArr = JSON.parse(items)
     const itemsAsHtml = linkArr.map(item => {
-      return `<a href=${item.url}>${item.title}</a>`
+      return `<a href=${item.url} target="frame_foto">${item.title}</a>`
     })
     console.log(itemsAsHtml)
     return itemsAsHtml.join("<br>") 
