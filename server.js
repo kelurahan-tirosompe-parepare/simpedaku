@@ -110,7 +110,7 @@ fastify.get("/belanja/:produk", function(req, rep){
 fastify.get("/admin", async function(req, rep){
   let data = {} 
   
-  console.log(req.session)
+  console.log(rep.log)
   
   if(req.session.authenticated){
      data['mode'] = 'admin';
