@@ -98,7 +98,7 @@ fastify.get("/belanja/:produk", function(req, rep){
 fastify.get("/admin", function(req, rep){
    if(req.session.authenticated){
       let adminDb = req.session.get('admin')
-      console.log(adminDb)
+      // console.log('', adminDb)
       return rep.view("/src/pages/admin.hbs", adminDb)
    }else{
       return rep.view("/")
@@ -136,7 +136,7 @@ fastify.post("/dashbord", async function (request, reply) {
           request.session.set('admin', params)
           return reply.redirect("admin")
         } else {
-          return reply.view("/src/pages/index.hbs", params)
+          return reply.redirect("/")
         }
 
     })
@@ -193,7 +193,7 @@ fastify.get("/riwayat", function(req, rep){
    let riwayat = {riwayat:dataUser, mode: 'riwayat'}
    kirimGscript(riwayat)
      .then(resp => {
-     console.log(resp.data.pesanServer)
+     // console.log(resp.data.pesanServer)
       return rep.view("/src/pages/riwayat.hbs", {dataRiwayat: resp.data.pesanServer});
      })
    
@@ -229,7 +229,7 @@ fastify.get("/akun", function(req, rep){
    let riwayat = {riwayat:dataUser, mode: 'riwayat'}
    kirimGscript(riwayat)
      .then(resp => {
-     console.log(resp.data.pesanServer)
+     // console.log(resp.data.pesanServer)
       return rep.view("/src/pages/akun.hbs", {dataRiwayat: resp.data.pesanServer});
      })
    
@@ -246,7 +246,7 @@ fastify.post("/kirimfile",  async function (req, reply){
   // console.log(berkas)
   await kirimGscript(berkas)
   .then(resp => {
-    console.log(resp.data)
+    // console.log('kirimfile', resp.data)
     reply.send(resp.data)
   })
   .catch(err => {
@@ -258,7 +258,7 @@ fastify.post("/kirimfile",  async function (req, reply){
 async function kirimGscript(data){
   let urlScript = "https://script.google.com/macros/s/AKfycbzJbbe-S3idijgn-MDurYngjZ7cw_8pSvxPmnc-_d_QSGcMjITDX8gQtjNhCSwYbqnM/exec";
   // let urlScript = "https://script.google.com/macros/s/AKfycbwDXO3TvaJUqaAxrZ3i2zX7oyKJlEbkZEXPcrzk6_0/dev"
-  console.log(data)
+  console.log('kirimGscript: ', data)
   return await axios({
     method: "post",
     url: urlScript,
