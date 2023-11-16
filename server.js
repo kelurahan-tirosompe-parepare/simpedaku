@@ -7,7 +7,7 @@ let token, tirsom //user id
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
-  logger: { level: 'info' },
+  logger: false,
 });
 
 // Setup our static files
@@ -110,7 +110,7 @@ fastify.get("/belanja/:produk", function(req, rep){
 fastify.get("/admin", async function(req, rep){
   let data = {} 
   
-  console.log('log admin= ', fastify.logger)
+  // console.log('log admin= ', rep)
   
   if(req.session.authenticated){
      data['mode'] = 'admin';
@@ -119,12 +119,12 @@ fastify.get("/admin", async function(req, rep){
       // let adminDb = req.session.get('admin')
       let data = res.data.pesanServer
       data.shift()
-      console.log('pesan server untuk admin= ', data)
+      // console.log('pesan server untuk admin= ', data)
       
       return rep.view("/src/pages/admin.hbs", {riwayat: data})
     })
    }else{
-      return rep.view("/")
+      return rep.redirect("/")
    }
 })
 
