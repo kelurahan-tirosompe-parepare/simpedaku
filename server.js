@@ -20,7 +20,7 @@ fastify.register(fastifyStatic, {
 });
 
 fastify.register(fastifyStatic, {
-  root: path.join(__dirname, 'node_modules/photoswipe/dist'),
+  root: path.join(__dirname, 'node_modules'),
   prefix: '/node_modules/',
   decorateReply: false // the reply decorator has been added by the first plugin registration
 })
@@ -95,7 +95,7 @@ fastify.register(require('@fastify/session'), {
 const suket = require("./src/suket.json");
 
 fastify.get('/phsw', function (req, reply) {
-  reply.sendFile('style.css') // serving path.join(__dirname, 'public', 'myHtml.html') directly
+  reply.sendFile('/node_modules/photoswipe.esm.js') // serving path.join(__dirname, 'public', 'myHtml.html') directly
 })
 
 fastify.get("/", function (req, rep) {
