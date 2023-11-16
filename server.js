@@ -1,6 +1,6 @@
 const path = require("path");
 //import PhotoSwipeLightbox from './node_modules/photoswipe/dist/photoswipe.mjs'
-//const phswStyle = require('./node_modules/dist/photoswipe/photoswipe.css');
+//const phswStyle = require('./node_modules/photoswipe/dist/photoswipe.css');
 // console.log(PhotoSwipeLightbox)
 
 const axios = require("axios");
@@ -20,7 +20,7 @@ fastify.register(fastifyStatic, {
 });
 
 fastify.register(fastifyStatic, {
-  root: path.join(__dirname, 'node_modules'),
+  root: path.join(__dirname, 'node_modules/photoswipe/dist'),
   prefix: '/node_modules/',
   decorateReply: false // the reply decorator has been added by the first plugin registration
 })
@@ -94,8 +94,8 @@ fastify.register(require('@fastify/session'), {
 // Load and parse SEO data
 const suket = require("./src/suket.json");
 
-fastify.get('/photoswipe', function(req, res){
-  return res.view(path.join(__dirname, './node_modules/photoswipe/dist'))
+fastify.get('/phsw', function (req, reply) {
+  reply.sendFile('style.css') // serving path.join(__dirname, 'public', 'myHtml.html') directly
 })
 
 fastify.get("/", function (req, rep) {
