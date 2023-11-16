@@ -95,11 +95,18 @@ fastify.get("/belanja/:produk", function(req, rep){
     }
 })
 
-fastify.get("/admin", function(req, rep){
-   if(req.session.authenticated){
-      let adminDb = req.session.get('admin')
-      // console.log('', adminDb)
-      return rep.view("/src/pages/admin.hbs", adminDb)
+fastify.get("/admin", async function(req, rep){
+  let data = {} 
+  if(req.session.authenticated){
+     data['mode'] = 'admin';
+    await kirimGscript(data)
+      .then((res) => {
+      // let adminDb = req.session.get('admin')
+      
+      console.log('pesan server untuk admin= ', res.data)
+      
+      return rep.view("/src/pages/admin.hbs")
+    })
    }else{
       return rep.view("/")
    }
@@ -126,20 +133,20 @@ fastify.post("/dashbord", async function (request, reply) {
   }
 
   if(username == "admin" && password == "admin"){
-    data.mode = 'admin';
-    await kirimGscript(data)
-      .then((res) => {
+//     data.mode = 'admin';
+//     await kirimGscript(data)
+//       .then((res) => {
       
-       if (res.data != "username/password salah") {
-          params['pesan'] = res.data
+//        if (res.data != "username/password salah") {
+//           params['pesan'] = res.data
           request.session.authenticated = true
-          request.session.set('admin', params)
+          // request.session.set('admin', params)
           return reply.redirect("admin")
-        } else {
-          return reply.redirect("/")
-        }
+//         } else {
+//           return reply.redirect("/")
+//         }
 
-    })
+//     })
   }
   
   await kirimGscript(data)
