@@ -55,7 +55,10 @@ handlebars.registerHelper('warna', function(warna){
 })
 
 handlebars.registerHelper('link', function(items, options){
-  console.log(items)
+  let linkArr = JSON.parse(items)
+   const itemsAsHtml = linkArr.map(item => {
+    `<a href=${item.url}>${item.title}</a>`
+  })
   
   return items
 })
