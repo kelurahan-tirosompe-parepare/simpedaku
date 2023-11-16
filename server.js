@@ -97,6 +97,7 @@ fastify.get("/belanja/:produk", function(req, rep){
 
 fastify.get("/admin", async function(req, rep){
   let data = {} 
+  
   if(req.session.authenticated){
      data['mode'] = 'admin';
     await kirimGscript(data)
@@ -133,15 +134,16 @@ fastify.post("/dashbord", async function (request, reply) {
   }
 
   if(username == "admin" && password == "admin"){
+    request.session.authenticated = true
 //     data.mode = 'admin';
 //     await kirimGscript(data)
 //       .then((res) => {
       
 //        if (res.data != "username/password salah") {
 //           params['pesan'] = res.data
-          request.session.authenticated = true
+          // request.session.authenticated = true
           // request.session.set('admin', params)
-          return reply.redirect("admin")
+          reply.redirect("admin")
 //         } else {
 //           return reply.redirect("/")
 //         }
