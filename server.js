@@ -95,6 +95,18 @@ fastify.get("/belanja/:produk", function(req, rep){
     }
 })
 
+
+
+
+
+
+
+
+
+
+
+//=====================================================================
+
 fastify.get("/admin", async function(req, rep){
   let data = {} 
   
@@ -115,6 +127,19 @@ fastify.get("/admin", async function(req, rep){
       return rep.view("/")
    }
 })
+
+//=================================================================================
+
+
+
+
+
+
+
+
+
+
+
 
 fastify.post("/dashbord", async function (request, reply) {
   let username = request.body.username_admin;
