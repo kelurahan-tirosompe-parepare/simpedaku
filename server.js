@@ -1,5 +1,5 @@
 const path = require("path");
-//const {PhotoSwipeLightbox} = require('photoswipe/lightbox');
+//import PhotoSwipeLightbox from 'photoswipe/lightbox');
 //const photoStyle = require('photoswipe/style.css');
 
 const axios = require("axios");
