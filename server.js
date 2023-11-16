@@ -151,6 +151,22 @@ fastify.get("/admin-umkm", function(req, res){
   }
 })
 
+fastify.get("/admin-pengaduan", function(req, res){
+  if(req.session.authenticated){
+    return res.view("/src/pages/admin/admin-pengaduan.hbs")
+  }else{
+    return res.redirect("/")
+  }
+})
+
+fastify.get("/admin-akun", function(req, res){
+  if(req.session.authenticated){
+    return res.view("/src/pages/admin/admin-akun.hbs")
+  }else{
+    return res.redirect("/")
+  }
+})
+
 //=================================================================================
 
 

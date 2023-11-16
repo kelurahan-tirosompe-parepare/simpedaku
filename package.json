@@ -17,7 +17,8 @@
     "fastify-multer": "^2.0.3",
     "@fastify/multipart": "^8.0.0",
     "@fastify/cookie": "^9.1.0",
-    "@fastify/session": "^10.5.0"
+    "@fastify/session": "^10.5.0",
+    "photoswipe": "^5.4.2"
   },
   "engines": {
     "node": "14.x"
