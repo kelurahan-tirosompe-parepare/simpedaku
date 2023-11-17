@@ -71,7 +71,7 @@ handlebars.registerHelper('link', function(items, options){
     return itemsAsHtml.join("<br>") 
 })
 
-//\\=========================================================
+//\\=================   END   ====================================
 
 function setCookie(exdays) {
   const d = new Date();
@@ -88,8 +88,17 @@ fastify.register(require('@fastify/session'), {
     cookie: { secure: false, expires: setCookie(1) }
   })
 
+
+
+
+
+
+
+
 // Load and parse SEO data
 const suket = require("./src/suket.json");
+
+//===========       USERS PAGES      ============================
 
 fastify.get("/", function (req, rep) {
   // token = Math.random().toString(36).slice(2)
@@ -116,12 +125,127 @@ fastify.get("/belanja/:produk", function(req, rep){
     }
 })
 
+fastify.post("/dashbord", async function (request, reply) {
+  let username = request.body.username_admin;
+  let password = request.body.password_admin;
+  let rw = request.body.rw_admin;
+  
+  let data = {
+      rw: rw,
+      username: username,
+      password: password,
+      mode: 'login'
+    }
+  
+  
+  let params = { pesan: "" };
 
+  if (username == "" || Number.isNaN(rw * 1) || password == "") {
+    params["pesan"] = "salah";
+    return reply.view("/src/pages/index.hbs", params);
+  }
 
+  if(username == "admin" && password == "admin"){
+    request.session.authenticated = true
+          reply.redirect("admin")
+  }
+  
+  await kirimGscript(data)
+    .then((res) => {
+      // console.log(res.data);
+      params["pesan"] = res.data;
+      let pesanServer = res.data;
 
+      let dataDb = {
+        dataUser: {
+          no_keluarga: pesanServer[0],
+          kki: pesanServer[1],
+          nik: pesanServer[2],
+          nama: pesanServer[3],
+          hubungan: pesanServer[4],
+          tanggal_lahir: pesanServer[5],
+          usia: pesanServer[6],
+          jumlah_anak: pesanServer[7],
+          kesetaraan_jkn: pesanServer[8],
+          status_pus: pesanServer[9],
+          status_hamil: pesanServer[10],
+          password: pesanServer[11],
+          rw: pesanServer[12]
+        },
+        dataList: suket,
+        dataForm: JSON.stringify(suket)
+      };
 
+      // console.log(dataDb)
 
+      if (pesanServer != "username/password salah") {
+        
+        request.session.authenticated = true
+        request.session.set('dataDb', dataDb)
+        
+        return reply.view("/src/pages/dashboard.hbs", dataDb);
+      } else {
+        return reply.view("/src/pages/index.hbs", params)
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
+fastify.get("/riwayat", function(req, rep){
+ if(req.session.authenticated){
+   let dataUser = (req.session.get('dataDb')).dataUser
+   // console.log(dataUser.nik)
+   let riwayat = {riwayat:dataUser, mode: 'riwayat'}
+   kirimGscript(riwayat)
+     .then(resp => {
+     // console.log(resp.data.pesanServer)
+      return rep.view("/src/pages/riwayat.hbs", {dataRiwayat: resp.data.pesanServer});
+     })
+   
+  }else{
+    return rep.redirect("/"); 
+  }
+
+})
+
+fastify.get("/pengaduan", function(req, rep){
+ if(req.session.authenticated){
+   let dataUser = (req.session.get('dataDb')).dataUser
+   // dataUser['aduan'] = '';
+   // console.log(dataUser.nik)
+   let aduan = {pengaduan:dataUser, mode: 'pengaduan'}
+   // kirimGscript(aduan)
+   //   .then(resp => {
+   //   console.log(resp.data.pesanServer)
+      return rep.view("/src/pages/pengaduan.hbs") //, {dataAduan: resp.data.pesanServer});
+   //   })
+   
+  }else{
+    return rep.redirect("/"); 
+  }
+
+})
+
+fastify.get("/akun", function(req, rep){
+ if(req.session.authenticated){
+   let dataUser = (req.session.get('dataDb')).dataUser
+   // console.log(dataUser.nik)
+   let riwayat = {riwayat:dataUser, mode: 'riwayat'}
+   kirimGscript(riwayat)
+     .then(resp => {
+     // console.log(resp.data.pesanServer)
+      return rep.view("/src/pages/akun.hbs", {dataRiwayat: resp.data.pesanServer});
+     })
+   
+  }else{
+    return rep.redirect("/"); 
+  }
+
+})
+
+//============       END            
 
 
 
@@ -173,153 +297,11 @@ fastify.get("/admin-akun", function(req, res){
   }
 })
 
-//=================================================================================
+//================        END         ===========================================
 
 
 
 
-
-
-
-
-
-
-
-
-fastify.post("/dashbord", async function (request, reply) {
-  let username = request.body.username_admin;
-  let password = request.body.password_admin;
-  let rw = request.body.rw_admin;
-  
-  let data = {
-      rw: rw,
-      username: username,
-      password: password,
-      mode: 'login'
-    }
-  
-  
-  let params = { pesan: "" };
-
-  if (username == "" || Number.isNaN(rw * 1) || password == "") {
-    params["pesan"] = "salah";
-    return reply.view("/src/pages/index.hbs", params);
-  }
-
-  if(username == "admin" && password == "admin"){
-    request.session.authenticated = true
-//     data.mode = 'admin';
-//     await kirimGscript(data)
-//       .then((res) => {
-      
-//        if (res.data != "username/password salah") {
-//           params['pesan'] = res.data
-          // request.session.authenticated = true
-          // request.session.set('admin', params)
-          reply.redirect("admin")
-//         } else {
-//           return reply.redirect("/")
-//         }
-
-//     })
-  }
-  
-  await kirimGscript(data)
-    .then((res) => {
-      // console.log(res.data);
-      params["pesan"] = res.data;
-      let pesanServer = res.data;
-
-      let dataDb = {
-        dataUser: {
-          no_keluarga: pesanServer[0],
-          kki: pesanServer[1],
-          nik: pesanServer[2],
-          nama: pesanServer[3],
-          hubungan: pesanServer[4],
-          tanggal_lahir: pesanServer[5],
-          usia: pesanServer[6],
-          jumlah_anak: pesanServer[7],
-          kesetaraan_jkn: pesanServer[8],
-          status_pus: pesanServer[9],
-          status_hamil: pesanServer[10],
-          password: pesanServer[11],
-          rw: pesanServer[12]
-        },
-        dataList: suket,
-        dataForm: JSON.stringify(suket)
-      };
-
-      // console.log(dataDb)
-
-      if (pesanServer != "username/password salah") {
-        
-        request.session.authenticated = true
-        request.session.set('dataDb', dataDb)
-        
-        return reply.view("/src/pages/dashboard.hbs", dataDb);
-      } else {
-        return reply.view("/src/pages/index.hbs", params)
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
-
-fastify.get("/riwayat", function(req, rep){
- if(req.session.authenticated){
-   let dataUser = (req.session.get('dataDb')).dataUser
-   // console.log(dataUser.nik)
-   let riwayat = {riwayat:dataUser, mode: 'riwayat'}
-   kirimGscript(riwayat)
-     .then(resp => {
-     // console.log(resp.data.pesanServer)
-      return rep.view("/src/pages/riwayat.hbs", {dataRiwayat: resp.data.pesanServer});
-     })
-   
-  }else{
-    return rep.redirect("/"); 
-  }
-
-})
-
-fastify.get("/pengaduan", function(req, rep){
- if(req.session.authenticated){
-   let dataUser = (req.session.get('dataDb')).dataUser
-   // dataUser['aduan'] = '';
-   // console.log(dataUser.nik)
-   let aduan = {pengaduan:dataUser, mode: 'pengaduan'}
-   // kirimGscript(aduan)
-   //   .then(resp => {
-   //   console.log(resp.data.pesanServer)
-      return rep.view("/src/pages/pengaduan.hbs") //, {dataAduan: resp.data.pesanServer});
-   //   })
-   
-  }else{
-    return rep.redirect("/"); 
-  }
-
-})
-
-
-fastify.get("/akun", function(req, rep){
- if(req.session.authenticated){
-   let dataUser = (req.session.get('dataDb')).dataUser
-   // console.log(dataUser.nik)
-   let riwayat = {riwayat:dataUser, mode: 'riwayat'}
-   kirimGscript(riwayat)
-     .then(resp => {
-     // console.log(resp.data.pesanServer)
-      return rep.view("/src/pages/akun.hbs", {dataRiwayat: resp.data.pesanServer});
-     })
-   
-  }else{
-    return rep.redirect("/"); 
-  }
-
-})
 
 
 fastify.post("/kirimfile",  async function (req, reply){
