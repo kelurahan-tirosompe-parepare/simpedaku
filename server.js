@@ -1,7 +1,4 @@
 const path = require("path");
-//import PhotoSwipeLightbox from './node_modules/photoswipe/dist/photoswipe.mjs'
-//const phswStyle = require('./node_modules/photoswipe/dist/photoswipe.css');
-// console.log(PhotoSwipeLightbox)
 
 const axios = require("axios");
 const handlebars = require("handlebars")
@@ -20,8 +17,8 @@ fastify.register(fastifyStatic, {
 });
 
 fastify.register(fastifyStatic, {
-  root: path.join(__dirname, 'node_modules/photoswipe/dist/'),
-  prefix: '/node/',
+  root: path.join(__dirname, 'node_modules/photoswipe/dist'),
+  prefix: '/phsw/',
   decorateReply: false // the reply decorator has been added by the first plugin registration
 })
 
