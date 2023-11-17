@@ -66,7 +66,7 @@ handlebars.registerHelper('warna', function(warna){
 handlebars.registerHelper('link', function(items, options){
     const template = `<div class="pswp-gallery pswp-gallery--single-column" id="gallery--berkas">
                         <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg" 
-                          data-pswp-width="1669" 
+                          data-pswp-width="3000" 
                           data-pswp-height="2500" 
                           target="_blank">
                                             gambar 1
@@ -78,6 +78,7 @@ handlebars.registerHelper('link', function(items, options){
                                             gambar 2
                         </a>
                       </div>`
+    
     const linkArr = JSON.parse(items)
     const itemsAsHtml = linkArr.map(item => {
       return `<a href=${item.url} target="frame_foto">${item.title}</a>`
