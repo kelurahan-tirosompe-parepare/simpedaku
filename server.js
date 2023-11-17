@@ -94,8 +94,8 @@ fastify.register(require('@fastify/session'), {
 // Load and parse SEO data
 const suket = require("./src/suket.json");
 
-fastify.get('/phsw', function (req, reply) {
-  reply.sendFile('/node_modules/photoswipe.esm.js') // serving path.join(__dirname, 'public', 'myHtml.html') directly
+fastify.get('/node_modules', function (req, reply) {
+  reply.sendFile('/photoswipe/dist/photoswipe.esm.js') // serving path.join(__dirname, 'public', 'myHtml.html') directly
 })
 
 fastify.get("/", function (req, rep) {
