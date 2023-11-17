@@ -17,15 +17,6 @@ const options = { dataSource: [
       height: 3000,
       alt: 'test image 2'
     },
-
-    // responsive image
-    {
-      srcset: 'https://dummyimage.com/1500x1000/555/fff/?text=1500x1000 1500w, https://dummyimage.com/1200x800/555/fff/?text=1200x800 1200w, https://dummyimage.com/600x400/555/fff/?text=600x400 600w',
-      src: 'https://dummyimage.com/1500x1000/555/fff/?text=1500x1000',
-      width: 3000,
-      height: 3000,
-      alt: 'test image 3',
-    },
   ],
   showHideAnimationType: 'zoom',
   // may select multiple "galleries"
@@ -40,4 +31,9 @@ const options = { dataSource: [
 
 const lightbox = new PhotoSwipeLightbox(options);
 lightbox.init();
+
+document.querySelector('#link-open-phsw').onclick = () => {
+  lightbox.loadAndOpen(0); // defines start slide index
+};
+
 </script>
