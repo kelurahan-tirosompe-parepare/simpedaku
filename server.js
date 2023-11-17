@@ -64,6 +64,20 @@ handlebars.registerHelper('warna', function(warna){
 })
 
 handlebars.registerHelper('link', function(items, options){
+    const template = `<div class="pswp-gallery pswp-gallery--single-column" id="gallery--berkas">
+                        <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg" 
+                          data-pswp-width="1669" 
+                          data-pswp-height="2500" 
+                          target="_blank">
+                                            gambar 1
+                        </a>
+                        <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-2500.jpg" 
+                          data-pswp-width="1875" 
+                          data-pswp-height="2500"
+                          target="_blank">
+                                            gambar 2
+                        </a>
+                      </div>`
     const linkArr = JSON.parse(items)
     const itemsAsHtml = linkArr.map(item => {
       return `<a href=${item.url} target="frame_foto">${item.title}</a>`
@@ -73,6 +87,10 @@ handlebars.registerHelper('link', function(items, options){
 })
 
 //\\=================   END   ====================================
+
+
+
+
 
 function setCookie(exdays) {
   const d = new Date();
