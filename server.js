@@ -39,6 +39,7 @@ fastify.register(require("@fastify/view"), {
       jquery_bootstrap: './src/partials/jquery_bootstrap.hbs',
       admin_jquery_bootstrap: './src/partials/adminjqbootstrap.hbs',
       admin_navigation: './src/partials/adminnavigation.hbs',
+      phsw: './src/partials/phsw.hbs'
     }
   }
 });
