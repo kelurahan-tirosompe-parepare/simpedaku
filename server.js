@@ -95,7 +95,7 @@ fastify.register(require('@fastify/session'), {
 const suket = require("./src/suket.json");
 
 fastify.get('/node', function (req, reply) {
-  reply.sendFile('style.css') // serving path.join(__dirname, 'public', 'myHtml.html') directly
+  reply.sendFile('node_modules/') // serving path.join(__dirname, 'public', 'myHtml.html') directly
 })
 
 fastify.get('/syuaib', function (req, reply) {
