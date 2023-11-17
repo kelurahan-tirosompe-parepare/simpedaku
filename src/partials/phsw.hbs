@@ -33,7 +33,7 @@ lightbox.init();
 
 $('#link-open-phsw').click(function(e){
   e.preventDefault()
-  console.log(this)
+  console.log($(this).index())
   // console.log($('a').parents(e.target).child('a').filter())
   lightbox.loadAndOpen(); // defines start slide index
 });
