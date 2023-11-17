@@ -19,7 +19,7 @@ const options = {
   ],
   showHideAnimationType: 'zoom',
   // may select multiple "galleries"
-  gallery: '#link-open-phsw',
+  // gallery: '#link-open-phsw',
 
   // Elements within gallery (slides)
   children: 'a',
@@ -31,8 +31,10 @@ const options = {
 const lightbox = new PhotoSwipeLightbox(options);
 lightbox.init();
 
-// document.querySelector('#link-open-phsw').onclick = () => {
-//   lightbox.loadAndOpen(0); // defines start slide index
-// };
+document.querySelector('#link-open-phsw').onclick = (e) => {
+  e.preventDefault()
+  console.log($(e.target))
+  lightbox.loadAndOpen(); // defines start slide index
+};
 
 </script>
