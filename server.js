@@ -71,22 +71,15 @@ handlebars.registerHelper('link', function(items, options){
                           target="_blank">
                                             gambar 1
                         </a>
-                        <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-2500.jpg" 
-                          data-pswp-width="1875" 
-                          data-pswp-height="2500"
-                          target="_blank">
-                                            gambar 2
-                        </a>
                       </div>`
     
-  let linkArr = items.replaceAll("[","{")
-  linkArr = linkArr.replaceAll("]","}")
-  const linkBerkas = JSON.parse(linkArr)
+  let linkArr = items
+  //const linkBerkas = JSON.parse(linkArr)
   
-   const itemObj = linkArr.map(item => {
-      return [item.url, item.title]
-   })
-    console.log(li)
+  // const itemObj = linkArr.map(item => {
+  //    return [item.url, item.title]
+  // })
+    console.log(JSON.parse(linkArr))
     return JSON.parse(linkArr)
    // return itemsAsHtml.join("<br>") 
 })
