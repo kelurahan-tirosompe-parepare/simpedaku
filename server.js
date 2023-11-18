@@ -64,24 +64,24 @@ handlebars.registerHelper('warna', function(warna){
 })
 
 handlebars.registerHelper('link', function(items, options){
-    const template = `<div class="pswp-gallery pswp-gallery--single-column" id="gallery--berkas">
-                        <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg" 
+    const template = (title, url) => {return `<a href=${url}
                           data-pswp-width="3000" 
                           data-pswp-height="2500" 
                           target="_blank">
-                                            gambar 1
-                        </a>
-                      </div>`
+                          ${title}
+                        </a>`}
     
-  let linkArr = items
-  //const linkBerkas = JSON.parse(linkArr)
+  //let linkArr = items
+  const linkBerkas = JSON.parse(items)
   
   // const itemObj = linkArr.map(item => {
   //    return [item.url, item.title]
   // })
-    console.log(JSON.parse(linkArr))
-    return JSON.parse(linkArr)
-   // return itemsAsHtml.join("<br>") 
+    //console.log(JSON.parse(linkArr))
+  const result = template(linkBerkas.title, linkBerkas.url) 
+  console.log(result)
+  return result
+  // return itemsAsHtml.join("<br>") 
 })
 
 //\\=================   END   ====================================
