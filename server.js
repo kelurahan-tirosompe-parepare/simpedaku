@@ -71,12 +71,12 @@ handlebars.registerHelper('link', function(items, options){
                           ${title}
                         </a>`}
     
-  let linkArr = JSON.parse(items)
-  //const linkBerkas = JSON.parse(items)
-  
+  let linkArr = items
+  const linkBerkas = JSON.parse(items)
+  linkBerkas.map()
  //const result = template(linkBerkas.title, linkBerkas.url) 
-  console.log(linkArr)
-  return linkArr[0]
+  console.log(linkBerkas.length)
+  return linkArr
   // return itemsAsHtml.join("<br>") 
 })
 
