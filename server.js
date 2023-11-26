@@ -114,6 +114,7 @@ const suket = require("./src/suket.json");
 //===========       USERS PAGES      ============================
 
 fastify.get("/", function (req, rep) {
+  console.log(req.session.authenticated)
   // token = Math.random().toString(36).slice(2)
   req.session.authenticated = false
   return rep.view("/src/pages/index.hbs");
